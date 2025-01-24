@@ -1,8 +1,13 @@
 {
     "scripts": {
-        "start": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\""
+        "start": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\" \"npm run seed\"",
+        "seed": "ts-node backend/src/scripts/seed.ts"
     },
     "dependencies": {
+        "axios": "^1.7.9",
         "dotenv": "^16.4.7"
+    },
+    "devDependencies": {
+        "@types/axios": "^0.9.36"
     }
 }
