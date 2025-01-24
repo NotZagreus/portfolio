@@ -1,26 +1,181 @@
-@import './base.css';
+/* Import Fonts */
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  src: url('https://github.com/DuoSoftware/DVP-AgentConsole/blob/master/assets/fonts/avenir-next-lt-pro/AvenirNextLTPro-Regular.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+}
 
+@font-face {
+  font-family: 'Avenir Next LT Pro Demi';
+  src: url('https://github.com/DuoSoftware/DVP-AgentConsole/blob/master/assets/fonts/avenir-next-lt-pro/AvenirNextLTPro-Demi.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* General Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Avenir Next LT Pro', sans-serif;
+  line-height: 1.6;
+  background-color: hsla(210, 20%, 15%, 1); /* Dark blue-steel background */
+  color: hsla(210, 50%, 70%, 1); /* Medium blue-steel text */
+}
+
+/* Container */
 #app {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   font-weight: normal;
+  background-color: hsla(210, 20%, 25%, 1); /* Dark blue-steel container background */
+  border-radius: 10px;
+  box-shadow: 0 2px 10px hsla(210, 20%, 10%, 1); /* Dark blue-steel shadow */
 }
 
+/* Links */
 a,
 .green {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
+  color: hsla(210, 50%, 60%, 1); /* Dark blue-steel */
   transition: 0.4s;
   padding: 3px;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+a:hover {
+  background-color: hsla(210, 50%, 60%, 0.2); /* Dark blue-steel */
 }
 
+/* Header */
+header {
+  padding: 2rem 0;
+  text-align: center;
+  background-color: hsla(210, 20%, 20%, 1); /* Dark blue-steel background */
+}
+
+header h1 {
+  font-size: 3rem;
+  color: hsla(210, 50%, 80%, 1); /* Light blue-steel */
+}
+
+header p {
+  font-size: 1.2rem;
+  color: hsla(210, 50%, 70%, 1); /* Medium blue-steel */
+}
+
+/* Navigation */
+nav {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+nav a {
+  color: hsla(210, 50%, 80%, 1); /* Light blue-steel */
+  margin: 0 1rem;
+  font-size: 1.1rem;
+  padding: 0.5rem;
+}
+
+nav a:hover {
+  color: hsla(210, 50%, 60%, 1); /* Dark blue-steel */
+  background-color: hsla(210, 20%, 30%, 1); /* Darker blue-steel */
+  border-radius: 5px;
+}
+
+/* Main Section */
+main {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 2rem;
+  padding: 3rem 0;
+  background-color: hsla(210, 20%, 25%, 1); /* Dark blue-steel container background */
+  border-radius: 10px;
+  box-shadow: 0 2px 10px hsla(210, 20%, 10%, 1); /* Dark blue-steel shadow */
+}
+
+/* Section */
+section {
+  background-color: hsla(210, 20%, 25%, 1); /* Dark blue-steel container background */
+  padding: 3rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px hsla(210, 20%, 10%, 1); /* Dark blue-steel shadow */
+}
+
+section h2 {
+  font-size: 2.5rem;
+  color: hsla(210, 50%, 80%, 1); /* Light blue-steel */
+  margin-bottom: 1rem;
+}
+
+section p {
+  font-size: 1.2rem;
+  color: hsla(210, 50%, 70%, 1); /* Medium blue-steel */
+  line-height: 1.8;
+}
+
+/* Portfolio Section */
+#portfolio {
+  margin-top: 3rem;
+}
+
+#portfolio .grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+#portfolio .project {
+  background-color: hsla(210, 20%, 25%, 1); /* Dark blue-steel container background */
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px hsla(210, 20%, 10%, 1); /* Dark blue-steel shadow */
+}
+
+#portfolio .project img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+#portfolio .project h3 {
+  font-size: 1.5rem;
+  color: hsla(210, 50%, 80%, 1); /* Light blue-steel */
+  margin-top: 1rem;
+}
+
+#portfolio .project p {
+  font-size: 1rem;
+  color: hsla(210, 50%, 70%, 1); /* Medium blue-steel */
+}
+
+/* Footer */
+footer {
+  background-color: hsla(210, 20%, 25%, 1); /* Dark blue-steel container background */
+  padding: 2rem;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px hsla(210, 20%, 10%, 1); /* Dark blue-steel shadow */
+}
+
+footer p {
+  font-size: 1.1rem;
+  color: hsla(210, 50%, 70%, 1); /* Medium blue-steel */
+}
+
+/* Headers */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Avenir Next LT Pro Demi', sans-serif;
+}
+
+/* Media Queries */
 @media (min-width: 1024px) {
   body {
     display: flex;
@@ -31,5 +186,40 @@ a,
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
+  }
+
+  /* Portfolio Grid */
+  #portfolio .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  #app {
+    padding: 0 1rem;
+  }
+
+  /* Portfolio Grid */
+  #portfolio .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  header p,
+  nav a {
+    font-size: 1rem;
+  }
+
+  section h2 {
+    font-size: 2rem;
+  }
+
+  #portfolio .grid {
+    grid-template-columns: 1fr;
   }
 }
