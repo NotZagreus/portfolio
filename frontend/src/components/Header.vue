@@ -1,12 +1,10 @@
 <template>
   <header>
-    <Logo />
     <Navigation />
   </header>
 </template>
   
 <script setup lang="ts">
-  import Logo from './Logo.vue'
   import Navigation from './Navigation.vue'
 </script>
   
