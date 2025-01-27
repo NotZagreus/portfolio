@@ -12,7 +12,7 @@
     text-align: center;
     text-size-adjust: 100%;
     padding: 1rem;
-    background-color: hsla(210, 20%, 20%, 1); /* Dark blue-steel background */
+    background-color: #29333d; /* Dark blue-steel background */
     border-top: 1px solid hsla(210, 20%, 10%, 1); /* Dark blue-steel border */
     position: fixed;
     width: 100%;
