@@ -13,6 +13,16 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Get a single project
+router.get('/:id', async (req, res) => {
+  try {
+    const project = await ProjectService.getProjectById(req.params.id);
+    res.json(project);
+  } catch (error: any) {
+    res.status(404).json({ message: error.message });
+  }
+});
+
 // Add a new project
 router.post('/', async (req, res) => {
   try {
@@ -20,6 +30,26 @@ router.post('/', async (req, res) => {
     res.status(201).json(project);
   } catch (error: any) {
     res.status(400).json({ message: error.message });
+  }
+});
+
+// Update a project
+router.put('/:id', async (req, res) => {
+  try {
+    const project = await ProjectService.updateProject(req.params.id, req.body);
+    res.json(project);
+  } catch (error: any) {
+    res.status(404).json({ message: error.message });
+  }
+});
+
+// Delete a project
+router.delete('/:id', async (req, res) => {
+  try {
+    const project = await ProjectService.deleteProject(req.params.id);
+    res.json(project);
+  } catch (error: any) {
+    res.status(404).json({ message: error.message });
   }
 });
 

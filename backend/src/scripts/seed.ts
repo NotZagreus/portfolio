@@ -1,38 +1,43 @@
-import mongoose from 'mongoose';
-import Project from '../datalayer/project';
+// import mongoose from 'mongoose';
+// import dotenv from 'dotenv';
+// import Project from '../datalayer/project';
 
-const sampleProjects = [
-  {
-    title: 'Photography Portfolio',
-    description: 'A showcase of my best photography projects.',
-    image: 'https://example.com/photo1.jpg',
-  },
-  {
-    title: 'Web App Development',
-    description: 'A full-stack app built with Vue.js and Express.js.',
-    image: 'https://example.com/webapp.jpg',
-  },
-];
+// dotenv.config({ path: '../../.env' });
 
-const seedData = async () => {
-  try {
-    // Connect to MongoDB
-    await mongoose.connect('mongodb://localhost:27017/portfolio');
-    console.log('Database connected');
+// const sampleProjects = [
+//   {
+//     title: 'Photography Portfolio',
+//     description: 'A showcase of my best photography projects.',
+//     image: 'https://example.com/photo1.jpg',
+//   },
+//   {
+//     title: 'Web App Development',
+//     description: 'A full-stack app built with Vue.js and Express.js.',
+//     image: 'https://example.com/webapp.jpg',
+//   },
+// ];
 
-    // Clear existing data
-    await Project.deleteMany();
-    console.log('Existing data cleared');
+// const seedData = async () => {
+//   try {
+//     // Connect to MongoDB
+//     await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/portfolio', {
+//     });
+//     console.log('Database connected');
 
-    // Insert sample data
-    await Project.insertMany(sampleProjects);
-    console.log('Sample data inserted');
+//     // Clear existing data
+//     await Project.deleteMany();
+//     await Project.collection.drop();
+//     console.log('Existing data cleared');
 
-    process.exit(0);
-  } catch (error) {
-    console.error('Error seeding data:', error);
-    process.exit(1);
-  }
-};
+//     // Insert sample data
+//     await Project.insertMany(sampleProjects);
+//     console.log('Sample data inserted');
 
-seedData();
+//     process.exit(0);
+//   } catch (error) {
+//     console.error('Error seeding data:', error);
+//     process.exit(1);
+//   }
+// };
+
+// seedData();
