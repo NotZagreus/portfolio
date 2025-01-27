@@ -6,10 +6,22 @@ export interface IProject extends Document {
   image: string;
 }
 
-const ProjectSchema: Schema = new Schema({
-  title: { type: String, required: true },
-  description: { type: String, required: true },
-  image: { type: String },
-});
+const ProjectSchema: Schema = new Schema(
+  {
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    image: { type: String },
+  },
+  { 
+    versionKey: false,
+    toJSON: {
+      virtuals: true,
+      transform: (doc, ret) => {
+        delete ret._id;
+        return ret;
+      }
+    }
+  }
+);
 
 export default mongoose.model<IProject>('Project', ProjectSchema);
