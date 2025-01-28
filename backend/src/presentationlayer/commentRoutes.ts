@@ -1,12 +1,12 @@
 import express from 'express';
-import ProjectService from '../businesslayer/projectService';
+import CommentService from '../businesslayer/commentService';
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const projects = await ProjectService.getProjects();
-    res.json(projects);
+    const comments = await CommentService.getComments();
+    res.json(comments);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
@@ -14,8 +14,8 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const project = await ProjectService.getProjectById(req.params.id);
-    res.json(project);
+    const comment = await CommentService.getCommentById(req.params.id);
+    res.json(comment);
   } catch (error: any) {
     res.status(404).json({ message: error.message });
   }
@@ -23,8 +23,8 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const project = await ProjectService.createProject(req.body);
-    res.status(201).json(project);
+    const comment = await CommentService.createComment(req.body);
+    res.status(201).json(comment);
   } catch (error: any) {
     res.status(400).json({ message: error.message });
   }
@@ -32,8 +32,8 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const project = await ProjectService.updateProject(req.params.id, req.body);
-    res.json(project);
+    const comment = await CommentService.updateComment(req.params.id, req.body);
+    res.json(comment);
   } catch (error: any) {
     res.status(404).json({ message: error.message });
   }
@@ -41,8 +41,8 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    const project = await ProjectService.deleteProject(req.params.id);
-    res.json(project);
+    const comment = await CommentService.deleteComment(req.params.id);
+    res.json(comment);
   } catch (error: any) {
     res.status(404).json({ message: error.message });
   }

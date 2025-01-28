@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import connectDB from './config/db';
 import projectRoutes from './presentationlayer/projectRoutes';
+import commentRoutes from './presentationlayer/commentRoutes';
+
 
 dotenv.config({ path: '../.env' });
 
@@ -22,6 +24,7 @@ connectDB().then(() => {
 
 // Routes
 app.use('/api/projects', projectRoutes);
+app.use('/api/comments', commentRoutes);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Welcome to my Portfolio');

@@ -20,6 +20,11 @@ const router = createRouter({
       name: 'about',
       component: () => import('../views/AboutView.vue'),
     },
+    {
+      path: '/comments',
+      name: 'comments',
+      component: () => import('../views/CommentsView.vue'),
+    },
   ],
 })
 
