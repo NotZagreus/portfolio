@@ -202,6 +202,11 @@ onMounted(fetchProjects);
   cursor: pointer;
   color: hsla(210, 50%, 70%, 1);
   padding: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.dropdown-button:hover {
+  transform: rotate(90deg);
 }
 
 .dropdown-menu {
