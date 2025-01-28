@@ -17,8 +17,8 @@
         <p>{{ project.description }}</p>
       </div>
       <div class="add-project">
-      <button class="add-button" @click="showAddModal = true">+</button>
-    </div>
+        <button class="add-button" @click="showAddModal = true">+</button>
+      </div>
     </div>
 
     <div v-if="showAddModal" class="modal">
