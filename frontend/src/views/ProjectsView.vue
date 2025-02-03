@@ -14,6 +14,7 @@
             </div>
           </div>
         </div>
+        <img v-if="project.image" :src="project.image" alt="Project Image" />
         <p>{{ project.description }}</p>
       </div>
       <div class="add-project">
@@ -21,11 +22,13 @@
       </div>
     </div>
 
+    <!-- Add Project Modal -->
     <div v-if="showAddModal" class="modal">
       <div class="modal-content">
         <h3>Add New Project</h3>
         <input v-model="newProject.title" placeholder="Title" />
         <textarea v-model="newProject.description" placeholder="Description"></textarea>
+        <input type="file" @change="handleFileUpload($event, 'newProject')" />
         <div class="modal-buttons">
           <button class="modal-button" @click="addProject">Add</button>
           <button class="modal-button" @click="closeAddModal">Cancel</button>
@@ -33,11 +36,13 @@
       </div>
     </div>
 
+    <!-- Edit Project Modal -->
     <div v-if="showEditModal" class="modal">
       <div class="modal-content">
         <h3>Edit Project</h3>
         <input v-model="editForm.title" placeholder="Title" />
         <textarea v-model="editForm.description" placeholder="Description"></textarea>
+        <input type="file" @change="handleFileUpload($event, 'editForm')" />
         <div class="modal-buttons">
           <button class="modal-button" @click="saveProject">Save</button>
           <button class="modal-button" @click="closeEditModal">Cancel</button>
@@ -45,6 +50,7 @@
       </div>
     </div>
 
+    <!-- Delete Project Modal -->
     <div v-if="showDeleteModal" class="modal">
       <div class="modal-content">
         <h3>Are you sure you want to delete this project?</h3>
@@ -65,6 +71,7 @@ interface Project {
   id: string;
   title: string;
   description: string;
+  image?: string;
 }
 
 const projects = ref<Project[]>([]);
@@ -90,18 +97,27 @@ const toggleDropdown = (id: string) => {
 };
 
 const editProject = (project: Project) => {
-  editForm.value = { id: project.id, title: project.title, description: project.description };
+  editForm.value = { id: project.id, title: project.title, description: project.description, image: project.image };
   showEditModal.value = true;
   dropdownOpen.value = null;
 };
 
 const saveProject = async () => {
   try {
-    const { id, title, description } = editForm.value;
-    await axios.put(`http://localhost:14344/api/projects/${id}`, { title, description });
-    const index = projects.value.findIndex(p => p.id === id);
+    const formData = new FormData();
+    formData.append('title', editForm.value.title);
+    formData.append('description', editForm.value.description);
+    if (editForm.value.image) {
+      formData.append('image', editForm.value.image);
+    }
+    await axios.put(`http://localhost:14344/api/projects/${editForm.value.id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    const index = projects.value.findIndex(p => p.id === editForm.value.id);
     if (index !== -1) {
-      projects.value[index] = { id, title, description };
+      projects.value[index] = { ...editForm.value };
     }
     closeEditModal();
   } catch (error) {
@@ -136,7 +152,17 @@ const closeDeleteModal = () => {
 
 const addProject = async () => {
   try {
-    const response = await axios.post('http://localhost:14344/api/projects', newProject.value);
+    const formData = new FormData();
+    formData.append('title', newProject.value.title);
+    formData.append('description', newProject.value.description);
+    if (newProject.value.image) {
+      formData.append('image', newProject.value.image);
+    }
+    const response = await axios.post('http://localhost:14344/api/projects', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
     projects.value.push(response.data);
     closeAddModal();
   } catch (error) {
@@ -147,6 +173,21 @@ const addProject = async () => {
 const closeAddModal = () => {
   showAddModal.value = false;
   newProject.value = { id: '', title: '', description: '' };
+};
+
+const handleFileUpload = (event: Event, formType: 'newProject' | 'editForm') => {
+  const file = (event.target as HTMLInputElement).files?.[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (formType === 'newProject') {
+        newProject.value.image = reader.result as string;
+      } else {
+        editForm.value.image = reader.result as string;
+      }
+    };
+    reader.readAsDataURL(file);
+  }
 };
 
 onMounted(fetchProjects);

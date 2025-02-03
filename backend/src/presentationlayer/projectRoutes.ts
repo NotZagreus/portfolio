@@ -1,7 +1,9 @@
 import express from 'express';
+import multer from 'multer';
 import ProjectService from '../businesslayer/projectService';
 
 const router = express.Router();
+const upload = multer({ storage: multer.memoryStorage() });
 
 router.get('/', async (req, res) => {
   try {
@@ -21,18 +23,26 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', upload.single('image'), async (req, res) => {
   try {
-    const project = await ProjectService.createProject(req.body);
+    const projectData = req.body;
+    if (req.file) {
+      projectData.image = req.file.buffer.toString('base64');
+    }
+    const project = await ProjectService.createProject(projectData);
     res.status(201).json(project);
   } catch (error: any) {
     res.status(400).json({ message: error.message });
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', upload.single('image'), async (req, res) => {
   try {
-    const project = await ProjectService.updateProject(req.params.id, req.body);
+    const projectData = req.body;
+    if (req.file) {
+      projectData.image = req.file.buffer.toString('base64');
+    }
+    const project = await ProjectService.updateProject(req.params.id, projectData);
     res.json(project);
   } catch (error: any) {
     res.status(404).json({ message: error.message });
