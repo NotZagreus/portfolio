@@ -7,10 +7,16 @@
         <div
           class="comment-card"
           v-for="comment in comments"
-          :key="comment._id"
+          :key="comment.id"
         >
           <h2>{{ comment.firstName }} {{ comment.lastName }}</h2>
           <p>{{ comment.comment }}</p>
+          <div class="dropdown">
+            <button class="dropdown-button" @click="toggleDropdown(comment.id)">⋮</button>
+            <div v-if="dropdownOpen === comment.id" class="dropdown-menu">
+              <button class="dropdown-item" @click="openDeleteModal(comment)">Delete</button>
+            </div>
+          </div>
         </div>
       </div>
       <button class="arrow right-arrow" @click="nextComment">›</button>
@@ -33,6 +39,17 @@
         </div>
       </div>
     </div>
+
+    <!-- Delete Comment Modal -->
+    <div v-if="showDeleteModal" class="modal">
+      <div class="modal-content">
+        <h3>Are you sure you want to delete this comment?</h3>
+        <div class="modal-buttons">
+          <button class="modal-button" @click="deleteComment">Yes</button>
+          <button class="modal-button" @click="closeDeleteModal">No</button>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -41,7 +58,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import axios from 'axios';
 
 interface Comment {
-  _id: string;
+  id: string;
   firstName: string;
   lastName: string;
   comment: string;
@@ -51,8 +68,11 @@ const comments = ref<Comment[]>([]);
 const currentIndex = ref(0);
 const delay = 7777;
 const showAddModal = ref(false);
-const newComment = ref<Comment>({ _id: '', firstName: '', lastName: '', comment: '' });
+const newComment = ref<Comment>({ id: '', firstName: '', lastName: '', comment: '' });
 const addError = ref<{ firstName?: string; lastName?: string; comment?: string }>({});
+const showDeleteModal = ref(false);
+const commentToDelete = ref<Comment | null>(null);
+const dropdownOpen = ref<string | null>(null);
 
 const fetchComments = async () => {
   try {
@@ -110,8 +130,35 @@ const addComment = async () => {
 
 const closeAddModal = () => {
   showAddModal.value = false;
-  newComment.value = { _id: '', firstName: '', lastName: '', comment: '' };
+  newComment.value = { id: '', firstName: '', lastName: '', comment: '' };
   addError.value = {};
+};
+
+const toggleDropdown = (id: string) => {
+  dropdownOpen.value = dropdownOpen.value === id ? null : id;
+};
+
+const openDeleteModal = (comment: Comment) => {
+  commentToDelete.value = comment;
+  showDeleteModal.value = true;
+  dropdownOpen.value = null;
+};
+
+const closeDeleteModal = () => {
+  showDeleteModal.value = false;
+  commentToDelete.value = null;
+};
+
+const deleteComment = async () => {
+  if (!commentToDelete.value) return;
+
+  try {
+    await axios.delete(`http://localhost:14344/api/comments/${commentToDelete.value.id}`);
+    comments.value = comments.value.filter(comment => comment.id !== commentToDelete.value!.id);
+    closeDeleteModal();
+  } catch (error) {
+    console.error('Error deleting comment:', error);
+  }
 };
 
 onMounted(() => {
@@ -133,7 +180,6 @@ onMounted(() => {
   });
 });
 </script>
-
 
 <style scoped>
 .comments {
@@ -158,6 +204,7 @@ onMounted(() => {
   box-shadow: 0 4px 8px hsla(210, 20%, 10%, 1);
   color: hsla(210, 50%, 70%, 1);
   text-align: center;
+  position: relative;
 }
 
 .comment-card h2 {
@@ -258,27 +305,55 @@ onMounted(() => {
 
 .modal-buttons {
   display: flex;
-  justify-content: center;
-  gap: 1rem;
+  justify-content: space-between;
   margin-top: 1rem;
 }
 
-.modal-button {
-  background-color: hsla(210, 20%, 35%, 1);
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+.delete-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  color: hsla(210, 50%, 70%, 1);
+  font-size: 1.2rem;
 }
 
-.modal-button:hover {
-  background-color: hsla(210, 20%, 45%, 1);
+.dropdown {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
-.error-message {
-  color: #f87171;
-  margin-top: 1rem;
+.dropdown-button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: hsla(210, 50%, 70%, 1);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: hsla(210, 20%, 25%, 1);
+  border: 1px solid hsla(210, 20%, 35%, 1);
+  border-radius: 4px;
+  box-shadow: 0 4px 8px hsla(210, 20%, 10%, 1);
+  z-index: 1000;
+}
+
+.dropdown-item {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: hsla(210, 50%, 70%, 1);
+  background-color: hsla(210, 20%, 25%, 1);
+  border: none;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown-item:hover {
+  background-color: hsla(210, 20%, 35%, 1);
 }
 </style>
