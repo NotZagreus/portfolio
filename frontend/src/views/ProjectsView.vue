@@ -14,7 +14,7 @@
             </div>
           </div>
         </div>
-        <img v-if="project.image" :src="project.image" alt="Project Image" style="width: 200px; height: 200px;" />
+        <img v-if="project.image" :src="project.image" alt="Project Image" class="project-image" />
         <a v-if="project.github_link" :href="project.github_link" target="_blank">
           <img src="@/assets/Pictures/25231.png" alt="GitHub Icon" class="github-icon" />
         </a>
@@ -77,6 +77,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import './CSS/ProjectsView.css';
 
 interface Project {
   id: string;
@@ -241,7 +242,7 @@ const handleFileUpload = (event: Event, formType: 'newProject' | 'editForm') => 
           }
           uploadError.value = null;
         } else {
-          uploadError.value = 'Please upload a square image.';
+          resizeImage(img, formType);
         }
       };
       img.src = reader.result as string;
@@ -250,196 +251,29 @@ const handleFileUpload = (event: Event, formType: 'newProject' | 'editForm') => 
   }
 };
 
+const resizeImage = (img: HTMLImageElement, formType: 'newProject' | 'editForm') => {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  const size = Math.min(img.width, img.height);
+  canvas.width = size;
+  canvas.height = size;
+  ctx?.drawImage(img, (img.width - size) / 2, (img.height - size) / 2, size, size, 0, 0, size, size);
+  const resizedImage = canvas.toDataURL('image/png');
+  if (formType === 'newProject') {
+    newProject.value.image = resizedImage;
+  } else {
+    editForm.value.image = resizedImage;
+  }
+  uploadError.value = null;
+  downloadImage(resizedImage);
+};
+
+const downloadImage = (dataUrl: string) => {
+  const link = document.createElement('a');
+  link.href = dataUrl;
+  link.download = 'resized-image.png';
+  link.click();
+};
+
 onMounted(fetchProjects);
 </script>
-
-<style scoped>
-.projects {
-  padding: 2rem;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1rem;
-}
-
-.project-card {
-  background-color: hsla(210, 20%, 25%, 1);
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px hsla(210, 20%, 10%, 1);
-  color: hsla(210, 50%, 70%, 1);
-}
-
-.project-card h2 {
-  font-size: 1.5rem;
-  color: hsla(210, 50%, 80%, 1);
-  margin-top: 1rem;
-}
-
-.project-card p {
-  font-size: 1rem;
-  color: hsla(210, 50%, 70%, 1);
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-}
-
-.dropdown {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.dropdown-button {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: hsla(210, 50%, 70%, 1);
-  padding: 0.5rem;
-  transition: transform 0.3s ease;
-}
-
-.dropdown-button:hover {
-  transform: rotate(90deg);
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: rgb(36, 45, 54);
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-}
-
-.dropdown-item {
-  padding: 0.5rem 1rem;
-  background: none;
-  border: none;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-  color: hsla(210, 50%, 70%, 1);
-}
-
-.dropdown-item:hover {
-  background-color: hsla(210, 20%, 30%, 1);
-  color: hsla(210, 50%, 80%, 1);
-}
-
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background-color: hsla(210, 20%, 25%, 1);
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 90%;
-  max-width: 500px;
-  color: hsla(210, 50%, 70%, 1);
-}
-
-.modal-content h3 {
-  margin-top: 0;
-  color: hsla(210, 50%, 80%, 1);
-}
-
-.modal-content input,
-.modal-content textarea {
-  width: 100%;
-  padding: 0.5rem;
-  margin-top: 1rem;
-  border: 1px solid hsla(210, 20%, 40%, 1);
-  border-radius: 4px;
-  background-color: hsla(210, 20%, 30%, 1);
-  color: hsla(210, 50%, 70%, 1);
-}
-
-.modal-content input::placeholder,
-.modal-content textarea::placeholder {
-  color: hsla(210, 50%, 60%, 1);
-}
-
-.modal-content input:focus,
-.modal-content textarea:focus {
-  outline: none;
-  border-color: hsla(210, 50%, 70%, 1);
-}
-
-.modal-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.modal-button {
-  background-color: rgb(71, 85, 100);
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.modal-button:hover {
-  background-color: hsla(210, 50%, 60%, 1);
-}
-
-.add-project {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
-.add-button {
-  background-color: hsla(210, 20%, 25%, 1);
-  color: hsla(210, 50%, 70%, 1);
-  border: none;
-  padding: 1rem;
-  border-radius: 50%;
-  font-size: 2rem;
-  cursor: pointer;
-  box-shadow: 0 4px 8px hsla(210, 20%, 10%, 1);
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.add-button:hover {
-  background-color: hsla(210, 20%, 30%, 1);
-  color: hsla(210, 50%, 80%, 1);
-}
-
-.github-icon {
-  width: 24px;
-  height: 24px;
-}
-
-.error-message {
-  color: rgb(238, 210, 180);
-  margin-top: 1rem;
-}
-</style>

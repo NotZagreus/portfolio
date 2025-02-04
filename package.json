@@ -5,6 +5,7 @@
     },
     "dependencies": {
         "axios": "^1.7.9",
+        "cropperjs": "^1.6.2",
         "dotenv": "^16.4.7",
         "multer": "^1.4.5-lts.1",
         "primevue": "^4.2.5",
