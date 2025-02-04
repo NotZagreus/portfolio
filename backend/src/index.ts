@@ -4,6 +4,7 @@ import cors from 'cors';
 import connectDB from './config/db';
 import projectRoutes from './presentationlayer/projectRoutes';
 import commentRoutes from './presentationlayer/commentRoutes';
+import bodyParser from 'body-parser';
 
 
 dotenv.config({ path: '../.env' });
@@ -13,7 +14,8 @@ const PORT = process.env.PORT;
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 // Connect to MongoDB
 connectDB().then(() => {

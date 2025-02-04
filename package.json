@@ -6,10 +6,16 @@
     "dependencies": {
         "axios": "^1.7.9",
         "dotenv": "^16.4.7",
-        "multer": "^1.4.5-lts.1"
+        "multer": "^1.4.5-lts.1",
+        "primevue": "^4.2.5",
+        "swiper": "^11.2.2",
+        "vue-carousel": "^0.18.0",
+        "vue-cropperjs": "^5.0.0",
+        "vue-slick-carousel": "^1.0.6"
     },
     "devDependencies": {
         "@types/axios": "^0.9.36",
-        "@types/multer": "^1.4.12"
+        "@types/multer": "^1.4.12",
+        "@types/vue-cropperjs": "^4.1.6"
     }
 }

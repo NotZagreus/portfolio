@@ -4,6 +4,7 @@ export interface IProject extends Document {
   title: string;
   description: string;
   image: string;
+  github_link?: string;
 }
 
 const ProjectSchema: Schema = new Schema(
@@ -11,6 +12,7 @@ const ProjectSchema: Schema = new Schema(
     title: { type: String, required: true },
     description: { type: String, required: true },
     image: { type: String },
+    github_link: { type: String },
   },
   { 
     versionKey: false,

@@ -14,7 +14,10 @@
             </div>
           </div>
         </div>
-        <img v-if="project.image" :src="project.image" alt="Project Image" />
+        <img v-if="project.image" :src="project.image" alt="Project Image" style="width: 200px; height: 200px;" />
+        <a v-if="project.github_link" :href="project.github_link" target="_blank">
+          <img src="@/assets/Pictures/25231.png" alt="GitHub Icon" class="github-icon" />
+        </a>
         <p>{{ project.description }}</p>
       </div>
       <div class="add-project">
@@ -27,8 +30,12 @@
       <div class="modal-content">
         <h3>Add New Project</h3>
         <input v-model="newProject.title" placeholder="Title" />
+        <div v-if="addError.title" class="error-message">{{ addError.title }}</div>
         <textarea v-model="newProject.description" placeholder="Description"></textarea>
+        <div v-if="addError.description" class="error-message">{{ addError.description }}</div>
+        <input v-model="newProject.github_link" placeholder="GitHub Link" />
         <input type="file" @change="handleFileUpload($event, 'newProject')" />
+        <div v-if="uploadError" class="error-message">{{ uploadError }}</div>
         <div class="modal-buttons">
           <button class="modal-button" @click="addProject">Add</button>
           <button class="modal-button" @click="closeAddModal">Cancel</button>
@@ -41,8 +48,12 @@
       <div class="modal-content">
         <h3>Edit Project</h3>
         <input v-model="editForm.title" placeholder="Title" />
+        <div v-if="editError.title" class="error-message">{{ editError.title }}</div>
         <textarea v-model="editForm.description" placeholder="Description"></textarea>
+        <div v-if="editError.description" class="error-message">{{ editError.description }}</div>
+        <input v-model="editForm.github_link" placeholder="GitHub Link" />
         <input type="file" @change="handleFileUpload($event, 'editForm')" />
+        <div v-if="uploadError" class="error-message">{{ uploadError }}</div>
         <div class="modal-buttons">
           <button class="modal-button" @click="saveProject">Save</button>
           <button class="modal-button" @click="closeEditModal">Cancel</button>
@@ -71,7 +82,8 @@ interface Project {
   id: string;
   title: string;
   description: string;
-  image?: string;
+  image: string;
+  github_link?: string;
 }
 
 const projects = ref<Project[]>([]);
@@ -79,9 +91,12 @@ const dropdownOpen = ref<string | null>(null);
 const showEditModal = ref(false);
 const showDeleteModal = ref(false);
 const showAddModal = ref(false);
-const editForm = ref<Project>({ id: '', title: '', description: '' });
-const newProject = ref<Project>({ id: '', title: '', description: '' });
+const editForm = ref<Project>({ id: '', title: '', description: '', image: '', github_link: '' });
+const newProject = ref<Project>({ id: '', title: '', description: '', image: '', github_link: '' });
 const projectToDelete = ref<string | null>(null);
+const uploadError = ref<string | null>(null);
+const addError = ref<{ title?: string; description?: string }>({});
+const editError = ref<{ title?: string; description?: string }>({});
 
 const fetchProjects = async () => {
   try {
@@ -97,16 +112,33 @@ const toggleDropdown = (id: string) => {
 };
 
 const editProject = (project: Project) => {
-  editForm.value = { id: project.id, title: project.title, description: project.description, image: project.image };
+  editForm.value = { id: project.id, title: project.title, description: project.description, image: project.image, github_link: project.github_link };
   showEditModal.value = true;
   dropdownOpen.value = null;
 };
 
 const saveProject = async () => {
+  if (!editForm.value.title) {
+    editError.value.title = 'Title is required.';
+  } else {
+    editError.value.title = '';
+  }
+  if (!editForm.value.description) {
+    editError.value.description = 'Description is required.';
+  } else {
+    editError.value.description = '';
+  }
+  if (editError.value.title || editError.value.description) {
+    return;
+  }
+
   try {
     const formData = new FormData();
     formData.append('title', editForm.value.title);
     formData.append('description', editForm.value.description);
+    if (editForm.value.github_link) {
+      formData.append('github_link', editForm.value.github_link);
+    }
     if (editForm.value.image) {
       formData.append('image', editForm.value.image);
     }
@@ -151,10 +183,27 @@ const closeDeleteModal = () => {
 };
 
 const addProject = async () => {
+  if (!newProject.value.title) {
+    addError.value.title = 'Title is required.';
+  } else {
+    addError.value.title = '';
+  }
+  if (!newProject.value.description) {
+    addError.value.description = 'Description is required.';
+  } else {
+    addError.value.description = '';
+  }
+  if (addError.value.title || addError.value.description) {
+    return;
+  }
+
   try {
     const formData = new FormData();
     formData.append('title', newProject.value.title);
     formData.append('description', newProject.value.description);
+    if (newProject.value.github_link) {
+      formData.append('github_link', newProject.value.github_link);
+    }
     if (newProject.value.image) {
       formData.append('image', newProject.value.image);
     }
@@ -172,7 +221,9 @@ const addProject = async () => {
 
 const closeAddModal = () => {
   showAddModal.value = false;
-  newProject.value = { id: '', title: '', description: '' };
+  newProject.value = { id: '', title: '', description: '', image: '', github_link: '' };
+  uploadError.value = null;
+  addError.value = {};
 };
 
 const handleFileUpload = (event: Event, formType: 'newProject' | 'editForm') => {
@@ -180,11 +231,20 @@ const handleFileUpload = (event: Event, formType: 'newProject' | 'editForm') => 
   if (file) {
     const reader = new FileReader();
     reader.onload = () => {
-      if (formType === 'newProject') {
-        newProject.value.image = reader.result as string;
-      } else {
-        editForm.value.image = reader.result as string;
-      }
+      const img = new Image();
+      img.onload = () => {
+        if (img.width === img.height) {
+          if (formType === 'newProject') {
+            newProject.value.image = reader.result as string;
+          } else {
+            editForm.value.image = reader.result as string;
+          }
+          uploadError.value = null;
+        } else {
+          uploadError.value = 'Please upload a square image.';
+        }
+      };
+      img.src = reader.result as string;
     };
     reader.readAsDataURL(file);
   }
@@ -371,5 +431,15 @@ onMounted(fetchProjects);
 .add-button:hover {
   background-color: hsla(210, 20%, 30%, 1);
   color: hsla(210, 50%, 80%, 1);
+}
+
+.github-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.error-message {
+  color: rgb(238, 210, 180);
+  margin-top: 1rem;
 }
 </style>

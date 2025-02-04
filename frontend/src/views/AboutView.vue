@@ -1,9 +1,9 @@
 <template>
-  <div class="about">
+  <section class="about">
     <h1>This is an about page</h1>
     <button class="cv-button" @click="downloadCV('en')">Download CV (English)</button>
     <button class="cv-button" @click="downloadCV('fr')">Download CV (French)</button>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -24,7 +24,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .about {
   text-align: center;
   padding: 20px;
