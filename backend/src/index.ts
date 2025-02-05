@@ -5,12 +5,12 @@ import connectDB from './config/db';
 import projectRoutes from './presentationlayer/projectRoutes';
 import commentRoutes from './presentationlayer/commentRoutes';
 import bodyParser from 'body-parser';
-
+import nodemailer from 'nodemailer';
 
 dotenv.config({ path: '../.env' });
 
 const app = express();
-const PORT = process.env.PORT;
+const BACKEND_PORT = process.env.BACKEND_PORT;
 
 // Middleware
 app.use(cors());
@@ -24,6 +24,34 @@ connectDB().then(() => {
   console.error('MongoDB connection error:', err);
 });
 
+// Nodemailer transporter setup
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER || "jhondoesnthack@gmail.com" ,
+    pass: process.env.EMAIL_PASS || "ebgg ywsd ljxt mdqb"
+  }
+});
+
+// Email sending route
+app.post('/send', (req: Request, res: Response) => {
+  const { to, subject, text } = req.body;
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to,
+    subject,
+    text
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return res.status(500).send(error.toString());
+    }
+    res.send('Email sent: ' + info.response);
+  });
+});
+
 // Routes
 app.use('/api/projects', projectRoutes);
 app.use('/api/comments', commentRoutes);
@@ -32,7 +60,7 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Welcome to my Portfolio');
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+// Start the backend server
+app.listen(BACKEND_PORT, () => {
+  console.log(`Backend is running on http://localhost:${BACKEND_PORT}`);
 });

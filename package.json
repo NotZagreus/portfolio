@@ -1,13 +1,13 @@
 {
     "scripts": {
-        "start": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\" \"npm run seed\"",
-        "seed": "ts-node backend/src/scripts/seed.ts"
+        "start": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\" "
     },
     "dependencies": {
         "axios": "^1.7.9",
         "cropperjs": "^1.6.2",
         "dotenv": "^16.4.7",
         "multer": "^1.4.5-lts.1",
+        "nodemailer": "^6.10.0",
         "primevue": "^4.2.5",
         "swiper": "^11.2.2",
         "vue-carousel": "^0.18.0",
@@ -17,6 +17,7 @@
     "devDependencies": {
         "@types/axios": "^0.9.36",
         "@types/multer": "^1.4.12",
+        "@types/nodemailer": "^6.4.17",
         "@types/vue-cropperjs": "^4.1.6"
     }
 }
