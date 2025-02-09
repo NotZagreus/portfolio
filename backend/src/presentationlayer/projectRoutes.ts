@@ -1,14 +1,15 @@
 import express from 'express';
 import multer from 'multer';
 import ProjectService from '../businesslayer/projectService';
+import { checkJwt, checkPermissions } from '../middleware/auth';
 
 const router = express.Router();
 const upload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 10 * 1024 * 1024 } 
+  limits: { fileSize: 10 * 1024 * 1024 }
 });
 
-router.get('/', async (req, res) => {
+router.get('/', async (_, res) => {
   try {
     const projects = await ProjectService.getProjects();
     res.json(projects);
@@ -26,7 +27,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', upload.single('image'), async (req, res) => {
+router.post('/', checkJwt, checkPermissions(), upload.single('image'), async (req, res) => {
   try {
     const projectData = req.body;
     if (req.file) {
@@ -39,7 +40,7 @@ router.post('/', upload.single('image'), async (req, res) => {
   }
 });
 
-router.put('/:id', upload.single('image'), async (req, res) => {
+router.put('/:id', checkJwt, checkPermissions(), upload.single('image'), async (req, res) => {
   try {
     const projectData = req.body;
     if (req.file) {
@@ -52,7 +53,7 @@ router.put('/:id', upload.single('image'), async (req, res) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', checkJwt, checkPermissions(), async (req, res) => {
   try {
     const project = await ProjectService.deleteProject(req.params.id);
     res.json(project);

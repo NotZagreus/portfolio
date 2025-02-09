@@ -78,6 +78,7 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import './CSS/ProjectsView.css';
+import { useAuth0 } from '@auth0/auth0-vue';
 
 interface Project {
   id: string;
@@ -99,23 +100,18 @@ const uploadError = ref<string | null>(null);
 const addError = ref<{ title?: string; description?: string }>({});
 const editError = ref<{ title?: string; description?: string }>({});
 
+const { getAccessTokenSilently } = useAuth0();
+
 const fetchProjects = async () => {
   try {
-    const response = await axios.get('http://localhost:14344/api/projects');
+    const token = await getAccessTokenSilently();
+    const response = await axios.get('http://localhost:14344/api/projects', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     projects.value = response.data;
   } catch (error) {
     console.error('Error fetching projects:', error);
   }
-};
-
-const toggleDropdown = (id: string) => {
-  dropdownOpen.value = dropdownOpen.value === id ? null : id;
-};
-
-const editProject = (project: Project) => {
-  editForm.value = { id: project.id, title: project.title, description: project.description, image: project.image, github_link: project.github_link };
-  showEditModal.value = true;
-  dropdownOpen.value = null;
 };
 
 const saveProject = async () => {
@@ -134,6 +130,10 @@ const saveProject = async () => {
   }
 
   try {
+    const token = await getAccessTokenSilently();
+
+    console.log("Token:", token);
+
     const formData = new FormData();
     formData.append('title', editForm.value.title);
     formData.append('description', editForm.value.description);
@@ -143,11 +143,13 @@ const saveProject = async () => {
     if (editForm.value.image) {
       formData.append('image', editForm.value.image);
     }
-    await axios.put(`http://localhost:14344/api/projects/${editForm.value.id}`, formData, {
+    const response = await axios.put(`http://localhost:14344/api/projects/${editForm.value.id}`, formData, {
       headers: {
-        'Content-Type': 'multipart/form-data'
-      }
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${token}`,
+      },
     });
+    console.log("Response:", response);
     const index = projects.value.findIndex(p => p.id === editForm.value.id);
     if (index !== -1) {
       projects.value[index] = { ...editForm.value };
@@ -155,32 +157,25 @@ const saveProject = async () => {
     closeEditModal();
   } catch (error) {
     console.error('Error saving project:', error);
+    if (axios.isAxiosError(error) && error.response) {
+      console.error('Response data:', error.response.data);
+      console.error('Response status:', error.response.status);
+      console.error('Response headers:', error.response.headers);
+    }
   }
-};
-
-const closeEditModal = () => {
-  showEditModal.value = false;
-};
-
-const confirmDelete = (id: string) => {
-  projectToDelete.value = id;
-  showDeleteModal.value = true;
-  dropdownOpen.value = null;
 };
 
 const deleteProject = async () => {
   try {
-    await axios.delete(`http://localhost:14344/api/projects/${projectToDelete.value}`);
+    const token = await getAccessTokenSilently();
+    await axios.delete(`http://localhost:14344/api/projects/${projectToDelete.value}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     projects.value = projects.value.filter(p => p.id !== projectToDelete.value);
     closeDeleteModal();
   } catch (error) {
     console.error('Error deleting project:', error);
   }
-};
-
-const closeDeleteModal = () => {
-  showDeleteModal.value = false;
-  projectToDelete.value = null;
 };
 
 const addProject = async () => {
@@ -199,6 +194,7 @@ const addProject = async () => {
   }
 
   try {
+    const token = await getAccessTokenSilently();
     const formData = new FormData();
     formData.append('title', newProject.value.title);
     formData.append('description', newProject.value.description);
@@ -210,8 +206,9 @@ const addProject = async () => {
     }
     const response = await axios.post('http://localhost:14344/api/projects', formData, {
       headers: {
-        'Content-Type': 'multipart/form-data'
-      }
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${token}`,
+      },
     });
     projects.value.push(response.data);
     closeAddModal();
@@ -219,6 +216,118 @@ const addProject = async () => {
     console.error('Error adding project:', error);
   }
 };
+
+const toggleDropdown = (id: string) => {
+  dropdownOpen.value = dropdownOpen.value === id ? null : id;
+};
+
+const editProject = (project: Project) => {
+  editForm.value = { id: project.id, title: project.title, description: project.description, image: project.image, github_link: project.github_link };
+  showEditModal.value = true;
+  dropdownOpen.value = null;
+};
+
+// const saveProject = async () => {
+//   if (!editForm.value.title) {
+//     editError.value.title = 'Title is required.';
+//   } else {
+//     editError.value.title = '';
+//   }
+//   if (!editForm.value.description) {
+//     editError.value.description = 'Description is required.';
+//   } else {
+//     editError.value.description = '';
+//   }
+//   if (editError.value.title || editError.value.description) {
+//     return;
+//   }
+
+//   try {
+//     const formData = new FormData();
+//     formData.append('title', editForm.value.title);
+//     formData.append('description', editForm.value.description);
+//     if (editForm.value.github_link) {
+//       formData.append('github_link', editForm.value.github_link);
+//     }
+//     if (editForm.value.image) {
+//       formData.append('image', editForm.value.image);
+//     }
+//     await axios.put(`http://localhost:14344/api/projects/${editForm.value.id}`, formData, {
+//       headers: {
+//         'Content-Type': 'multipart/form-data'
+//       }
+//     });
+//     const index = projects.value.findIndex(p => p.id === editForm.value.id);
+//     if (index !== -1) {
+//       projects.value[index] = { ...editForm.value };
+//     }
+//     closeEditModal();
+//   } catch (error) {
+//     console.error('Error saving project:', error);
+//   }
+// };
+
+const closeEditModal = () => {
+  showEditModal.value = false;
+};
+
+const confirmDelete = (id: string) => {
+  projectToDelete.value = id;
+  showDeleteModal.value = true;
+  dropdownOpen.value = null;
+};
+
+// const deleteProject = async () => {
+//   try {
+//     await axios.delete(`http://localhost:14344/api/projects/${projectToDelete.value}`);
+//     projects.value = projects.value.filter(p => p.id !== projectToDelete.value);
+//     closeDeleteModal();
+//   } catch (error) {
+//     console.error('Error deleting project:', error);
+//   }
+// };
+
+const closeDeleteModal = () => {
+  showDeleteModal.value = false;
+  projectToDelete.value = null;
+};
+
+// const addProject = async () => {
+//   if (!newProject.value.title) {
+//     addError.value.title = 'Title is required.';
+//   } else {
+//     addError.value.title = '';
+//   }
+//   if (!newProject.value.description) {
+//     addError.value.description = 'Description is required.';
+//   } else {
+//     addError.value.description = '';
+//   }
+//   if (addError.value.title || addError.value.description) {
+//     return;
+//   }
+
+//   try {
+//     const formData = new FormData();
+//     formData.append('title', newProject.value.title);
+//     formData.append('description', newProject.value.description);
+//     if (newProject.value.github_link) {
+//       formData.append('github_link', newProject.value.github_link);
+//     }
+//     if (newProject.value.image) {
+//       formData.append('image', newProject.value.image);
+//     }
+//     const response = await axios.post('http://localhost:14344/api/projects', formData, {
+//       headers: {
+//         'Content-Type': 'multipart/form-data'
+//       }
+//     });
+//     projects.value.push(response.data);
+//     closeAddModal();
+//   } catch (error) {
+//     console.error('Error adding project:', error);
+//   }
+// };
 
 const closeAddModal = () => {
   showAddModal.value = false;

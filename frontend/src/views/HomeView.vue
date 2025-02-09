@@ -1,8 +1,16 @@
 <script setup lang="ts">
 import { useAuth0 } from '@auth0/auth0-vue';
+import { ref, onMounted } from 'vue';
 
-const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+const { isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently } = useAuth0();
 const windowLocation = window.location.origin;
+const accessToken = ref('');
+
+onMounted(async () => {
+  if (isAuthenticated.value) {
+    accessToken.value = await getAccessTokenSilently();
+  }
+});
 </script>
 
 <template>
@@ -33,6 +41,9 @@ const windowLocation = window.location.origin;
     <div class="auth-buttons">
       <button v-if="isAuthenticated" @click="logout({ logoutParams: { returnTo: windowLocation } })">Logout</button>
       <button v-else @click="loginWithRedirect()">Login</button>
+    </div>
+    <div v-if="isAuthenticated" class="token-display">
+      <p>Your access token is: {{ accessToken }}</p>
     </div>
   </main>
 </template>

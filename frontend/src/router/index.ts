@@ -1,9 +1,10 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import ProjectsView from '../views/ProjectsView.vue'
-import AboutView from '../views/AboutView.vue'
-import CommentsView from '../views/CommentsView.vue'
-import ContactView from '@/views/ContactView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
+import ProjectsView from '../views/ProjectsView.vue';
+import AboutView from '../views/AboutView.vue';
+import CommentsView from '../views/CommentsView.vue';
+import ContactView from '@/views/ContactView.vue';
+import { useAuth0 } from '@auth0/auth0-vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,6 +18,7 @@ const router = createRouter({
       path: '/projects',
       name: 'projects',
       component: ProjectsView,
+      meta: { requiresAuth: true },
     },
     {
       path: '/about',
@@ -34,6 +36,16 @@ const router = createRouter({
       component: ContactView,
     }
   ],
-})
+});
 
-export default router
+router.beforeEach((to, from, next) => {
+  const { isAuthenticated } = useAuth0();
+
+  if (to.meta.requiresAuth && !isAuthenticated.value) {
+    next({ name: 'home' });
+  } else {
+    next();
+  }
+});
+
+export default router;
