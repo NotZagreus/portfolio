@@ -28,8 +28,8 @@ connectDB().then(() => {
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.EMAIL_USER || "jhondoesnthack@gmail.com" ,
-    pass: process.env.EMAIL_PASS || "ebgg ywsd ljxt mdqb"
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
   }
 });
 

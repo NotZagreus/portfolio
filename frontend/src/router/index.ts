@@ -4,6 +4,7 @@ import ProjectsView from '../views/ProjectsView.vue';
 import AboutView from '../views/AboutView.vue';
 import CommentsView from '../views/CommentsView.vue';
 import ContactView from '@/views/ContactView.vue';
+import Portfolio from '@/Portfolio.vue';
 import { useAuth0 } from '@auth0/auth0-vue';
 
 const router = createRouter({
@@ -12,7 +13,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView,
+      component: Portfolio,
     },
     {
       path: '/projects',
