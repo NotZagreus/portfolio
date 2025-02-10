@@ -10,6 +10,17 @@
       <div class="navigation-container"></div>
     </div>
     <div class="right-side">
+      <div class="paragraph-container">
+        <h3>
+          With a love for problem-solving, I have worked as an infanteer in the Canadian Army,
+          honing my skills in punctuality, teamwork, and charisma to engage with others and achieve
+          results. Using a logical and straightforward approach, I tackle any problem I’m faced
+          with, combining curiosity and military-level discipline to find effective and efficient
+          solutions. Attention to detail and clear communication are critical in overcoming
+          challenges, and I consistently support my team while continuously improving my skills and
+          effectiveness.
+        </h3>
+      </div>
       <Projects />
     </div>
   </div>
@@ -17,7 +28,7 @@
 
 <script setup lang="ts">
 import Contact from './components/Contact.vue'
-import Projects from './components/Projects.vue';
+import Projects from './components/Projects.vue'
 </script>
 
 <style scoped></style>
