@@ -1,9 +1,8 @@
 <template>
-  <section class="about">
-    <h1>This is an about page</h1>
+  <div>
     <button class="cv-button" @click="downloadCV('en')">Download CV (English)</button>
     <button class="cv-button" @click="downloadCV('fr')">Download CV (French)</button>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -25,11 +24,6 @@ export default {
 </script>
 
 <style scoped>
-.about {
-  text-align: center;
-  padding: 20px;
-}
-
 .cv-button {
   background-color: #4CAF50; /* Green */
   border: none;
@@ -47,14 +41,5 @@ export default {
 
 .cv-button:hover {
   background-color: #45a049;
-}
-
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
 }
 </style>

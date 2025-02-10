@@ -1,9 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
-import ProjectsView from '../views/ProjectsView.vue';
-import AboutView from '../views/AboutView.vue';
-import CommentsView from '../views/CommentsView.vue';
-import ContactView from '@/views/ContactView.vue';
 import Portfolio from '@/Portfolio.vue';
 import { useAuth0 } from '@auth0/auth0-vue';
 
@@ -14,27 +9,6 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: Portfolio,
-    },
-    {
-      path: '/projects',
-      name: 'projects',
-      component: ProjectsView,
-      meta: { requiresAuth: true },
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: AboutView,
-    },
-    {
-      path: '/comments',
-      name: 'comments',
-      component: CommentsView,
-    },
-    {
-      path: '/contact',
-      name: 'contact',
-      component: ContactView,
     }
   ],
 });
