@@ -1,0 +1,39 @@
+body {
+background: linear-gradient(to bottom, #1F262E, #46586A);
+min-height: 100vh;
+margin: 0;
+}
+
+/* Example media query for tablets */
+@media (max-width: 768px) {
+body {
+    background: linear-gradient(to bottom, #1F262E, #3A4A5A);
+}
+}
+
+/* Example media query for mobile devices */
+@media (max-width: 480px) {
+body {
+    background: linear-gradient(to bottom, #1F262E, #2E3A4A);
+}
+}
+
+.container {
+display: flex;
+}
+
+.left-side {
+width: 50%;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.right-side {
+width: 50%;
+}
+
+.info-container {
+width: 25%;
+text-align: center;
+}
