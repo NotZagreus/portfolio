@@ -16,8 +16,8 @@
             <li :class="{ active: activeSection === 'projects' }">
               <a href="#projects">Projects</a>
             </li>
-            <li :class="{ active: activeSection === 'cv' }">
-              <a href="#cv">CV</a>
+            <li :class="{ active: activeSection === 'testimonials' }">
+              <a href="#testimonials">Testimonials</a>
             </li>
           </ul>
           <div class="line"></div>
@@ -40,11 +40,11 @@
       <div id="projects">
         <Projects />
       </div>
-      <div id="cv">
-        <CV />
-      </div>
-      <div id="comments">
+      <div id="testimonials">
         <Comments />
+      </div>
+      <div id="CV">
+        <CV />
       </div>
     </div>
   </div>
@@ -57,7 +57,7 @@ import Projects from './components/Projects.vue'
 import CV from './components/CV.vue'
 import Comments from './components/Comments.vue'
 
-const sections = ref(['description', 'projects', 'cv'])
+const sections = ref(['description', 'projects', 'testimonial'])
 const activeSection = ref('')
 const dotStyle = ref({ top: '0px' })
 
