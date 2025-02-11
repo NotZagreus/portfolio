@@ -1,4 +1,4 @@
-import Project, { IProject } from './project';
+import Project, { IProject } from "./project";
 
 export default class ProjectRepository {
   static async getAllProjects(): Promise<IProject[]> {
@@ -13,8 +13,11 @@ export default class ProjectRepository {
     const project = new Project(data);
     return project.save();
   }
-  
-  static async updateProject(id: string, data: Partial<IProject>): Promise<IProject | null> {
+
+  static async updateProject(
+    id: string,
+    data: Partial<IProject>
+  ): Promise<IProject | null> {
     return Project.findByIdAndUpdate(id, data, { new: true });
   }
 

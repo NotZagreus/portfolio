@@ -1,4 +1,4 @@
-import Comment, { IComment } from './comment';
+import Comment, { IComment } from "./comment";
 
 export default class CommentRepository {
   static async getAllComments(): Promise<IComment[]> {
@@ -13,8 +13,11 @@ export default class CommentRepository {
     const comment = new Comment(data);
     return comment.save();
   }
-  
-  static async updateComment(id: string, data: Partial<IComment>): Promise<IComment | null> {
+
+  static async updateComment(
+    id: string,
+    data: Partial<IComment>
+  ): Promise<IComment | null> {
     return Comment.findByIdAndUpdate(id, data, { new: true });
   }
 

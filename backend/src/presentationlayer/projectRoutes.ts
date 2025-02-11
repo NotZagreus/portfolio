@@ -1,15 +1,15 @@
-import express from 'express';
-import multer from 'multer';
-import ProjectService from '../businesslayer/projectService';
-import { checkJwt, checkPermissions } from '../middleware/auth';
+import express from "express";
+import multer from "multer";
+import ProjectService from "../businesslayer/projectService";
+import { checkJwt, checkPermissions } from "../middleware/auth";
 
 const router = express.Router();
 const upload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 10 * 1024 * 1024 }
+  limits: { fileSize: 10 * 1024 * 1024 },
 });
 
-router.get('/', async (_, res) => {
+router.get("/", async (_, res) => {
   try {
     const projects = await ProjectService.getProjects();
     res.json(projects);
@@ -18,7 +18,7 @@ router.get('/', async (_, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const project = await ProjectService.getProjectById(req.params.id);
     res.json(project);
@@ -27,33 +27,48 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', checkJwt, checkPermissions(), upload.single('image'), async (req, res) => {
-  try {
-    const projectData = req.body;
-    if (req.file) {
-      projectData.image = req.file.buffer.toString('base64');
+router.post(
+  "/",
+  checkJwt,
+  checkPermissions(),
+  upload.single("image"),
+  async (req, res) => {
+    try {
+      const projectData = req.body;
+      if (req.file) {
+        projectData.image = req.file.buffer.toString("base64");
+      }
+      const project = await ProjectService.createProject(projectData);
+      res.status(201).json(project);
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
     }
-    const project = await ProjectService.createProject(projectData);
-    res.status(201).json(project);
-  } catch (error: any) {
-    res.status(400).json({ message: error.message });
   }
-});
+);
 
-router.put('/:id', checkJwt, checkPermissions(), upload.single('image'), async (req, res) => {
-  try {
-    const projectData = req.body;
-    if (req.file) {
-      projectData.image = req.file.buffer.toString('base64');
+router.put(
+  "/:id",
+  checkJwt,
+  checkPermissions(),
+  upload.single("image"),
+  async (req, res) => {
+    try {
+      const projectData = req.body;
+      if (req.file) {
+        projectData.image = req.file.buffer.toString("base64");
+      }
+      const project = await ProjectService.updateProject(
+        req.params.id,
+        projectData
+      );
+      res.json(project);
+    } catch (error: any) {
+      res.status(404).json({ message: error.message });
     }
-    const project = await ProjectService.updateProject(req.params.id, projectData);
-    res.json(project);
-  } catch (error: any) {
-    res.status(404).json({ message: error.message });
   }
-});
+);
 
-router.delete('/:id', checkJwt, checkPermissions(), async (req, res) => {
+router.delete("/:id", checkJwt, checkPermissions(), async (req, res) => {
   try {
     const project = await ProjectService.deleteProject(req.params.id);
     res.json(project);

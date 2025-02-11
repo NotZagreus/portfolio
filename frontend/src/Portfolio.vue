@@ -43,6 +43,9 @@
       <div id="cv">
         <CV />
       </div>
+      <div id="comments">
+        <Comments />
+      </div>
     </div>
   </div>
 </template>
@@ -52,6 +55,7 @@ import { onMounted, ref } from 'vue'
 import Contact from './components/Contact.vue'
 import Projects from './components/Projects.vue'
 import CV from './components/CV.vue'
+import Comments from './components/Comments.vue'
 
 const sections = ref(['description', 'projects', 'cv'])
 const activeSection = ref('')
