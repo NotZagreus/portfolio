@@ -18,6 +18,7 @@
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
+  z-index: -1;
 }
 
 .project-card h2 {
@@ -37,6 +38,7 @@
 .project-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
 .card-header {

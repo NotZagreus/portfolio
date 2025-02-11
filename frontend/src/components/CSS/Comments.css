@@ -7,12 +7,14 @@
   position: relative;
   overflow: hidden; /* Ensure no part of previous cards is visible */
   margin: 2rem 0;
+  z-index: -1;
 }
 
 .carousel-track {
   display: flex;
   transition: transform 0.5s ease;
   width: 100%; /* Ensure it spans the full width of the container */
+  z-index: -1;
 }
 
 .comment-card {
@@ -27,6 +29,7 @@
   position: relative;
   margin: 0;
   box-sizing: border-box; /* Prevent any margin or padding from affecting the width */
+  z-index: -1;
 }
 
 .comment-card h2 {
