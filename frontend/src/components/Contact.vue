@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useAuth0 } from '@auth0/auth0-vue'
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const { isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently } = useAuth0()
 const windowLocation = window.location.origin
 const accessToken = ref('')
@@ -31,14 +33,14 @@ const sendEmail = async () => {
   })
 
   if (response.ok) {
-    alert('Email sent successfully!')
+    alert(t('contact.emailSent'))
     firstName.value = ''
     lastName.value = ''
     email.value = ''
     message.value = ''
     showModal.value = false
   } else {
-    alert('Failed to send email.')
+    alert(t('contact.emailFailed'))
   }
 }
 </script>
@@ -83,32 +85,32 @@ const sendEmail = async () => {
         v-if="isAuthenticated"
         @click="logout({ logoutParams: { returnTo: windowLocation } })"
       >
-        Logout
+        {{ t('contact.logout') }}
       </button>
-      <button v-else @click="loginWithRedirect()">Login</button>
+      <button v-else @click="loginWithRedirect()">{{ t('contact.login') }}</button>
     </div>
     <div v-if="showModal" class="modal">
       <div class="modal-content">
         <span class="close" @click="showModal = false">&times;</span>
-        <h1>Contact Me</h1>
+        <h1>{{ t('contact.contactMe') }}</h1>
         <form @submit.prevent="sendEmail">
           <div>
-            <label for="firstName">First Name:</label>
+            <label for="firstName">{{ t('contact.firstName') }}:</label>
             <input type="text" id="firstName" v-model="firstName" required />
           </div>
           <div>
-            <label for="lastName">Last Name:</label>
+            <label for="lastName">{{ t('contact.lastName') }}:</label>
             <input type="text" id="lastName" v-model="lastName" required />
           </div>
           <div>
-            <label for="email">Email:</label>
+            <label for="email">{{ t('contact.email') }}:</label>
             <input type="email" id="email" v-model="email" required />
           </div>
           <div>
-            <label for="message">Message:</label>
+            <label for="message">{{ t('contact.message') }}:</label>
             <textarea id="message" v-model="message" required></textarea>
           </div>
-          <button type="submit">Send</button>
+          <button type="submit">{{ t('contact.send') }}</button>
         </form>
       </div>
     </div>

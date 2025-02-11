@@ -1,0 +1,67 @@
+{
+  "welcome": "Welcome to my Portfolio",
+  "description": "With a love for problem-solving, I have worked as an infanteer in the Canadian Army, honing my skills in punctuality, teamwork, and charisma to engage with others and achieve results. Using a logical and straightforward approach, I tackle any problem I’m faced with, combining curiosity and military-level discipline to find effective and efficient solutions. Attention to detail and clear communication are critical in overcoming challenges, and I consistently support my team while continuously improving my skills and effectiveness.",
+  "projects": {
+    "title": "Projects",
+    "edit": "Edit",
+    "delete": "Delete",
+    "addNew": "Add New Project",
+    "titlePlaceholder": "Title",
+    "descriptionPlaceholder": "Description",
+    "githubLinkPlaceholder": "GitHub Link",
+    "add": "Add",
+    "cancel": "Cancel",
+    "editProject": "Edit Project",
+    "save": "Save",
+    "confirmDelete": "Are you sure you want to delete this project?",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "portfolio": {
+    "name": "Artem Kozlov",
+    "title": "3rd Year Computer Science Student",
+    "specialization": "I specialize in full-stack development, IT support and love cybersecurity.",
+    "description": "Description",
+    "projects": "Projects",
+    "testimonials": "Testimonials",
+    "descriptionText": "With a love for problem-solving, I have worked as an infanteer in the Canadian Army, honing my skills in punctuality, teamwork, and charisma to engage with others and achieve results. Using a logical and straightforward approach, I tackle any problem I’m faced with, combining curiosity and military-level discipline to find effective and efficient solutions. Attention to detail and clear communication are critical in overcoming challenges, and I consistently support my team while continuously improving my skills and effectiveness."
+  },
+  "contact": {
+    "logout": "Logout",
+    "login": "Login",
+    "contactMe": "Contact Me",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send",
+    "emailSent": "Email sent successfully!",
+    "emailFailed": "Failed to send email."
+  },
+  "comments": {
+    "title": "Testimonials",
+    "delete": "Delete",
+    "approve": "Approve",
+    "addComment": "Add Comment",
+    "addNewComment": "Add New Comment",
+    "firstNamePlaceholder": "First Name",
+    "lastNamePlaceholder": "Last Name",
+    "commentPlaceholder": "Comment",
+    "add": "Add",
+    "cancel": "Cancel",
+    "confirmDelete": "Are you sure you want to delete this comment?",
+    "yes": "Yes",
+    "no": "No",
+    "firstNameRequired": "First name is required.",
+    "lastNameRequired": "Last name is required.",
+    "commentRequired": "Comment is required."
+  },
+  "cv": {
+    "downloadButton": "Download CV",
+    "selectLanguage": "Select Language",
+    "selectLanguagePlaceholder": "Select Language",
+    "english": "English",
+    "french": "French",
+    "selectValidLanguage": "Please select a valid language"
+  }
+}

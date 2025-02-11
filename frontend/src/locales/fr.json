@@ -1,0 +1,67 @@
+{
+  "welcome": "Bienvenue dans mon portfolio",
+  "description": "Passionné par la résolution de problèmes, j'ai travaillé comme fantassin dans l'Armée canadienne, perfectionnant mes compétences en ponctualité, travail d'équipe et charisme pour interagir avec les autres et obtenir des résultats. Avec une approche logique et directe, je fais face à chaque problème qui se présente à moi, en combinant curiosité et discipline militaire pour trouver des solutions efficaces et efficientes. L'attention aux détails et une communication claire sont essentielles pour surmonter les défis, et je soutiens constamment mon équipe tout en améliorant continuellement mes compétences et mon efficacité.",
+  "projects": {
+    "title": "Projets",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "addNew": "Ajouter un nouveau projet",
+    "titlePlaceholder": "Titre",
+    "descriptionPlaceholder": "Description",
+    "githubLinkPlaceholder": "Lien GitHub",
+    "add": "Ajouter",
+    "cancel": "Annuler",
+    "editProject": "Modifier le projet",
+    "save": "Enregistrer",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce projet?",
+    "yes": "Oui",
+    "no": "Non"
+  },
+  "portfolio": {
+    "name": "Artem Kozlov",
+    "title": "Étudiant en 3ème année d'informatique",
+    "specialization": "Je me spécialise dans le développement full-stack, le support informatique et j'adore la cybersécurité.",
+    "description": "Description",
+    "projects": "Projets",
+    "testimonials": "Témoignages",
+    "descriptionText": "Passionné par la résolution de problèmes, j'ai travaillé comme fantassin dans l'Armée canadienne, perfectionnant mes compétences en ponctualité, travail d'équipe et charisme pour interagir avec les autres et obtenir des résultats. Avec une approche logique et directe, je fais face à chaque problème qui se présente à moi, en combinant curiosité et discipline militaire pour trouver des solutions efficaces et efficientes. L'attention aux détails et une communication claire sont essentielles pour surmonter les défis, et je soutiens constamment mon équipe tout en améliorant continuellement mes compétences et mon efficacité."
+  },
+  "contact": {
+    "logout": "Déconnection",
+    "login": "Connection",
+    "contactMe": "Contactez-moi",
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "email": "Email",
+    "message": "Message",
+    "send": "Envoyer",
+    "emailSent": "Email envoyé avec succès!",
+    "emailFailed": "Échec de l'envoi de l'email."
+  },
+  "comments": {
+    "title": "Témoignages",
+    "delete": "Supprimer",
+    "approve": "Approuver",
+    "addComment": "Ajouter un commentaire",
+    "addNewComment": "Ajouter un nouveau commentaire",
+    "firstNamePlaceholder": "Prénom",
+    "lastNamePlaceholder": "Nom de famille",
+    "commentPlaceholder": "Commentaire",
+    "add": "Ajouter",
+    "cancel": "Annuler",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce commentaire?",
+    "yes": "Oui",
+    "no": "Non",
+    "firstNameRequired": "Le prénom est requis.",
+    "lastNameRequired": "Le nom de famille est requis.",
+    "commentRequired": "Le commentaire est requis."
+  },
+  "cv": {
+    "downloadButton": "Télécharger le CV",
+    "selectLanguage": "Choisir la langue",
+    "selectLanguagePlaceholder": "Choisir la langue",
+    "english": "Anglais",
+    "french": "Français",
+    "selectValidLanguage": "Veuillez sélectionner une langue valide"
+  }
+}

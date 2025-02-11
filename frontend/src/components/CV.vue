@@ -1,26 +1,31 @@
 <template>
   <section class="about">
-    <button class="cv-button" @click="showModal = true">Download CV</button>
+    <button class="cv-button" @click="showModal = true">{{ t('cv.downloadButton') }}</button>
     <div v-if="showModal" class="modal">
       <div class="modal-content">
         <span class="close" @click="showModal = false">&times;</span>
-        <h2>Select Language</h2>
+        <h2>{{ t('cv.selectLanguage') }}</h2>
         <select v-model="selectedLanguage" class="cv-select">
-          <option value="" disabled>Select Language</option>
-          <option value="en">English</option>
-          <option value="fr">French</option>
+          <option value="" disabled>{{ t('cv.selectLanguagePlaceholder') }}</option>
+          <option value="en">{{ t('cv.english') }}</option>
+          <option value="fr">{{ t('cv.french') }}</option>
         </select>
-        <button class="cv-button" @click="downloadSelectedCV">Download</button>
+        <button class="cv-button" @click="downloadSelectedCV">{{ t('cv.downloadButton') }}</button>
       </div>
     </div>
   </section>
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n'
 import cvEn from '@/assets/Resume EN - Artem Kozlov.pdf'
 import cvFr from '@/assets/Resume FR - Artem Kozlov.pdf'
 
 export default {
+  setup() {
+    const { t } = useI18n()
+    return { t }
+  },
   data() {
     return {
       selectedLanguage: '',
@@ -37,7 +42,7 @@ export default {
         this.downloadCV(this.cvFiles[this.selectedLanguage])
         this.showModal = false
       } else {
-        alert('Please select a valid language')
+        alert(this.$t('cv.selectValidLanguage'))
       }
     },
     downloadCV(path) {

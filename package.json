@@ -13,7 +13,8 @@
         "nodemailer": "^6.10.0",
         "primevue": "^4.2.5",
         "swiper": "^11.2.2",
-        "vue-cropperjs": "^5.0.0"
+        "vue-cropperjs": "^5.0.0",
+        "vue-i18n": "^11.1.1"
     },
     "devDependencies": {
         "@types/axios": "^0.9.36",

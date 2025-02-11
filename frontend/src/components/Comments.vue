@@ -1,6 +1,6 @@
 <template>
   <section class="comments">
-    <h1>Testimonials</h1>
+    <h1>{{ t('comments.title') }}</h1>
     <div class="carousel">
       <button class="arrow left-arrow" @click="prevComment">‹</button>
       <div class="carousel-track" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
@@ -10,13 +10,13 @@
           <div v-if="isAdmin" class="dropdown">
             <button class="dropdown-button" @click="toggleDropdown(comment.id)">⋮</button>
             <div v-if="dropdownOpen === comment.id" class="dropdown-menu">
-              <button class="dropdown-item" @click="openDeleteModal(comment)">Delete</button>
+              <button class="dropdown-item" @click="openDeleteModal(comment)">{{ t('comments.delete') }}</button>
               <button
                 v-if="!comment.approved"
                 class="dropdown-item"
                 @click="approveComment(comment)"
               >
-                Approve
+                {{ t('comments.approve') }}
               </button>
             </div>
           </div>
@@ -25,22 +25,22 @@
       <button class="arrow right-arrow" @click="nextComment">›</button>
     </div>
     <button v-if="isAuthenticated" class="add-comment-button" @click="showAddModal = true">
-      Add Comment
+      {{ t('comments.addComment') }}
     </button>
 
     <!-- Add Comment Modal -->
     <div v-if="showAddModal" class="modal">
       <div class="modal-content">
-        <h3>Add New Comment</h3>
-        <input v-model="newComment.firstName" placeholder="First Name" />
+        <h3>{{ t('comments.addNewComment') }}</h3>
+        <input v-model="newComment.firstName" :placeholder="t('comments.firstNamePlaceholder')" />
         <div v-if="addError.firstName" class="error-message">{{ addError.firstName }}</div>
-        <input v-model="newComment.lastName" placeholder="Last Name" />
+        <input v-model="newComment.lastName" :placeholder="t('comments.lastNamePlaceholder')" />
         <div v-if="addError.lastName" class="error-message">{{ addError.lastName }}</div>
-        <textarea v-model="newComment.comment" placeholder="Comment"></textarea>
+        <textarea v-model="newComment.comment" :placeholder="t('comments.commentPlaceholder')"></textarea>
         <div v-if="addError.comment" class="error-message">{{ addError.comment }}</div>
         <div class="modal-buttons">
-          <button class="modal-button" @click="addComment">Add</button>
-          <button class="modal-button" @click="closeAddModal">Cancel</button>
+          <button class="modal-button" @click="addComment">{{ t('comments.add') }}</button>
+          <button class="modal-button" @click="closeAddModal">{{ t('comments.cancel') }}</button>
         </div>
       </div>
     </div>
@@ -48,10 +48,10 @@
     <!-- Delete Comment Modal -->
     <div v-if="showDeleteModal" class="modal">
       <div class="modal-content">
-        <h3>Are you sure you want to delete this comment?</h3>
+        <h3>{{ t('comments.confirmDelete') }}</h3>
         <div class="modal-buttons">
-          <button class="modal-button" @click="deleteComment">Yes</button>
-          <button class="modal-button" @click="closeDeleteModal">No</button>
+          <button class="modal-button" @click="deleteComment">{{ t('comments.yes') }}</button>
+          <button class="modal-button" @click="closeDeleteModal">{{ t('comments.no') }}</button>
         </div>
       </div>
     </div>
@@ -62,7 +62,10 @@
 import { ref, onMounted, onUnmounted, watch } from 'vue'
 import axios from 'axios'
 import { useAuth0 } from '@auth0/auth0-vue'
+import { useI18n } from 'vue-i18n'
 import './CSS/Comments.css'
+
+const { t } = useI18n()
 
 interface Comment {
   id: string
@@ -136,17 +139,17 @@ const prevComment = () => {
 
 const addComment = async () => {
   if (!newComment.value.firstName) {
-    addError.value.firstName = 'First name is required.'
+    addError.value.firstName = t('comments.firstNameRequired')
   } else {
     addError.value.firstName = ''
   }
   if (!newComment.value.lastName) {
-    addError.value.lastName = 'Last name is required.'
+    addError.value.lastName = t('comments.lastNameRequired')
   } else {
     addError.value.lastName = ''
   }
   if (!newComment.value.comment) {
-    addError.value.comment = 'Comment is required.'
+    addError.value.comment = t('comments.commentRequired')
   } else {
     addError.value.comment = ''
   }

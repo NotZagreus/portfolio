@@ -1,6 +1,6 @@
 <template>
   <section class="projects">
-    <h1>Projects</h1>
+    <h1>{{ t('projects.title') }}</h1>
 
     <div class="grid">
       <div class="project-card" v-for="project in projects" :key="project.id">
@@ -9,8 +9,12 @@
           <div v-if="isAdmin" class="dropdown">
             <button class="dropdown-button" @click="toggleDropdown(project.id)">...</button>
             <div v-if="dropdownOpen === project.id" class="dropdown-menu">
-              <button class="dropdown-item" @click="editProject(project)">Edit</button>
-              <button class="dropdown-item" @click="confirmDelete(project.id)">Delete</button>
+              <button class="dropdown-item" @click="editProject(project)">
+                {{ t('projects.edit') }}
+              </button>
+              <button class="dropdown-item" @click="confirmDelete(project.id)">
+                {{ t('projects.delete') }}
+              </button>
             </div>
           </div>
         </div>
@@ -28,17 +32,23 @@
     <!-- Add Project Modal -->
     <div v-if="showAddModal" class="modal">
       <div class="modal-content">
-        <h3>Add New Project</h3>
-        <input v-model="newProject.title" placeholder="Title" />
+        <h3>{{ t('projects.addNew') }}</h3>
+        <input v-model="newProject.title" :placeholder="t('projects.titlePlaceholder')" />
         <div v-if="addError.title" class="error-message">{{ addError.title }}</div>
-        <textarea v-model="newProject.description" placeholder="Description"></textarea>
+        <textarea
+          v-model="newProject.description"
+          :placeholder="t('projects.descriptionPlaceholder')"
+        ></textarea>
         <div v-if="addError.description" class="error-message">{{ addError.description }}</div>
-        <input v-model="newProject.github_link" placeholder="GitHub Link" />
+        <input
+          v-model="newProject.github_link"
+          :placeholder="t('projects.githubLinkPlaceholder')"
+        />
         <input type="file" @change="handleFileUpload($event, 'newProject')" />
         <div v-if="uploadError" class="error-message">{{ uploadError }}</div>
         <div class="modal-buttons">
-          <button class="modal-button" @click="addProject">Add</button>
-          <button class="modal-button" @click="closeAddModal">Cancel</button>
+          <button class="modal-button" @click="addProject">{{ t('projects.add') }}</button>
+          <button class="modal-button" @click="closeAddModal">{{ t('projects.cancel') }}</button>
         </div>
       </div>
     </div>
@@ -46,17 +56,20 @@
     <!-- Edit Project Modal -->
     <div v-if="showEditModal" class="modal">
       <div class="modal-content">
-        <h3>Edit Project</h3>
-        <input v-model="editForm.title" placeholder="Title" />
+        <h3>{{ t('projects.editProject') }}</h3>
+        <input v-model="editForm.title" :placeholder="t('projects.titlePlaceholder')" />
         <div v-if="editError.title" class="error-message">{{ editError.title }}</div>
-        <textarea v-model="editForm.description" placeholder="Description"></textarea>
+        <textarea
+          v-model="editForm.description"
+          :placeholder="t('projects.descriptionPlaceholder')"
+        ></textarea>
         <div v-if="editError.description" class="error-message">{{ editError.description }}</div>
-        <input v-model="editForm.github_link" placeholder="GitHub Link" />
+        <input v-model="editForm.github_link" :placeholder="t('projects.githubLinkPlaceholder')" />
         <input type="file" @change="handleFileUpload($event, 'editForm')" />
         <div v-if="uploadError" class="error-message">{{ uploadError }}</div>
         <div class="modal-buttons">
-          <button class="modal-button" @click="saveProject">Save</button>
-          <button class="modal-button" @click="closeEditModal">Cancel</button>
+          <button class="modal-button" @click="saveProject">{{ t('projects.save') }}</button>
+          <button class="modal-button" @click="closeEditModal">{{ t('projects.cancel') }}</button>
         </div>
       </div>
     </div>
@@ -64,10 +77,10 @@
     <!-- Delete Project Modal -->
     <div v-if="showDeleteModal" class="modal">
       <div class="modal-content">
-        <h3>Are you sure you want to delete this project?</h3>
+        <h3>{{ t('projects.confirmDelete') }}</h3>
         <div class="modal-buttons">
-          <button class="modal-button" @click="deleteProject">Yes</button>
-          <button class="modal-button" @click="closeDeleteModal">No</button>
+          <button class="modal-button" @click="deleteProject">{{ t('projects.yes') }}</button>
+          <button class="modal-button" @click="closeDeleteModal">{{ t('projects.no') }}</button>
         </div>
       </div>
     </div>
@@ -75,6 +88,8 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 import { ref, onMounted, watch, type Ref } from 'vue'
 import axios from 'axios'
 import './CSS/ProjectsView.css'
@@ -343,3 +358,5 @@ function customWatch(isAuthenticated: Ref<boolean, boolean>, arg1: (newValue: an
   throw new Error('Function not implemented.')
 }
 </script>
+
+<style scoped></style>
