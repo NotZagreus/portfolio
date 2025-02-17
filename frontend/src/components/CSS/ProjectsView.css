@@ -1,5 +1,5 @@
 .projects {
-  padding: 2rem;
+  padding: 0%;
 }
 
 .grid {
@@ -10,25 +10,23 @@
 
 .project-card {
   background-color: #1e293b;
-  padding: 0.90rem; /* Reduced padding */
+  padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   color: #e2e8f0;
-  width: 100%;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   z-index: 1;
+  margin-top: 0.5rem;
 }
 
 .project-card h2 {
-  font-size: 1rem; /* Reduced font size */
+  font-size: 1rem;
   color: #a8b0b9;
   margin: 0;
 }
 
 .project-card p {
-  font-size: 0.95rem; /* Reduced font size */
+  font-size: 0.95rem;
   color: #9a9ead;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -38,29 +36,41 @@
 .project-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  z-index: 1;
 }
 
 .project-image {
   width: 50%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 4px;
   margin-top: 1rem;
   border: 2px solid #232836;
 }
 
+.project-dropdown {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.project-title {
+  width: 100%;
+  padding: 1rem;
+  background-color: #1e293b;
+  color: #e2e8f0;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.project-title:hover {
+  background-color: #334155;
+}
 
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
-}
-
-.dropdown {
-  position: absolute;
-  top: 0;
-  right: 0;
 }
 
 .dropdown-button {
@@ -69,37 +79,6 @@
   font-size: 1.5rem;
   cursor: pointer;
   color: #94a3b8;
-  padding: 0rem;
-  transition: transform 1s ease;
-}
-
-.dropdown-button:hover {
-  animation: bounce 1.5s ease;
-}
-
-.dropdown-button::before {
-  content: '';
-  position: absolute;
-  top: -10px;
-  bottom: -10px;
-  left: -10px;
-  right: -10px;
-}
-
-@keyframes bounce {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-10px);
-  }
-  60% {
-    transform: translateY(-5px);
-  }
 }
 
 .dropdown-menu {
@@ -111,6 +90,18 @@
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 10;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
 }
 
 .dropdown-item {
@@ -126,13 +117,6 @@
 .dropdown-item:hover {
   background-color: #475569;
   color: #cbd5e1;
-}
-
-.project-image {
-width: 50%;
-height: auto;
-border-radius: 8px;
-margin-top: 1rem;
 }
 
 .github-icon {
@@ -161,9 +145,7 @@ margin-top: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .add-button:hover {
@@ -246,4 +228,3 @@ margin-top: 1rem;
   color: #f87171;
   margin-top: 1rem;
 }
-

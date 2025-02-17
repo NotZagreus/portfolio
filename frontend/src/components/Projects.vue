@@ -2,8 +2,11 @@
   <section class="projects">
     <h1>{{ t('projects.title') }}</h1>
 
-    <div class="grid">
-      <div class="project-card" v-for="project in projects" :key="project.id">
+    <div class="project-dropdown" v-for="project in projects" :key="project.id">
+      <button class="project-title" @click="toggleProjectDropdown(project.id)">
+        {{ project.title }}
+      </button>
+      <div v-if="dropdownOpen === project.id" class="project-card">
         <div class="card-header">
           <h2>{{ project.title }}</h2>
           <div v-if="isAdmin" class="dropdown">
@@ -24,9 +27,9 @@
           <img src="@/assets/Pictures/25231.png" alt="GitHub Icon" class="github-icon" />
         </a>
       </div>
-      <div v-if="isAdmin" class="add-project">
-        <button class="add-button" @click="showAddModal = true">+</button>
-      </div>
+    </div>
+    <div v-if="isAdmin" class="add-project">
+      <button class="add-button" @click="showAddModal = true">+</button>
     </div>
 
     <!-- Add Project Modal -->
@@ -266,6 +269,10 @@ const addProject = async () => {
 }
 
 const toggleDropdown = (id: string) => {
+  dropdownOpen.value = dropdownOpen.value === id ? null : id
+}
+
+const toggleProjectDropdown = (id: string) => {
   dropdownOpen.value = dropdownOpen.value === id ? null : id
 }
 

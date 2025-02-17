@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { useAuth0 } from '@auth0/auth0-vue'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import cvEn from '@/assets/Resume EN - Artem Kozlov.pdf'
 import cvFr from '@/assets/Resume FR - Artem Kozlov.pdf'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const { isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently } = useAuth0()
 const windowLocation = window.location.origin
 const accessToken = ref('')
@@ -65,6 +65,12 @@ const downloadCV = (path: string) => {
   if (!path) return
   window.open(path, '_blank')
 }
+
+const currentLanguage = computed(() => locale.value === 'en' ? 'En' : 'Fr')
+
+const switchLanguage = () => {
+  locale.value = locale.value === 'en' ? 'fr' : 'en'
+}
 </script>
 
 <template>
@@ -101,15 +107,6 @@ const downloadCV = (path: string) => {
           ></path>
         </svg>
       </div>
-    </div>
-    <div class="auth-buttons">
-      <button
-        v-if="isAuthenticated"
-        @click="logout({ logoutParams: { returnTo: windowLocation } })"
-      >
-        {{ t('contact.logout') }}
-      </button>
-      <button v-else @click="loginWithRedirect()">{{ t('contact.login') }}</button>
     </div>
     <div v-if="showModal" class="modal">
       <div class="modal-content">
