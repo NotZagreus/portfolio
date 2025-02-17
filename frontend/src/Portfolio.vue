@@ -10,7 +10,11 @@
       <div class="navigation-container">
         <nav>
           <ul>
-            <li v-for="(section, index) in sections" :key="section" :class="{ active: activeSection === section }">
+            <li
+              v-for="(section, index) in sections"
+              :key="section"
+              :class="{ active: activeSection === section }"
+            >
               <a :href="`#${section}`" @click.prevent="scrollToSection(section)">
                 {{ t(`portfolio.${section}`) }}
               </a>
@@ -96,7 +100,7 @@ const handleScroll = () => {
   })
 }
 
-const currentLanguage = computed(() => locale.value === 'en' ? 'En' : 'Fr')
+const currentLanguage = computed(() => (locale.value === 'en' ? 'En' : 'Fr'))
 
 const switchLanguage = () => {
   locale.value = locale.value === 'en' ? 'fr' : 'en'
@@ -114,6 +118,4 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

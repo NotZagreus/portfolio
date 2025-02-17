@@ -1,6 +1,5 @@
 .comments {
-  padding: 2rem;
-  text-align: center;
+  text-align: justify;
 }
 
 .carousel {
@@ -8,6 +7,8 @@
   overflow: hidden;
   margin: 2rem 0;
   z-index: 1;
+  padding: 0%;
+  width: 100%;
 }
 
 .carousel-track {
@@ -19,9 +20,8 @@
 
 .comment-card {
   flex: 0 0 100%;
-  max-width: 100%;
-  background-color: #1e293b;
-  padding: 0.75rem;
+  background-color: #181e29;
+  padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   color: #e2e8f0;
@@ -29,7 +29,9 @@
   position: relative;
   margin: 0;
   box-sizing: border-box;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   z-index: 1;
 }
 
@@ -70,9 +72,9 @@
 }
 
 .add-comment-button {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   padding: 0.5rem 1rem;
-  background-color: #1e293b;
+  background-color: #181e29;
   color: #e2e8f0;
   border: none;
   border-radius: 4px;

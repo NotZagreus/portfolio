@@ -1,7 +1,6 @@
 <template>
   <section class="projects">
     <h1>{{ t('projects.title') }}</h1>
-
     <div class="project-dropdown" v-for="project in projects" :key="project.id">
       <button class="project-title" @click="toggleProjectDropdown(project.id)">
         {{ project.title }}
@@ -21,11 +20,20 @@
             </div>
           </div>
         </div>
-        <img v-if="project.image" :src="project.image" alt="Project Image" class="project-image" />
-        <p>{{ project.description }}</p>
-        <a v-if="project.github_link" :href="project.github_link" target="_blank">
-          <img src="@/assets/Pictures/25231.png" alt="GitHub Icon" class="github-icon" />
-        </a>
+        <div class="project-content">
+          <img
+            v-if="project.image"
+            :src="project.image"
+            alt="Project Image"
+            class="project-image"
+          />
+          <div class="project-description">
+            <p>{{ project.description }}</p>
+            <a v-if="project.github_link" :href="project.github_link" target="_blank">
+              <img src="@/assets/Pictures/25231.png" alt="GitHub Icon" class="github-icon" />
+            </a>
+          </div>
+        </div>
       </div>
     </div>
     <div v-if="isAdmin" class="add-project">
@@ -318,16 +326,7 @@ const handleFileUpload = (event: Event, formType: 'newProject' | 'editForm') => 
     reader.onload = () => {
       const img = new Image()
       img.onload = () => {
-        if (img.width === img.height) {
-          if (formType === 'newProject') {
-            newProject.value.image = reader.result as string
-          } else {
-            editForm.value.image = reader.result as string
-          }
-          uploadError.value = null
-        } else {
-          resizeImage(img, formType)
-        }
+        resizeImage(img, formType)
       }
       img.src = reader.result as string
     }
@@ -338,10 +337,10 @@ const handleFileUpload = (event: Event, formType: 'newProject' | 'editForm') => 
 const resizeImage = (img: HTMLImageElement, formType: 'newProject' | 'editForm') => {
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')
-  const size = Math.min(img.width, img.height)
-  canvas.width = size
-  canvas.height = size
-  ctx?.drawImage(img, (img.width - size) / 2, (img.height - size) / 2, size, size, 0, 0, size, size)
+  const targetSize = 300 
+  canvas.width = targetSize
+  canvas.height = targetSize
+  ctx?.drawImage(img, 0, 0, targetSize, targetSize)
   const resizedImage = canvas.toDataURL('image/png')
   if (formType === 'newProject') {
     newProject.value.image = resizedImage
@@ -365,5 +364,6 @@ function customWatch(isAuthenticated: Ref<boolean, boolean>, arg1: (newValue: an
   throw new Error('Function not implemented.')
 }
 </script>
+
 
 <style scoped></style>
