@@ -1,3 +1,8 @@
+body {
+  padding-bottom: 20%;
+}
+
+
 .comments {
   padding: 2rem;
   text-align: center;
@@ -19,7 +24,7 @@
 
 .comment-card {
   flex: 0 0 100%;
-  min-width: 100%;
+  max-width: 100%;
   background-color: #1e293b;
   padding: 0.75rem;
   border-radius: 8px;
@@ -45,7 +50,6 @@
 }
 
 .comment-card:hover {
-  transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }

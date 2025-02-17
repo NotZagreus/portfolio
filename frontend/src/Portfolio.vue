@@ -17,8 +17,8 @@
             <li :class="{ active: activeSection === 'projects' }">
               <a href="#projects" @click.prevent="scrollToSection('projects')">{{ t('portfolio.projects') }}</a>
             </li>
-            <li :class="{ active: activeSection === 'comments' }">
-              <a href="#comments" @click.prevent="scrollToSection('comments')">{{ t('portfolio.testimonials') }}</a>
+            <li :class="{ active: activeSection === 'testimonials' }">
+              <a href="#testimonials" @click.prevent="scrollToSection('testimonials')">{{ t('portfolio.testimonials') }}</a>
             </li>
           </ul>
           <div class="line"></div>
@@ -33,7 +33,7 @@
       <div id="projects">
         <Projects />
       </div>
-      <div id="comments">
+      <div id="testimonials">
         <Comments />
       </div>
     </div>
@@ -56,7 +56,15 @@ const activeSection = ref('')
 const dotStyle = ref({ top: '0px' })
 
 const handleScroll = () => {
-  const scrollPosition = window.scrollY + 100
+  const scrollPosition = window.scrollY + window.innerHeight
+  const documentHeight = document.documentElement.scrollHeight
+
+  if (scrollPosition >= documentHeight) {
+    activeSection.value = 'testimonials'
+    dotStyle.value = { top: `${(sections.value.length - 1) * 50}px` }
+    return
+  }
+
   sections.value.forEach((section, index) => {
     const element = document.getElementById(section)
     if (element) {
@@ -74,6 +82,7 @@ const scrollToSection = (section: string) => {
   const element = document.getElementById(section)
   if (element) {
     element.scrollIntoView({ behavior: 'smooth' })
+    activeSection.value = section // Update activeSection when clicked
   }
 }
 
@@ -83,4 +92,6 @@ onMounted(() => {
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
