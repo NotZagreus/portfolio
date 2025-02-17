@@ -1,14 +1,8 @@
 /* Import Fonts */
 @font-face {
-  font-family: 'Avenir Next LT Pro';
-  src: url('https://github.com/DuoSoftware/DVP-AgentConsole/blob/master/assets/fonts/avenir-next-lt-pro/AvenirNextLTPro-Regular.otf') format('otf');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
   font-family: 'Avenir Next LT Pro Demi';
-  src: url('https://github.com/DuoSoftware/DVP-AgentConsole/blob/master/assets/fonts/avenir-next-lt-pro/AvenirNextLTPro-Demi.otf') format('otf');
+  src: url('./Fonts/AvenirNextLTPro-Demi.woff2') format('woff2'),
+       url('./Fonts/AvenirNextLTPro-Demi.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }

@@ -5,7 +5,7 @@
       <div class="info-container">
         <h1>{{ t('portfolio.name') }}</h1>
         <h3>{{ t('portfolio.title') }}</h3>
-        <h3>{{ t('portfolio.specialization') }}</h3>
+        <h4>{{ t('portfolio.specialization') }}</h4>
       </div>
       <LanguageSwitcher />
       <div class="navigation-container">
@@ -17,8 +17,8 @@
             <li :class="{ active: activeSection === 'projects' }">
               <a href="#projects" @click.prevent="scrollToSection('projects')">{{ t('portfolio.projects') }}</a>
             </li>
-            <li :class="{ active: activeSection === 'testimonials' }">
-              <a href="#testimonials" @click.prevent="scrollToSection('testimonials')">{{ t('portfolio.testimonials') }}</a>
+            <li :class="{ active: activeSection === 'comments' }">
+              <a href="#comments" @click.prevent="scrollToSection('comments')">{{ t('portfolio.testimonials') }}</a>
             </li>
           </ul>
           <div class="line"></div>
@@ -33,7 +33,7 @@
       <div id="projects">
         <Projects />
       </div>
-      <div id="testimonials">
+      <div id="comments">
         <Comments />
       </div>
     </div>
