@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="left-side">
-      <Contact />
+      <CV />
       <div class="info-container">
         <h1>{{ t('portfolio.name') }}</h1>
         <h3>{{ t('portfolio.title') }}</h3>
@@ -12,13 +12,13 @@
         <nav>
           <ul>
             <li :class="{ active: activeSection === 'description' }">
-              <a href="#description">{{ t('portfolio.description') }}</a>
+              <a href="#description" @click.prevent="scrollToSection('description')">{{ t('portfolio.description') }}</a>
             </li>
             <li :class="{ active: activeSection === 'projects' }">
-              <a href="#projects">{{ t('portfolio.projects') }}</a>
+              <a href="#projects" @click.prevent="scrollToSection('projects')">{{ t('portfolio.projects') }}</a>
             </li>
             <li :class="{ active: activeSection === 'testimonials' }">
-              <a href="#testimonials">{{ t('portfolio.testimonials') }}</a>
+              <a href="#testimonials" @click.prevent="scrollToSection('testimonials')">{{ t('portfolio.testimonials') }}</a>
             </li>
           </ul>
           <div class="line"></div>
@@ -36,9 +36,6 @@
       <div id="testimonials">
         <Comments />
       </div>
-      <div id="CV">
-        <CV />
-      </div>
     </div>
   </div>
 </template>
@@ -54,7 +51,7 @@ import LanguageSwitcher from './components/LanguageSwitcher.vue'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
-const sections = ref(['description', 'projects', 'testimonial'])
+const sections = ref(['description', 'projects', 'testimonials'])
 const activeSection = ref('')
 const dotStyle = ref({ top: '0px' })
 
@@ -71,6 +68,13 @@ const handleScroll = () => {
       }
     }
   })
+}
+
+const scrollToSection = (section: string) => {
+  const element = document.getElementById(section)
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' })
+  }
 }
 
 onMounted(() => {
