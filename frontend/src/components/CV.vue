@@ -66,7 +66,7 @@ const downloadCV = (path: string) => {
   window.open(path, '_blank')
 }
 
-const currentLanguage = computed(() => locale.value === 'en' ? 'En' : 'Fr')
+const currentLanguage = computed(() => (locale.value === 'en' ? 'En' : 'Fr'))
 
 const switchLanguage = () => {
   locale.value = locale.value === 'en' ? 'fr' : 'en'
@@ -78,9 +78,9 @@ const switchLanguage = () => {
     <div class="card">
       <div class="socialContainer containerOne" @click="showCvModal = true">
         <svg class="socialSvg cvSvg" viewBox="0 0 24 24">
-              <path
-              d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-4H8V8h5v2zm1-5.5V9h5.5L14 2.5z"
-              ></path>
+          <path
+            d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-4H8V8h5v2zm1-5.5V9h5.5L14 2.5z"
+          ></path>
         </svg>
       </div>
       <a href="https://github.com/NotZagreus" class="socialContainer containerTwo">
@@ -171,6 +171,7 @@ const switchLanguage = () => {
   justify-content: center;
   overflow: hidden;
   transition-duration: 0.3s;
+  flex: 1 1 auto; /* Allow flex items to grow and shrink */
 }
 /* instagram*/
 .containerOne:hover {
@@ -292,5 +293,37 @@ textarea {
 
 .cv-button:hover {
   background-color: #616161;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .socialContainer {
+    width: 40px;
+    height: 40px;
+  }
+
+  .socialSvg {
+    width: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 15px;
+  }
+
+  .socialContainer {
+    width: 35px;
+    height: 35px;
+  }
+
+  .socialSvg {
+    width: 12px;
+  }
 }
 </style>
