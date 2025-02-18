@@ -11,11 +11,11 @@ const projectRoutes_1 = __importDefault(require("./presentationlayer/projectRout
 const commentRoutes_1 = __importDefault(require("./presentationlayer/commentRoutes"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const nodemailer_1 = __importDefault(require("nodemailer")); // Import SentMessageInfo type
-dotenv_1.default.config({ path: "../.env" });
+dotenv_1.default.config(); // we see
 const app = (0, express_1.default)();
 const BACKEND_PORT = process.env.BACKEND_PORT;
 // Middleware
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({ origin: process.env.FRONTEND_DOMAIN }));
 app.use(body_parser_1.default.json({ limit: "10mb" }));
 app.use(body_parser_1.default.urlencoded({ limit: "10mb", extended: true }));
 // Connect to MongoDB

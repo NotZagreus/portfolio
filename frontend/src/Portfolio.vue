@@ -50,6 +50,7 @@
         <Comments />
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
@@ -60,7 +61,7 @@ import { useI18n } from 'vue-i18n'
 import Projects from './components/Projects.vue'
 import CV from './components/CV.vue'
 import Comments from './components/Comments.vue'
-import LanguageSwitcher from './components/LanguageSwitcher.vue'
+import Footer from './components/Footer.vue'
 
 const { t, locale } = useI18n()
 const { isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently } = useAuth0()
@@ -117,4 +118,27 @@ onMounted(() => {
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.auth-language-container {
+  margin-top: 20px;
+}
+
+.language-switcher {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  padding: 5px 10px;
+  border: none;
+  background-color: #1e293b;
+  color: #e2e8f0;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #334155;
+}
+</style>
