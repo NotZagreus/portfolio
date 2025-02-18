@@ -57,7 +57,6 @@
 import { onMounted, ref, computed } from 'vue'
 import { useAuth0 } from '@auth0/auth0-vue'
 import { useI18n } from 'vue-i18n'
-import Contact from './components/Contact.vue'
 import Projects from './components/Projects.vue'
 import CV from './components/CV.vue'
 import Comments from './components/Comments.vue'
