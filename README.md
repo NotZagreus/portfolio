@@ -1,4 +1,3 @@
-
 # My Portfolio
 
 Welcome to my portfolio project! This is a personal website built using **Vue.js** with **TypeScript** to showcase my skills, experience, and projects. The portfolio is designed to be responsive, visually appealing, and easy to navigate.
@@ -10,6 +9,8 @@ Welcome to my portfolio project! This is a personal website built using **Vue.js
 - **Projects Showcase:** A detailed overview of my past projects with screenshots and descriptions.
 - **Contact Section:** Reach out to me directly via a contact form or through social links.
 - **Responsive Design:** Optimized for viewing on desktop, tablet, and mobile devices.
+- **Language Support:** Switch between English and French.
+- **Admin Features:** Admin authentication and project management.
 
 ---
 
@@ -24,19 +25,21 @@ npm install
 ### Run the Development Server
 Start a local development server with hot-reloading:
 ```bash
-npm run serve
+npm run dev --prefix backend
+npm run dev --prefix frontend
 ```
 
 ### Build for Production
 Compile and minify the project for deployment:
 ```bash
-npm run build
+npm run build --prefix backend
+npm run build --prefix frontend
 ```
 
 ### Lint and Fix Code
 Run linting checks and fix formatting issues:
 ```bash
-npm run lint
+npm run lint --prefix frontend
 ```
 
 ---
@@ -44,28 +47,25 @@ npm run lint
 ## 🛠️ Technologies Used
 - **Frontend Framework:** Vue.js 3
 - **Language:** TypeScript
-- **Styling:** Tailwind CSS (or your chosen styling framework)
+- **Styling:** Tailwind CSS
 - **Tooling:** Vue CLI, ESLint, Prettier
-
----
-
-## 🎨 Customization
-You can customize this project further. For more configuration options, refer to the [Vue CLI Configuration Reference](https://cli.vuejs.org/config/).
+- **Backend Framework:** Express.js
+- **Database:** MongoDB
+- **Authentication:** Auth0
 
 ---
 
 ## 🌐 Deployment
-Once built for production, the portfolio can be deployed to:
-- **GitHub Pages**
-- **Vercel**
+Once built for production, the portfolio will be deployed to:
+- **DigitalOcean**
 
 ---
 
 ## 📧 Contact
 If you have any questions, feedback, or collaboration ideas, feel free to reach out:
-- **Email:** [your-email@example.com](mailto:your-email@example.com)
-- **LinkedIn:** [Your LinkedIn Profile](https://linkedin.com/in/yourprofile)
-- **GitHub:** [Your GitHub Profile](https://github.com/NotZagreus)
+- **Email:** [artemij.ca@gmail.com](mailto:artemij.ca@gmail.com)
+- **LinkedIn:** [www.linkedin.com/in/artem-kozlov-75544a23a](https://linkedin.com/in/artem-kozlov-75544a23a)
+- **GitHub:** [https://github.com/NotZagreus](https://github.com/NotZagreus)
 
 ---
 
