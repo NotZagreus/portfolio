@@ -28,7 +28,7 @@ onMounted(async () => {
 })
 
 const sendEmail = async () => {
-  const response = await fetch(`http://localhost:14344/send`, {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/send`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

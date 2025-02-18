@@ -101,7 +101,7 @@ const fetchUserInfo = async () => {
       const response = await axios.get('https://dev-k4fhctws467co87d.us.auth0.com/userinfo', {
         headers: { Authorization: `Bearer ${token}` },
       })
-      isAdmin.value = response.data.sub === 'google-oauth2|111871631735892967671'
+      isAdmin.value = response.data.sub === import.meta.env.VITE_ADMIN_USER_ID
     } catch (error) {
       console.error('Error fetching user info:', error)
     }
@@ -117,7 +117,7 @@ watch(isAuthenticated, fetchUserInfo)
 
 const fetchComments = async () => {
   try {
-    const response = await axios.get('http://localhost:14344/api/comments')
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/comments`)
     comments.value = response.data
   } catch (error) {
     console.error('Error fetching comments:', error)
@@ -159,7 +159,7 @@ const addComment = async () => {
 
   try {
     const response = await axios.post(
-      'http://localhost:14344/api/comments',
+      `${import.meta.env.VITE_API_URL}/api/comments`,
       {
         firstName: newComment.value.firstName,
         lastName: newComment.value.lastName,
@@ -205,7 +205,7 @@ const deleteComment = async () => {
 
   try {
     const token = await getAccessTokenSilently()
-    await axios.delete(`http://localhost:14344/api/comments/${commentToDelete.value.id}`, {
+    await axios.delete(`${import.meta.env.VITE_API_URL}/api/comments/${commentToDelete.value.id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -221,7 +221,7 @@ const approveComment = async (comment: Comment) => {
   try {
     const token = await getAccessTokenSilently()
     await axios.patch(
-      `http://localhost:14344/api/comments/${comment.id}`,
+      `${import.meta.env.VITE_API_URL}/api/comments/${comment.id}`,
       { approved: true },
       {
         headers: {
