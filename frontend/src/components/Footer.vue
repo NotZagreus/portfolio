@@ -58,7 +58,7 @@ onUnmounted(() => {
 
 <style scoped>
 .footer {
-    background-color: #1e293b;
+    background-color: rgb(25, 33, 48);
     color: #e2e8f0;
     padding-bottom: 1rem;
     text-align: center;
@@ -80,7 +80,7 @@ onUnmounted(() => {
     width: 3%;
     height: 5%;
     object-fit: contain;
-    background-color: #575f77;
+    background-color: #5a6074;
     border: 1px solid #24293f;
     border-radius: 8px;
     transition: transform 0.3s, box-shadow 0.3s;
