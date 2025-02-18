@@ -14,23 +14,23 @@ import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 
 const technologies = ref([
-    { name: 'Vue', image: 'src/assets/icons/vue-icon.png' },
-    { name: 'Docker', image: 'src/assets/icons/docker-icon.png' },
-    { name: 'Java', image: 'src/assets/icons/java-icon.png' },
-    { name: 'Auth0', image: 'src/assets/icons/auth0-icon.png' },
-    { name: 'SQL', image: 'src/assets/icons/sql-icon.png' },
-    { name: 'MongoDB', image: 'src/assets/icons/mongo-icon.png' },
-    { name: 'DigitalOcean', image: 'src/assets/icons/digitalocean-icon.png' },
-    { name: 'C#', image: 'src/assets/icons/c-sharp-icon.png' },
-    { name: 'Flask', image: 'src/assets/icons/flask-icon.png' },
-    { name: 'Git', image: 'src/assets/icons/git-icon.png' },
-    { name: 'JS', image: 'src/assets/icons/javascript-icon.png' },
-    { name: 'TS', image: 'src/assets/icons/typescript-icon.png' },
-    { name: 'React', image: 'src/assets/icons/react-icon.png' },
-    { name: 'NodeJS', image: 'src/assets/icons/nodejs-icon.png' },
-    { name: 'ExpressJS', image: 'src/assets/icons/expressjs-icon.png' },
-    { name: 'Python', image: 'src/assets/icons/python-icon.png' },
-    { name: 'Kotlin', image: 'src/assets/icons/kotlin-icon.png' }
+    { name: 'Vue', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905325/vue-icon_a4fkpt.png' },
+    { name: 'Docker', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905325/docker-icon_scasmy.png' },
+    { name: 'Java', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905324/java-icon_vcsyis.png' },
+    { name: 'Auth0', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905322/auth0-icon_pwgjzv.png' },
+    { name: 'SQL', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905323/sql-icon_crwpnb.png' },
+    { name: 'MongoDB', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905323/mongo-icon_xiz2tr.png' },
+    { name: 'DigitalOcean', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905322/digitalocean-icon_nh1khz.png' },
+    { name: 'C#', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905322/c-sharp-icon_ahjpy1.png' },
+    { name: 'Flask', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905322/flask-icon_eueh19.png' },
+    { name: 'Git', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905323/git-icon_qhdwhb.png' },
+    { name: 'JS', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905324/javascript-icon_kx95me.png' },
+    { name: 'TS', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905322/typescript-icon_ql9c69.png' },
+    { name: 'React', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905323/react-icon_c4ojac.png' },
+    { name: 'NodeJS', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905324/nodejs-icon_dpz2rb.png },
+    { name: 'ExpressJS', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905322/expressjs-icon_yrmssc.png' },
+    { name: 'Python', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905322/python-icon_jxyv1w.png' },
+    { name: 'Kotlin', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905322/kotlin-icon_iudkow.png' }
 ])
 
 const showFooter = ref(false)
