@@ -5,7 +5,7 @@ import connectDB from "./config/db";
 import projectRoutes from "./presentationlayer/projectRoutes";
 import commentRoutes from "./presentationlayer/commentRoutes";
 import bodyParser from "body-parser";
-import nodemailer from "nodemailer";
+import nodemailer, { SentMessageInfo } from "nodemailer"; // Import SentMessageInfo type
 
 dotenv.config({ path: "../.env" });
 
@@ -46,7 +46,7 @@ app.post("/send", (req: Request, res: Response) => {
     text,
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
+  transporter.sendMail(mailOptions, (error: Error | null, info: SentMessageInfo) => {
     if (error) {
       return res.status(500).send(error.toString());
     }
