@@ -10,7 +10,7 @@ const db_1 = __importDefault(require("./config/db"));
 const projectRoutes_1 = __importDefault(require("./presentationlayer/projectRoutes"));
 const commentRoutes_1 = __importDefault(require("./presentationlayer/commentRoutes"));
 const body_parser_1 = __importDefault(require("body-parser"));
-const nodemailer_1 = __importDefault(require("nodemailer"));
+const nodemailer_1 = __importDefault(require("nodemailer")); // Import SentMessageInfo type
 dotenv_1.default.config({ path: "../.env" });
 const app = (0, express_1.default)();
 const BACKEND_PORT = process.env.BACKEND_PORT;
