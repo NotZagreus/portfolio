@@ -42,11 +42,12 @@
 
 .project-image {
   width: 50%;
-  height: auto;
+  height: 50%;
   border-radius: 4px;
   margin-top: 1rem;
   border: 2px solid #232836;
   padding: auto;
+  object-fit: cover;
 }
 
 .project-dropdown {
