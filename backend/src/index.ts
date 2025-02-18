@@ -10,7 +10,7 @@ import nodemailer, { SentMessageInfo } from "nodemailer"; // Import SentMessageI
 dotenv.config({ path: "../.env" });
 
 const app = express();
-const BACKEND_PORT = process.env.BACKEND_PORT || 14344;
+const BACKEND_PORT = process.env.BACKEND_PORT;
 
 // Middleware
 app.use(cors());

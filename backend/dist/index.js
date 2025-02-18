@@ -50,6 +50,10 @@ app.post("/send", (req, res) => {
         res.send("Email sent: " + info.response);
     });
 });
+// Health check endpoint
+app.get("/health", (req, res) => {
+    res.status(200).send("OK");
+});
 // Routes
 app.use("/api/projects", projectRoutes_1.default);
 app.use("/api/comments", commentRoutes_1.default);
