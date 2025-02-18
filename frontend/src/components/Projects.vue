@@ -136,7 +136,7 @@ const fetchUserInfo = async () => {
       const response = await axios.get('https://dev-k4fhctws467co87d.us.auth0.com/userinfo', {
         headers: { Authorization: `Bearer ${token}` },
       })
-      isAdmin.value = response.data.sub === 'google-oauth2|111871631735892967671'
+      isAdmin.value = response.data.sub === import.meta.env.VITE_ADMIN_USER_ID
     } catch (error) {
       console.error('Error fetching user info:', error)
     }
@@ -157,11 +157,11 @@ const fetchProjects = async () => {
     let response
     if (isAuthenticated.value) {
       const token = await getAccessTokenSilently()
-      response = await axios.get('http://localhost:14344/api/projects', {
+      response = await axios.get(`${import.meta.env.VITE_API_URL}/api/projects`, {
         headers: { Authorization: `Bearer ${token}` },
       })
     } else {
-      response = await axios.get('http://localhost:14344/api/projects')
+      response = await axios.get(`${import.meta.env.VITE_API_URL}/api/projects`)
     }
     projects.value = response.data
   } catch (error) {
@@ -199,7 +199,7 @@ const saveProject = async () => {
       formData.append('image', editForm.value.image)
     }
     const response = await axios.put(
-      `http://localhost:14344/api/projects/${editForm.value.id}`,
+      `${import.meta.env.VITE_API_URL}/api/projects/${editForm.value.id}`,
       formData,
       {
         headers: {
@@ -227,7 +227,7 @@ const saveProject = async () => {
 const deleteProject = async () => {
   try {
     const token = await getAccessTokenSilently()
-    await axios.delete(`http://localhost:14344/api/projects/${projectToDelete.value}`, {
+    await axios.delete(`${import.meta.env.VITE_API_URL}/api/projects/${projectToDelete.value}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     projects.value = projects.value.filter((p) => p.id !== projectToDelete.value)
@@ -263,7 +263,7 @@ const addProject = async () => {
     if (newProject.value.image) {
       formData.append('image', newProject.value.image)
     }
-    const response = await axios.post('http://localhost:14344/api/projects', formData, {
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/projects`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,

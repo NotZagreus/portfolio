@@ -7,13 +7,13 @@ import commentRoutes from "./presentationlayer/commentRoutes";
 import bodyParser from "body-parser";
 import nodemailer, { SentMessageInfo } from "nodemailer"; // Import SentMessageInfo type
 
-dotenv.config({ path: "../.env" });
+dotenv.config();// we see
 
 const app = express();
 const BACKEND_PORT = process.env.BACKEND_PORT;
 
 // Middleware
-app.use(cors());
+app.use(cors({ origin : process.env.FRONTEND_DOMAIN }));
 app.use(bodyParser.json({ limit: "10mb" }));
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
