@@ -27,7 +27,7 @@ const technologies = ref([
     { name: 'JS', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905324/javascript-icon_kx95me.png' },
     { name: 'TS', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905322/typescript-icon_ql9c69.png' },
     { name: 'React', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905323/react-icon_c4ojac.png' },
-    { name: 'NodeJS', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905324/nodejs-icon_dpz2rb.png },
+    { name: 'NodeJS', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905324/nodejs-icon_dpz2rb.png' },
     { name: 'ExpressJS', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905322/expressjs-icon_yrmssc.png' },
     { name: 'Python', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905322/python-icon_jxyv1w.png' },
     { name: 'Kotlin', image: 'https://res.cloudinary.com/dhtprehby/image/upload/v1739905322/kotlin-icon_iudkow.png' }
