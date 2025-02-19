@@ -1,6 +1,6 @@
 # My Portfolio
 
-Welcome to my portfolio project! This is a personal website built using **Vue.js** with **TypeScript** to showcase my skills, experience, and projects. The portfolio is designed to be responsive, visually appealing, and easy to navigate.
+Welcome to my portfolio project! This is a personal website built using **Vue.js** with **TypeScript** for frontend and **Express.js** for backend to showcase my skills, experience, and projects. The portfolio is designed to be responsive, visually appealing, and easy to navigate.
 
 ---
 
