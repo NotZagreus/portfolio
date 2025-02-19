@@ -78,7 +78,7 @@ onUnmounted(() => {
 
 .technologies img {
     width: 3%;
-    height: 5%;
+    height: auto;
     object-fit: contain;
     background-color: #5a6074;
     border: 1px solid #24293f;
@@ -89,5 +89,23 @@ onUnmounted(() => {
 .technologies img:hover {
     transform: scale(1.05);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 1200px) {
+    .technologies img {
+        width: 5%;
+    }
+}
+
+@media (max-width: 800px) {
+    .technologies img {
+        width: 7%;
+    }
+}
+
+@media (max-width: 600px) {
+    .technologies img {
+        width: 10%;
+    }
 }
 </style>

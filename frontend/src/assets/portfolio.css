@@ -35,15 +35,94 @@ ul {
   font-family: 'Avenir Next LT Pro Demi';
 }
 
+@media (max-width: 1800px) {
+  body {
+    background: linear-gradient(to bottom, #1f262e, #445769);
+  }
+  .left-side, .right-side {
+    width: 70%;
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .left-side {
+    order: 1;
+  }
+
+  .right-side {
+    order: 2;
+  }
+}
+
+@media (max-width: 1200) {
+  body {
+    background: linear-gradient(to bottom, #1f262e, #445769);
+  }
+  .left-side, .right-side {
+    width: 70%;
+    padding: 10px;
+    font-size: 0.8rem;
+  }
+
+  .left-side {
+    order: 1;
+  }
+
+  .right-side {
+    order: 2;
+  }
+}
+
 /* Example media query for tablets */
+@media (max-width: 1024px) {
+  body {
+    background: linear-gradient(to bottom, #1f262e, #445769);
+  }
+
+}
+
+/* Media query for small screens */
 @media (max-width: 768px) {
   body {
     background: linear-gradient(to bottom, #1f262e, #445769);
   }
+
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .left-side, .right-side {
+    width: 70%;
+    padding: 10px;
+  }
+
+  .left-side {
+    order: 2;
+  }
+
+  .right-side {
+    order: 1;
+  }
 }
 
-/* Example media query for mobile devices */
+/* Media query for very small screens */
 @media (max-width: 480px) {
+  body {
+    background: linear-gradient(to bottom, #1f262e, #445769);
+  }
+
+  .left-side {
+    order: 2;
+  }
+
+  .right-side {
+    order: 1;
+  }
+}
+
+/* Example media query for small mobile devices */
+@media (max-width: 320px) {
   body {
     background: linear-gradient(to bottom, #1f262e, #445769);
   }

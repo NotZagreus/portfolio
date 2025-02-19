@@ -141,4 +141,13 @@ button {
 button:hover {
   background-color: #334155;
 }
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  overflow: hidden;
+}
+
 </style>
