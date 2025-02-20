@@ -14,6 +14,10 @@
   font-style: normal;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   background: linear-gradient(to bottom, #1f262e, #445769);
   min-height: 100vh;
@@ -40,19 +44,27 @@ html {
 
 .container {
   display: flex;
-  padding-top: 10%;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100vw; /* Ensure it always matches viewport width */
+  height: 100vh; /* Ensure it matches viewport height */
+  overflow: hidden; /* Prevent unwanted scrolling */
+}
+
+.left-side, .right-side {
+  flex: 1; /* Makes them take up equal space */
+  width: 50vw; /* Ensures they always take half of viewport width */
+  height: 100vh; /* Ensures they take full height */
+  overflow: hidden; /* Prevents scrolling inside */
 }
 
 .left-side {
-  padding-top: 3%;
-  width: 50%; /* responsive */
+  padding-top: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: sticky;
   top: 0;
-  height: 100vh;
-  overflow-y: auto;
   color: #e2e8f0;
   margin-left: auto;
   margin-right: auto;
@@ -129,9 +141,9 @@ html {
 }
 
 .right-side {
-  width: 50%; /* responsive */
-  padding-top: 3%;
-  padding-right: 3%;
+  padding-top: 10vh;
+  padding-right: 3vw;
+  padding-left: 3vw;
   overflow-y: auto;
   color: #e2e8f0;
   margin-left: auto;
@@ -143,10 +155,11 @@ html {
   text-wrap: wrap;
   padding: 1rem;
   border-radius: 0.5rem;
-  width: 95%; /* responsive */
+  width: 100%; /* responsive */
   margin-left: auto;
   margin-right: auto;
   text-align: justify;
+  word-wrap: break-word; /* Prevents overflow from long words */
 }
 
 .auth-language-container {
