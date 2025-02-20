@@ -1,7 +1,8 @@
 <template>
   <div class="container">
+    <Header />
     <div class="left-side">
-      <CV />
+      <!-- <CV /> -->
       <div class="info-container">
         <h1>{{ t('portfolio.name') }}</h1>
         <h3>{{ t('portfolio.title') }}</h3>
@@ -24,20 +25,6 @@
           <div class="dot" :style="dotStyle"></div>
         </nav>
       </div>
-      <div class="auth-language-container">
-        <div class="auth-buttons">
-          <button
-            v-if="isAuthenticated"
-            @click="logout({ logoutParams: { returnTo: windowLocation } })"
-          >
-            {{ t('contact.logout') }}
-          </button>
-          <button v-else @click="loginWithRedirect()">{{ t('contact.login') }}</button>
-        </div>
-        <div class="language-switcher">
-          <button @click="switchLanguage">{{ currentLanguage }}</button>
-        </div>
-      </div>
     </div>
     <div class="right-side">
       <div id="description" class="section">
@@ -55,18 +42,15 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, computed } from 'vue'
-import { useAuth0 } from '@auth0/auth0-vue'
+import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Projects from './components/Projects.vue'
 import CV from './components/CV.vue'
 import Comments from './components/Comments.vue'
 import Footer from './components/Footer.vue'
+import Header from './components/Header.vue'
 
-const { t, locale } = useI18n()
-const { isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently } = useAuth0()
-const windowLocation = window.location.origin
-const accessToken = ref('')
+const { t } = useI18n()
 const sections = ref(['description', 'projects', 'testimonials'])
 const activeSection = ref('')
 const dotStyle = ref({ top: '0px' })
@@ -100,12 +84,6 @@ const handleScroll = () => {
   })
 }
 
-const currentLanguage = computed(() => (locale.value === 'en' ? 'En' : 'Fr'))
-
-const switchLanguage = () => {
-  locale.value = locale.value === 'en' ? 'fr' : 'en'
-}
-
 onMounted(() => {
   // Set the line height to match the total scrollable height
   lineHeight.value = `${document.documentElement.scrollHeight}px`
@@ -118,36 +96,4 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
-.auth-language-container {
-  margin-top: 20px;
-}
-
-.language-switcher {
-  display: flex;
-  gap: 10px;
-}
-
-button {
-  padding: 5px 10px;
-  border: none;
-  background-color: #1e293b;
-  color: #e2e8f0;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #334155;
-}
-
-.container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  overflow: hidden;
-}
-
-</style>
+<style scoped></style>

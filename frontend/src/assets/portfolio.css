@@ -18,7 +18,6 @@ body {
   background: linear-gradient(to bottom, #1f262e, #445769);
   min-height: 100vh;
   margin: 0;
-  
 }
 
 p, h3 {
@@ -35,109 +34,17 @@ ul {
   font-family: 'Avenir Next LT Pro Demi';
 }
 
-@media (max-width: 1800px) {
-  body {
-    background: linear-gradient(to bottom, #1f262e, #445769);
-  }
-  .left-side, .right-side {
-    width: 70%;
-    padding: 10px;
-    font-size: 1rem;
-  }
-
-  .left-side {
-    order: 1;
-  }
-
-  .right-side {
-    order: 2;
-  }
-}
-
-@media (max-width: 1200) {
-  body {
-    background: linear-gradient(to bottom, #1f262e, #445769);
-  }
-  .left-side, .right-side {
-    width: 70%;
-    padding: 10px;
-    font-size: 0.8rem;
-  }
-
-  .left-side {
-    order: 1;
-  }
-
-  .right-side {
-    order: 2;
-  }
-}
-
-/* Example media query for tablets */
-@media (max-width: 1024px) {
-  body {
-    background: linear-gradient(to bottom, #1f262e, #445769);
-  }
-
-}
-
-/* Media query for small screens */
-@media (max-width: 768px) {
-  body {
-    background: linear-gradient(to bottom, #1f262e, #445769);
-  }
-
-  .container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .left-side, .right-side {
-    width: 70%;
-    padding: 10px;
-  }
-
-  .left-side {
-    order: 2;
-  }
-
-  .right-side {
-    order: 1;
-  }
-}
-
-/* Media query for very small screens */
-@media (max-width: 480px) {
-  body {
-    background: linear-gradient(to bottom, #1f262e, #445769);
-  }
-
-  .left-side {
-    order: 2;
-  }
-
-  .right-side {
-    order: 1;
-  }
-}
-
-/* Example media query for small mobile devices */
-@media (max-width: 320px) {
-  body {
-    background: linear-gradient(to bottom, #1f262e, #445769);
-  }
-}
-
 html {
   scroll-behavior: smooth;
 }
 
 .container {
   display: flex;
+  padding-top: 5%;
 }
 
 .left-side {
-  width: 50%;
+  width: 50%; /* responsive */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -152,7 +59,7 @@ html {
 }
 
 .info-container {
-  width: 50%;
+  width: 50%; /* responsive */
   text-align: justify;
   margin-bottom: 2rem;
 }
@@ -186,17 +93,18 @@ html {
   font-weight: bold;
   color: hsl(0, 0%, 80%);
 }
+
 .navigation-container nav ul li {
   margin: 60px 0;
   position: relative;
-  padding-left: 20px; /* Adjust this value to move the nav more to the left */
+  padding-left: 20px;
   display: flex;
   align-items: center;
 }
 
 .line {
   position: absolute;
-  left: 0; /* Adjust this value if needed */
+  left: 0;
   top: 0;
   bottom: 0;
   width: 1px;
@@ -206,7 +114,7 @@ html {
 
 .dot {
   position: absolute;
-  left: 0; /* Adjust this value if needed */
+  left: 0;
   width: 13px;
   height: 13px;
   background-color: hsl(0, 0%, 80%);
@@ -215,13 +123,12 @@ html {
   transition: top 0.5s ease, background-color 0.3s ease;
 }
 
-
 .dot:hover {
   background-color: hsl(0, 0%, 90%);
 }
 
 .right-side {
-  width: 50%;
+  width: 50%; /* responsive */
   padding: 2rem;
   overflow-y: auto;
   color: #e2e8f0;
@@ -234,7 +141,7 @@ html {
   text-wrap: wrap;
   padding: 1rem;
   border-radius: 0.5rem;
-  width: 95%;
+  width: 95%; /* responsive */
   margin-left: auto;
   margin-right: auto;
   text-align: justify;
@@ -247,20 +154,48 @@ html {
   margin-top: 20px;
   margin-bottom: 0px;
   position: absolute;
-  bottom: 20px; /* Adjust this value to move the container up or down */
+  bottom: 20px;
   left: 0;
-  padding: 0 20px; /* Add padding to the sides if needed */
+  padding: 0 20px;
+}
+
+
+.language-switcher {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  padding: 5px 10px;
+  border: none;
+  background-color: #1e293b;
+  color: #e2e8f0;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #334155;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  overflow: hidden;
 }
 
 .auth-buttons,
 .language-switcher {
-  margin-right: 10px; /* Add margin to space the buttons */
-  width: 100%;
+  margin-right: 10px;
+  width: 100%; /* responsive */
 }
 
 .auth-buttons button,
 .language-switcher button {
-  width: 100%;
+  width: 100%; /* responsive */
   padding: 5px 10px;
   border: none;
   background-color: rgb(83, 96, 108);

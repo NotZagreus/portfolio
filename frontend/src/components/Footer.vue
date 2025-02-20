@@ -1,8 +1,8 @@
 <template>
-    <footer v-if="showFooter" ref="footer" class="footer">
+    <footer v-if="showFooter" ref="footer" class="footer"> <!-- responsive -->
         <h3>{{ t('portfolio.technologies') }}</h3>
-        <div class="technologies">
-            <img v-for="tech in technologies" :key="tech.name" :src="tech.image" :alt="tech.name" />
+        <div class="technologies"> <!-- responsive -->
+            <img v-for="tech in technologies" :key="tech.name" :src="tech.image" :alt="tech.name" /> <!-- responsive -->
         </div>
     </footer>
 </template>
@@ -57,27 +57,27 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.footer {
+.footer { /* responsive */
     background-color: rgb(25, 33, 48);
     color: #e2e8f0;
     padding-bottom: 1rem;
     text-align: center;
-    width: 100%;
+    width: 100%; /* responsive */
     position: fixed;
     bottom: 0;
     left: 0;
     z-index: 10;
 }
 
-.technologies {
+.technologies { /* responsive */
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 10px; /* responsive */
     justify-content: center;
 }
 
-.technologies img {
-    width: 3%;
+.technologies img { /* responsive */
+    width: 3%; /* responsive */
     height: auto;
     object-fit: contain;
     background-color: #5a6074;
@@ -86,26 +86,26 @@ onUnmounted(() => {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.technologies img:hover {
+.technologies img:hover { /* responsive */
     transform: scale(1.05);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 1200px) {
-    .technologies img {
-        width: 5%;
+    .technologies img { /* responsive */
+        width: 5%; /* responsive */
     }
 }
 
 @media (max-width: 800px) {
-    .technologies img {
-        width: 7%;
+    .technologies img { /* responsive */
+        width: 7%; /* responsive */
     }
 }
 
 @media (max-width: 600px) {
-    .technologies img {
-        width: 10%;
+    .technologies img { /* responsive */
+        width: 10%; /* responsive */
     }
 }
 </style>

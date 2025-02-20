@@ -1,34 +1,34 @@
 .comments {
   text-align: justify;
-  padding-bottom: 10%;
+  padding-bottom: 10%; /* responsive */
 }
 
 .carousel {
   position: relative;
   overflow: hidden;
-  margin: 2rem 0;
+  margin: 2rem 0; /* responsive */
   z-index: 1;
-  padding: 0%;
-  width: 100%;
+  padding: 0%; /* responsive */
+  width: 100%; /* responsive */
 }
 
 .carousel-track {
   display: flex;
   transition: transform 0.5s ease;
-  width: 100%;
+  width: 100%; /* responsive */
   z-index: 1;
 }
 
 .comment-card {
-  flex: 0 0 100%;
+  flex: 0 0 100%; /* responsive */
   background-color: #1a2433;
-  padding: 1rem;
-  border-radius: 8px;
+  padding: 1rem; /* responsive */
+  border-radius: 8px; /* responsive */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   color: #e2e8f0;
   text-align: center;
   position: relative;
-  margin: 0;
+  margin: 0; /* responsive */
   box-sizing: border-box;
   transition:
     transform 0.3s ease,
@@ -37,13 +37,13 @@
 }
 
 .comment-card h2 {
-  font-size: 1rem;
+  font-size: 1rem; /* responsive */
   color: #cbd5e1;
-  margin-top: 1rem;
+  margin-top: 1rem; /* responsive */
 }
 
 .comment-card p {
-  font-size: 0.75rem;
+  font-size: 0.75rem; /* responsive */
   color: #94a3b8;
 }
 
@@ -58,27 +58,27 @@
   transform: translateY(-50%);
   background: none;
   border: none;
-  font-size: 2rem;
+  font-size: 2rem; /* responsive */
   color: #94a3b8;
   cursor: pointer;
   z-index: 1;
 }
 
 .left-arrow {
-  left: 10px;
+  left: 10px; /* responsive */
 }
 
 .right-arrow {
-  right: 10px;
+  right: 10px; /* responsive */
 }
 
 .add-comment-button {
-  margin-top: 0.5rem;
-  padding: 0.5rem 1rem;
+  margin-top: 0.5rem; /* responsive */
+  padding: 0.5rem 1rem; /* responsive */
   background-color: #181e29;
   color: #e2e8f0;
   border: none;
-  border-radius: 4px;
+  border-radius: 4px; /* responsive */
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -91,8 +91,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100%; /* responsive */
+  height: 100%; /* responsive */
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -102,11 +102,11 @@
 
 .modal-content {
   background-color: #1e293b;
-  padding: 2rem;
-  border-radius: 8px;
+  padding: 2rem; /* responsive */
+  border-radius: 8px; /* responsive */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 90%;
-  max-width: 500px;
+  width: 90%; /* responsive */
+  max-width: 500px; /* responsive */
   color: #e2e8f0;
 }
 
@@ -117,11 +117,11 @@
 
 .modal-content input,
 .modal-content textarea {
-  width: 100%;
-  padding: 0.5rem;
-  margin-top: 1rem;
+  width: 100%; /* responsive */
+  padding: 0.5rem; /* responsive */
+  margin-top: 1rem; /* responsive */
   border: 1px solid #475569;
-  border-radius: 4px;
+  border-radius: 4px; /* responsive */
   background-color: #334155;
   color: #e2e8f0;
 }
@@ -140,50 +140,50 @@
 .modal-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem;
+  margin-top: 1rem; /* responsive */
 }
 
 .delete-icon {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 10px; /* responsive */
+  right: 10px; /* responsive */
   cursor: pointer;
   color: #94a3b8;
-  font-size: 1.2rem;
+  font-size: 1.2rem; /* responsive */
 }
 
 .dropdown {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 10px; /* responsive */
+  right: 10px; /* responsive */
 }
 
 .dropdown-button {
   background: none;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.2rem; /* responsive */
   cursor: pointer;
   color: #94a3b8;
 }
 
 .dropdown-menu {
   position: absolute;
-  top: 100%;
+  top: 100%; /* responsive */
   right: 0;
   background-color: #334155;
   border: 1px solid #475569;
-  border-radius: 4px;
+  border-radius: 4px; /* responsive */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
 
 .dropdown-item {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem; /* responsive */
   cursor: pointer;
   color: #e2e8f0;
   background-color: #334155;
   border: none;
-  width: 100%;
+  width: 100%; /* responsive */
   text-align: left;
 }
 
