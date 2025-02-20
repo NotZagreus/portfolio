@@ -72,7 +72,8 @@ onUnmounted(() => {
 .technologies { /* responsive */
     display: flex;
     flex-wrap: wrap;
-    gap: 10px; /* responsive */
+    gap: 2%; /* responsive */
+    row-gap: 2%;
     justify-content: center;
 }
 
@@ -91,21 +92,33 @@ onUnmounted(() => {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-@media (max-width: 1200px) {
-    .technologies img { /* responsive */
-        width: 5%; /* responsive */
-    }
-}
-
-@media (max-width: 800px) {
-    .technologies img { /* responsive */
-        width: 7%; /* responsive */
-    }
-}
-
 @media (max-width: 600px) {
-    .technologies img { /* responsive */
-        width: 10%; /* responsive */
+    .technologies img {
+        width: 8%;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 768px) {
+    .technologies img {
+        width: 7%;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+    .technologies img {
+        width: 6%;
+    }
+}
+
+@media (min-width: 993px) and (max-width: 1200px) {
+    .technologies img {
+        width: 5%;
+    }
+}
+
+@media (min-width: 1201px) {
+    .technologies img {
+        width: 4%;
     }
 }
 </style>

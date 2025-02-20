@@ -2,7 +2,6 @@
   <div class="container">
     <Header />
     <div class="left-side">
-      <!-- <CV /> -->
       <div class="info-container">
         <h1>{{ t('portfolio.name') }}</h1>
         <h3>{{ t('portfolio.title') }}</h3>
@@ -45,7 +44,6 @@
 import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Projects from './components/Projects.vue'
-import CV from './components/CV.vue'
 import Comments from './components/Comments.vue'
 import Footer from './components/Footer.vue'
 import Header from './components/Header.vue'
@@ -69,10 +67,8 @@ const handleScroll = () => {
   const totalHeight = document.documentElement.scrollHeight - window.innerHeight
   const scrollProgress = (scrollPosition / totalHeight) * 100
 
-  // Update the dot position
   dotStyle.value = { top: `${scrollProgress}%` }
 
-  // Update the active section based on scroll position
   sections.value.forEach((section) => {
     const element = document.getElementById(section)
     if (element) {
@@ -85,13 +81,8 @@ const handleScroll = () => {
 }
 
 onMounted(() => {
-  // Set the line height to match the total scrollable height
   lineHeight.value = `${document.documentElement.scrollHeight}px`
-
-  // Add scroll event listener
   window.addEventListener('scroll', handleScroll)
-
-  // Initial call to set the dot position
   handleScroll()
 })
 </script>
