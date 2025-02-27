@@ -2,7 +2,6 @@
   <div class="container">
     <Header />
     <div class="left-side">
-      <!-- <CV /> -->
       <div class="info-container">
         <h1>{{ t('portfolio.name') }}</h1>
         <h3>{{ t('portfolio.title') }}</h3>
@@ -36,8 +35,8 @@
       <div id="testimonials" class="section">
         <Comments />
       </div>
+      <Footer />
     </div>
-    <Footer />
   </div>
 </template>
 
@@ -45,7 +44,6 @@
 import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Projects from './components/Projects.vue'
-import CV from './components/CV.vue'
 import Comments from './components/Comments.vue'
 import Footer from './components/Footer.vue'
 import Header from './components/Header.vue'

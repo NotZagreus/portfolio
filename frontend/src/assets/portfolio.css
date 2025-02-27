@@ -48,9 +48,9 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: sticky;
+  position: fixed;
   top: 0;
-  height: 100vh;
+  height: 100%;
   overflow-y: auto;
   color: #e2e8f0;
   margin-left: auto;
@@ -129,7 +129,8 @@ html {
 
 .right-side {
   width: 50%; /* responsive */
-  padding: 2rem;
+  padding-left: 50%;
+  padding-right: 2%;
   overflow-y: auto;
   color: #e2e8f0;
   margin-left: auto;
