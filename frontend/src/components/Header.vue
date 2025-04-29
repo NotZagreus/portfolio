@@ -1,6 +1,5 @@
 <template>
   <header v-if="showHeader" ref="header" class="header">
-    <!-- responsive -->
     <div class="auth-language-container">
       <div class="auth-buttons">
         <button
@@ -14,8 +13,11 @@
       <div class="language-switcher">
         <button @click="switchLanguage">{{ currentLanguage }}</button>
       </div>
+      <button class="contact-btn" @click="toggleBurgerMenu">
+        <span>Contact Me</span>
+      </button>
     </div>
-    <div class="card">
+    <div v-if="isBurgerMenuOpen" class="burger-menu-sidebar">
       <div class="socialContainer containerOne" @click="showCvModal = true">
         <svg class="socialSvg cvSvg" viewBox="0 0 24 24">
           <path
@@ -106,7 +108,13 @@ const header = ref<HTMLElement | null>(null)
 const handleScroll = () => {
   const scrollPosition = window.scrollY
   showHeader.value = scrollPosition <= headerHeight.value
-  document.body.style.paddingTop = showHeader.value ? `${headerHeight.value}px` : '0'
+  document.body.style.paddingTop = showHeader.value ? `${headerHeight.value}rem` : '0'
+}
+
+const isBurgerMenuOpen = ref(false)
+
+const toggleBurgerMenu = () => {
+  isBurgerMenuOpen.value = !isBurgerMenuOpen.value
 }
 
 const currentLanguage = computed(() => (locale.value === 'en' ? 'En' : 'Fr'))
@@ -184,15 +192,12 @@ const downloadCV = (path: string) => {
 
 <style scoped>
 .header {
-  /* responsive */
   background-color: rgb(25, 33, 48);
   color: #e2e8f0;
-  padding-top: 1%;
-  padding-bottom: 3%;
   text-align: center;
-  width: 100%; /* responsive */
+  width: 100%;
   position: fixed;
-  height: 3rem; /* responsive */
+  height: 5rem;
   top: 0;
   left: 0;
   z-index: 10;
@@ -203,12 +208,62 @@ const downloadCV = (path: string) => {
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
+  z-index: 2;
 }
 
 .auth-buttons,
 .language-switcher {
   display: flex;
   gap: 10px;
+}
+
+.auth-buttons button {
+  --btn-default-bg: #1e293b;
+  --btn-padding: 0.65rem 1rem;
+  --btn-hover-bg: #334155;
+  --btn-transition: 0.3s;
+  --btn-letter-spacing: 0.1rem;
+  --btn-animation-duration: 1.2s;
+  --btn-shadow-color: rgba(0, 0, 0, 0.137);
+  --btn-shadow: 0 2px 10px 0 var(--btn-shadow-color);
+  --hover-btn-color: #eff1f8;
+  --default-btn-color: #fff;
+  --font-size: 16px;
+  --font-weight: 600;
+  --font-family: Menlo, Roboto Mono, monospace;
+  box-sizing: border-box;
+  padding: var(--btn-padding);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--default-btn-color);
+  font: var(--font-weight) var(--font-size) var(--font-family);
+  background: var(--btn-default-bg);
+  border: none;
+  cursor: pointer;
+  transition: var(--btn-transition);
+  overflow: hidden;
+  box-shadow: var(--btn-shadow);
+  white-space: nowrap;
+  position: relative;
+}
+
+.auth-buttons button span {
+  letter-spacing: var(--btn-letter-spacing);
+  transition: var(--btn-transition);
+  box-sizing: border-box;
+  position: relative;
+  background: inherit;
+}
+
+.auth-buttons button:hover,
+.auth-buttons button:focus {
+  background-color: var(--btn-hover-bg);
+}
+
+.auth-buttons button:hover span,
+.auth-buttons button:focus span {
+  color: var(--hover-btn-color);
 }
 
 button {
@@ -230,41 +285,54 @@ button:hover {
   align-items: center;
   justify-content: center;
   padding: 25px;
-  position: fixed;
-  width: 55%; /* responsive */
-  height: auto; /* responsive */
-  gap: auto; /* responsive */
+  position: absolute;
+  width: 100%;
+  height: auto;
+  gap: 1rem;
   flex-wrap: nowrap;
 }
 
-/* for all social containers*/
+.burger-menu-sidebar {
+  position: fixed;
+  top: 1.25rem;
+  right: calc(2rem + 160px);
+  display: flex;
+  height: 1.5rem;
+  flex-direction: row;
+  background-color: rgba(30, 41, 59, 0.95);
+  padding: 0.5rem;
+  border-radius: 8px;
+  z-index: 2;
+  animation: slideInLeft 0.3s ease-out;
+}
+
 .socialContainer {
-  width: 52px; /* responsive */
-  height: 52px; /* responsive */
+  flex: 0 0 auto;
+  min-width: 3rem;
+  min-height: 1.5rem;
   background-color: hsla(210, 20%, 20%, 1);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  transition-duration: 0.3s;
-  flex: 1 1 auto; /* Allow flex items to grow and shrink */
+  border-radius: 0.5rem;
+  margin: 0 5px;
+  transition: transform 0.3s ease;
 }
-/* instagram*/
-.containerOne:hover {
-  background-color: #d62976;
-  transition-duration: 0.3s;
+
+.socialContainer:hover {
+  transform: scale(1.1);
 }
-/* github*/
+
 .containerTwo:hover {
   background-color: #333;
   transition-duration: 0.3s;
 }
-/* linkdin*/
+
 .containerThree:hover {
   background-color: #0072b1;
   transition-duration: 0.3s;
 }
-/* mail*/
+
 .containerFour:hover {
   background-color: #d44638;
   transition-duration: 0.3s;
@@ -276,7 +344,7 @@ button:hover {
 }
 
 .socialSvg {
-  width: 17px; /* responsive */
+  width: 17px;
 }
 
 .socialSvg path {
@@ -306,8 +374,8 @@ button:hover {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%; /* responsive */
-  height: 100%; /* responsive */
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 2;
 }
@@ -316,8 +384,8 @@ button:hover {
   background-color: hsl(212, 19%, 15%);
   padding: 20px;
   border-radius: 5px;
-  width: 80%; /* responsive */
-  max-width: 600px; /* responsive */
+  width: 80%;
+  max-width: 600px;
   position: relative;
   text-align: left;
 }
@@ -341,7 +409,7 @@ label {
 
 input,
 textarea {
-  width: 100%; /* responsive */
+  width: 100%;
   padding: 8px;
   box-sizing: border-box;
 }
@@ -349,18 +417,18 @@ textarea {
 .cv-select {
   padding: 10px;
   margin: 10px;
-  font-size: 16px; /* responsive */
+  font-size: 16px;
 }
 
 .cv-button {
   background-color: #3f3f3f;
   border: none;
   color: white;
-  padding: 15px 32px; /* responsive */
+  padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px; /* responsive */
+  font-size: 16px;
   margin: 10px 2px;
   cursor: pointer;
   border-radius: 4px;
@@ -368,38 +436,147 @@ textarea {
 }
 
 .cv-button:hover {
-  background-color: #616161;
+  transition-duration: 0.3s;
 }
 
-/* Media queries for responsiveness */
-@media (max-width: 768px) {
-  .card {
-    flex-direction: column;
-    gap: 20px; /* responsive */
-  }
+/* Menu Button */
+.contact-btn {
+  --btn-default-bg: #1e293b;
+  --btn-padding: 0.65rem 1rem;
+  --btn-hover-bg: #334155;
+  --btn-transition: 0.3s;
+  --btn-letter-spacing: 0.1rem;
+  --btn-animation-duration: 1.2s;
+  --btn-shadow-color: rgba(0, 0, 0, 0.137);
+  --btn-shadow: 0 2px 10px 0 var(--btn-shadow-color);
+  --hover-btn-color: #eff1f8;
+  --default-btn-color: #fff;
+  --font-size: 16px;
+  --font-weight: 600;
+  --font-family: Menlo, Roboto Mono, monospace;
+  box-sizing: border-box;
+  padding: var(--btn-padding);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--default-btn-color);
+  font: var(--font-weight) var(--font-size) var(--font-family);
+  background: var(--btn-default-bg);
+  border: none;
+  cursor: pointer;
+  transition: var(--btn-transition);
+  overflow: hidden;
+  box-shadow: var(--btn-shadow);
+  white-space: nowrap;
+  position: fixed;
+  top: 1.25rem;
+  right: 1.75rem;
+  translate: (-50%);
+  z-index: 2;
+}
 
-  .socialContainer {
-    width: 40px; /* responsive */
-    height: 40px; /* responsive */
-  }
+.contact-btn span {
+  letter-spacing: var(--btn-letter-spacing);
+  transition: var(--btn-transition);
+  box-sizing: border-box;
+  position: relative;
+  background: inherit;
+}
 
-  .socialSvg {
-    width: 14px; /* responsive */
+.contact-btn span::before {
+  box-sizing: border-box;
+  position: absolute;
+  content: "";
+  background: inherit;
+}
+
+.contact-btn:hover span,
+.contact-btn:focus span {
+  color: var(--hover-btn-color);
+}
+
+.contact-btn:hover span::before,
+.contact-btn:focus span::before {
+  animation: chitchat linear both var(--btn-animation-duration);
+}
+
+@keyframes chitchat {
+  0% {
+    content: "#*";
+  }
+  5% {
+    content: ".@";
+  }
+  10% {
+    content: "^{!";
+  }
+  15% {
+    content: "-!@$";
+  }
+  20% {
+    content: "#$_*&";
+  }
+  25% {
+    content: "№:0*&$@";
+  }
+  30% {
+    content: "#{+.*@$&";
+  }
+  35% {
+    content: "@}-?@&^#*";
+  }
+  45% {
+    content: "=.,^!@&#)";
+  }
+  50% {
+    content: "?2@%&*^%@";
+  }
+  60% {
+    content: "?{%*@&@$:";
+    right: 0;
+  }
+  65% {
+    content: "|{f[4&^@";
+    right: 0;
+  }
+  70% {
+    content: "{4%0%*!$";
+    right: 0;
+  }
+  75% {
+    content: "'1_0<$@";
+    right: 0;
+  }
+  80% {
+    content: "{0%$#!";
+    right: 0;
+  }
+  85% {
+    content: "]>'@$";
+    right: 0;
+  }
+  90% {
+    content: "4#@";
+    right: 0;
+  }
+  95% {
+    content: "2!";
+    right: 0;
+  }
+  100% {
+    content: "";
+    right: 0;
   }
 }
 
-@media (max-width: 480px) {
-  .card {
-    padding: 15px; /* responsive */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
   }
-
-  .socialContainer {
-    width: 35px; /* responsive */
-    height: 35px; /* responsive */
-  }
-
-  .socialSvg {
-    width: 12px; /* responsive */
+  to {
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 </style>
