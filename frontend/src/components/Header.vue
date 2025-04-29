@@ -382,7 +382,7 @@ button:hover {
 .burger-menu-sidebar {
   position: fixed;
   top: 1.25rem;
-  right: calc(2rem + 160px);
+  right: calc(3rem + 160px);
   display: flex;
   height: 1.5rem;
   flex-direction: row;
@@ -666,6 +666,33 @@ textarea {
     opacity: 1;
   }
 }
+
+@media (max-width: 768px) {
+  .burger-menu-sidebar {
+    top: calc(5rem + 0px); /* Adjust based on header height */
+    right: 0;
+    left: 50%;
+    flex-direction: column;
+    width: 35%;
+    height: auto;
+    border-radius: 0;
+    animation: slideInDown 0.3s ease-out;
+    gap: 0.25rem;
+    padding: 1rem;
+  }
+
+  @keyframes slideInDown {
+    from {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+}
+
 </style>
 
 
