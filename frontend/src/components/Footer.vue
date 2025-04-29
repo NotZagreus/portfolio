@@ -38,10 +38,12 @@ const footerHeight = ref(0)
 const footer = ref<HTMLElement | null>(null)
 
 const handleScroll = () => {
-  const scrollPosition = window.scrollY + window.innerHeight
-  const totalHeight = document.documentElement.scrollHeight
-  showFooter.value = scrollPosition >= totalHeight - footerHeight.value
-}
+    const scrollPosition = Math.ceil(window.scrollY + window.innerHeight);
+    const totalHeight = Math.ceil(document.documentElement.scrollHeight);
+
+    showFooter.value = scrollPosition >= totalHeight - 1;
+    document.body.style.paddingBottom = showFooter.value ? `${footerHeight.value}px` : '0';
+};
 
 onMounted(async () => {
   window.addEventListener('scroll', handleScroll)
@@ -59,7 +61,7 @@ onUnmounted(() => {
 .footer {
   background-color: rgb(25, 33, 48);
   color: #e2e8f0;
-  padding-bottom: 1rem;
+  padding: 1rem;
   text-align: center;
   width: 100%;
   position: fixed;
@@ -80,9 +82,10 @@ onUnmounted(() => {
   width: 3%;
   height: auto;
   object-fit: contain;
-  background-color: #5a6074;
+  background-color: #91939b;
   border: 1px solid #24293f;
   border-radius: 8px;
+  padding: 0.25rem;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 

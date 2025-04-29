@@ -433,13 +433,66 @@ button:hover {
 
 /* Shit Laptop - Similar to desktop */
 @media (min-width: 1366px) and (max-width: 1920px) {
-  body{
-    background-color: hsl(0, 100%, 50%);
+  @font-face {
+    font-family: 'Avenir Next LT Pro Demi';
+    src: url('./Fonts/AvenirNextLTPro-Demi.woff2') format('woff2'),
+         url('./Fonts/AvenirNextLTPro-Demi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Avenir Next LT Pro Ultra Light';
+    src: url('./Fonts/AvenirNextLTPro-UltLt.woff2') format('woff2'),
+         url('./Fonts/AvenirNextLTPro-UltLt.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  body {
+    /* background-color: hsl(0, 100%, 50%); */
+    background: linear-gradient(to bottom, #1f262e, #445769);
+    min-height: 100vh;
+    margin: 0;
+  }
+  
+  p, h3 {
+    font-family: 'Avenir Next LT Pro Ultra Light';
+  }
+  
+  h1, h2, h4 {
+    font-family: 'Avenir Next LT Pro Demi';
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    font-family: 'Avenir Next LT Pro Demi';
+  }
+  
+  html {
+    scroll-behavior: smooth;
   }
 }
 
 /* Tablet - Similar to mobile*/
 @media (min-width: 768px) and (max-width: 1366px) {
+  @font-face {
+    font-family: 'Avenir Next LT Pro Demi';
+    src: url('./Fonts/AvenirNextLTPro-Demi.woff2') format('woff2'),
+         url('./Fonts/AvenirNextLTPro-Demi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Avenir Next LT Pro Ultra Light';
+    src: url('./Fonts/AvenirNextLTPro-UltLt.woff2') format('woff2'),
+         url('./Fonts/AvenirNextLTPro-UltLt.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
   body{
     background-color: hsl(245, 100%, 50%);
   }
@@ -447,6 +500,22 @@ button:hover {
 
 /* Mobile Phone */
 @media (max-width: 768px) {
+  @font-face {
+    font-family: 'Avenir Next LT Pro Demi';
+    src: url('./Fonts/AvenirNextLTPro-Demi.woff2') format('woff2'),
+         url('./Fonts/AvenirNextLTPro-Demi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Avenir Next LT Pro Ultra Light';
+    src: url('./Fonts/AvenirNextLTPro-UltLt.woff2') format('woff2'),
+         url('./Fonts/AvenirNextLTPro-UltLt.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
   body{
     background-color: hsl(116, 100%, 50%);
   }
