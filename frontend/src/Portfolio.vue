@@ -83,15 +83,14 @@ const handleScroll = () => {
 }
 
 onMounted(() => {
-  // Set the line height to match the total scrollable height
   lineHeight.value = `${document.documentElement.scrollHeight}px`
-
-  // Add scroll event listener
   window.addEventListener('scroll', handleScroll)
-
-  // Initial call to set the dot position
   handleScroll()
 })
+
 </script>
 
-<style scoped></style>
+<style scoped>
+
+
+</style>
