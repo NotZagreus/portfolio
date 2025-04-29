@@ -200,6 +200,48 @@ const downloadCV = (path: string) => {
   z-index: 10;
 }
 
+.auth-language-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  padding: 0 20px;
+}
+
+
+.language-switcher {
+  display: flex;
+  gap: 10px;
+}
+
+.auth-buttons,
+.language-switcher {
+  margin-right: 10px;
+  width: 100%;
+}
+
+.auth-buttons button,
+.language-switcher button {
+  width: 100%;
+  padding: 5px 10px;
+  border: none;
+  background-color: rgb(83, 96, 108);
+  color: #e2e8f0;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.auth-buttons button:hover,
+.language-switcher button:hover {
+  background-color: #334155;
+}
+
+
 .auth-language-contact-container {
   display: flex;
   align-items: center;
