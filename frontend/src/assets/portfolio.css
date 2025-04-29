@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: 'Avenir Next LT Pro Demi';
   src: url('./Fonts/AvenirNextLTPro-Demi.woff2') format('woff2'),
        url('./Fonts/AvenirNextLTPro-Demi.woff') format('woff');
@@ -44,11 +44,12 @@ html {
 }
 
 .left-side {
-  width: 50%; /* responsive */
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: fixed;
+  padding-top: 8%;
   top: 0;
   height: 100%;
   overflow-y: auto;
@@ -59,7 +60,7 @@ html {
 }
 
 .info-container {
-  width: 50%; /* responsive */
+  width: 50%;
   text-align: justify;
   margin-bottom: 2rem;
 }
@@ -128,7 +129,7 @@ html {
 }
 
 .right-side {
-  width: 50%; /* responsive */
+  width: 50%;
   padding-left: 50%;
   padding-right: 2%;
   overflow-y: auto;
@@ -142,7 +143,7 @@ html {
   text-wrap: wrap;
   padding: 1rem;
   border-radius: 0.5rem;
-  width: 95%; /* responsive */
+  width: 95%;
   margin-left: auto;
   margin-right: auto;
   text-align: justify;
@@ -191,12 +192,12 @@ button:hover {
 .auth-buttons,
 .language-switcher {
   margin-right: 10px;
-  width: 100%; /* responsive */
+  width: 100%;
 }
 
 .auth-buttons button,
 .language-switcher button {
-  width: 100%; /* responsive */
+  width: 100%;
   padding: 5px 10px;
   border: none;
   background-color: rgb(83, 96, 108);
@@ -209,4 +210,244 @@ button:hover {
 .auth-buttons button:hover,
 .language-switcher button:hover {
   background-color: #334155;
+} */
+
+/* Responsive Design */
+/* Desktop/Laptop */
+@media (min-width: 1920px) {
+  @font-face {
+    font-family: 'Avenir Next LT Pro Demi';
+    src: url('./Fonts/AvenirNextLTPro-Demi.woff2') format('woff2'),
+         url('./Fonts/AvenirNextLTPro-Demi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Avenir Next LT Pro Ultra Light';
+    src: url('./Fonts/AvenirNextLTPro-UltLt.woff2') format('woff2'),
+         url('./Fonts/AvenirNextLTPro-UltLt.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  body {
+    background: linear-gradient(to bottom, #1f262e, #445769);
+    min-height: 100vh;
+    margin: 0;
+  }
+  
+  p, h3 {
+    font-family: 'Avenir Next LT Pro Ultra Light';
+  }
+  
+  h1, h2, h4 {
+    font-family: 'Avenir Next LT Pro Demi';
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    font-family: 'Avenir Next LT Pro Demi';
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  .container {
+    display: flex;
+    padding-top: 5%;
+  }
+  
+  .left-side {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    padding-top: 8%;
+    top: 0;
+    height: 100%;
+    overflow-y: auto;
+    color: #e2e8f0;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 3;
+  }
+  
+  .info-container {
+    width: 50%;
+    text-align: justify;
+    margin-bottom: 2rem;
+  }
+  
+  .navigation-container {
+    margin-top: 20px;
+    position: relative;
+  }
+  
+  .navigation-container nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+  
+  .navigation-container nav ul li a {
+    text-decoration: none;
+    color: #e2e8f0;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .navigation-container nav ul li a:hover {
+    color: hsl(0, 0%, 80%);
+    transform: translateX(5px);
+  }
+  
+  .navigation-container nav ul li.active a {
+    font-weight: bold;
+    color: hsl(0, 0%, 80%);
+  }
+  
+  .navigation-container nav ul li {
+    margin: 60px 0;
+    position: relative;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .line {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    height: 100%;
+    background-color: hsl(0, 0%, 80%);
+  }
+  
+  .dot {
+    position: absolute;
+    left: 0;
+    width: 13px;
+    height: 13px;
+    background-color: hsl(0, 0%, 80%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: top 0.5s ease, background-color 0.3s ease;
+  }
+  
+  .dot:hover {
+    background-color: hsl(0, 0%, 90%);
+  }
+  
+  .right-side {
+    width: 50%;
+    padding-left: 50%;
+    padding-right: 2%;
+    overflow-y: auto;
+    color: #e2e8f0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .section {
+    margin-bottom: 2rem;
+    text-wrap: wrap;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
+  }
+  
+  .auth-language-container {
+    display: flex;
+    justify-content: left;
+    align-items: justify;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    padding: 0 20px;
+  }
+  
+  
+  .language-switcher {
+    display: flex;
+    gap: 10px;
+  }
+  
+  button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #1e293b;
+    color: #e2e8f0;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #334155;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .auth-buttons,
+  .language-switcher {
+    margin-right: 10px;
+    width: 100%;
+  }
+  
+  .auth-buttons button,
+  .language-switcher button {
+    width: 100%;
+    padding: 5px 10px;
+    border: none;
+    background-color: rgb(83, 96, 108);
+    color: #e2e8f0;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .auth-buttons button:hover,
+  .language-switcher button:hover {
+    background-color: #334155;
+  }
+
+}
+
+/* Shit Laptop - Similar to desktop */
+@media (min-width: 1366px) and (max-width: 1920px) {
+  body{
+    background-color: hsl(0, 100%, 50%);
+  }
+}
+
+/* Tablet - Similar to mobile*/
+@media (min-width: 768px) and (max-width: 1366px) {
+  body{
+    background-color: hsl(245, 100%, 50%);
+  }
+}
+
+/* Mobile Phone */
+@media (max-width: 768px) {
+  body{
+    background-color: hsl(116, 100%, 50%);
+  }
 }

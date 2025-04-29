@@ -66,6 +66,7 @@ onUnmounted(() => {
   bottom: 0;
   left: 0;
   z-index: 10;
+  margin-top: 40%;
 }
 
 .technologies {

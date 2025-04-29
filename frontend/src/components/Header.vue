@@ -187,7 +187,8 @@ const downloadCV = (path: string) => {
   /* responsive */
   background-color: rgb(25, 33, 48);
   color: #e2e8f0;
-  padding-top: 1rem;
+  padding-top: 1%;
+  padding-bottom: 3%;
   text-align: center;
   width: 100%; /* responsive */
   position: fixed;
@@ -229,10 +230,10 @@ button:hover {
   align-items: center;
   justify-content: center;
   padding: 25px;
-  position: relative;
-  width: 100%; /* responsive */
+  position: fixed;
+  width: 55%; /* responsive */
   height: auto; /* responsive */
-  gap: 5%; /* responsive */
+  gap: auto; /* responsive */
   flex-wrap: nowrap;
 }
 
