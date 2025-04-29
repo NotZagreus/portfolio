@@ -187,7 +187,7 @@
     text-align: justify;
   }
   
-  .auth-language-container {
+  /* .auth-language-container {
     display: flex;
     justify-content: left;
     align-items: justify;
@@ -203,7 +203,7 @@
   .language-switcher {
     display: flex;
     gap: 10px;
-  }
+  } */
   
   button {
     padding: 5px 10px;
@@ -227,7 +227,7 @@
     overflow: hidden;
   }
   
-  .auth-buttons,
+  /* .auth-buttons,
   .language-switcher {
     margin-right: 10px;
     width: 100%;
@@ -248,7 +248,7 @@
   .auth-buttons button:hover,
   .language-switcher button:hover {
     background-color: #334155;
-  }
+  } */
 
   /* Footer */
   .footer {

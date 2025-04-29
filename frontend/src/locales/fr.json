@@ -37,7 +37,8 @@
     "message": "Message",
     "send": "Envoyer",
     "emailSent": "Email envoyé avec succès!",
-    "emailFailed": "Échec de l'envoi de l'email."
+    "emailFailed": "Échec de l'envoi de l'email.",
+    "me": "Contactez-moi"
   },
   "comments": {
     "title": "Témoignages",

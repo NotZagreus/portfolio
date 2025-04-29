@@ -2,10 +2,7 @@
   <header v-if="showHeader" ref="header" class="header">
     <div class="auth-language-container">
       <div class="auth-buttons">
-        <button
-          v-if="isAuthenticated"
-          @click="logout({ logoutParams: { returnTo: windowLocation } })"
-        >
+        <button v-if="isAuthenticated" @click="logout({ logoutParams: { returnTo: windowLocation } })">
           {{ t('contact.logout') }}
         </button>
         <button v-else @click="loginWithRedirect()">{{ t('contact.login') }}</button>
@@ -14,7 +11,7 @@
         <button @click="switchLanguage">{{ currentLanguage }}</button>
       </div>
       <button class="contact-btn" @click="toggleBurgerMenu">
-        <span>Contact Me</span>
+        <span>{{ t('contact.me') }}</span>
       </button>
     </div>
     <div v-if="isBurgerMenuOpen" class="burger-menu-sidebar">
@@ -203,11 +200,14 @@ const downloadCV = (path: string) => {
   z-index: 10;
 }
 
-.auth-language-container {
+.auth-language-contact-container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  justify-content: flex-end;
+  gap: 10px;
+  position: fixed;
+  top: 1.25rem;
+  right: 1.75rem;
   z-index: 2;
 }
 
@@ -216,6 +216,7 @@ const downloadCV = (path: string) => {
   display: flex;
   gap: 10px;
 }
+
 
 .auth-buttons button {
   --btn-default-bg: #1e293b;
@@ -278,6 +279,50 @@ button {
 
 button:hover {
   background-color: #334155;
+}
+
+.language-switcher button {
+  --btn-default-bg: #1e293b;
+  --btn-padding: 0.65rem 1rem;
+  --btn-hover-bg: #334155;
+  --btn-transition: 0.3s;
+  --btn-letter-spacing: 0.1rem;
+  --btn-animation-duration: 1.2s;
+  --btn-shadow-color: rgba(0, 0, 0, 0.137);
+  --btn-shadow: 0 2px 10px 0 var(--btn-shadow-color);
+  --hover-btn-color: #eff1f8;
+  --default-btn-color: #fff;
+  --font-size: 16px;
+  --font-weight: 600;
+  --font-family: Menlo, Roboto Mono, monospace;
+  box-sizing: border-box;
+  padding: var(--btn-padding);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--default-btn-color);
+  font: var(--font-weight) var(--font-size) var(--font-family);
+  background: var(--btn-default-bg);
+  border: none;
+  cursor: pointer;
+  transition: var(--btn-transition);
+  overflow: hidden;
+  box-shadow: var(--btn-shadow);
+  white-space: nowrap;
+  position: relative;
+}
+
+.language-switcher button span {
+  letter-spacing: var(--btn-letter-spacing);
+  transition: var(--btn-transition);
+  box-sizing: border-box;
+  position: relative;
+  background: inherit;
+}
+
+.language-switcher button:hover,
+.language-switcher button:focus {
+  background-color: var(--btn-hover-bg);
 }
 
 .card {
@@ -580,3 +625,5 @@ textarea {
   }
 }
 </style>
+
+

@@ -35,7 +35,8 @@
     "message": "Message",
     "send": "Send",
     "emailSent": "Email sent successfully!",
-    "emailFailed": "Failed to send email."
+    "emailFailed": "Failed to send email.",
+    "me": "Contact Me"
   },
   "comments": {
     "title": "Testimonials",
