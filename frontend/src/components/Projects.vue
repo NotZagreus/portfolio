@@ -151,6 +151,7 @@ const editError = ref<{ title?: string; description?: string }>({})
 const { getAccessTokenSilently, isAuthenticated, user } = useAuth0()
 const isAdmin = ref(false)
 
+
 const fetchUserInfo = async () => {
   if (isAuthenticated.value) {
     try {

@@ -97,7 +97,7 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #262f3a;
+  color: #1c232b;
 }
 
 .dropdown-menu {
@@ -138,8 +138,8 @@
 }
 
 .dropdown-item:hover {
-  background-color: #262f3a;
-  color: #d8e9e9;
+  background-color: #d8e9e9;
+  color: #262f3a;
 }
 
 .github-icon {
