@@ -26,13 +26,14 @@
       </div>
       <button class="arrow right-arrow" @click="nextComment">›</button>
     </div>
-    <button v-if="isAuthenticated" class="add-comment-button" @click="showAddModal = true">
-      {{ t('comments.addComment') }}
-    </button>
-    <button v-if="isAdmin" class="view-comments-button" @click="showViewModal = true">
-      {{ t('comments.viewAll') }}
-    </button>
-
+    <div class="carousel-actions">
+      <button v-if="isAuthenticated" class="add-comment-button" @click="showAddModal = true">
+        {{ t('comments.addComment') }}
+      </button>
+      <button v-if="isAdmin" class="view-comments-button" @click="showViewModal = true">
+        {{ t('comments.viewAll') }}
+      </button>
+    </div>
     <!-- Add Comment Modal -->
     <div v-if="showAddModal" class="modal">
       <div class="modal-content">
@@ -362,7 +363,6 @@ onMounted(() => {
     window.removeEventListener('keydown', handleKeydown)
   })
 })
-
 </script>
 
 <style scoped></style>

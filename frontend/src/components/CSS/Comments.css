@@ -290,3 +290,9 @@
 .modal-buttons.inline button:last-child:hover {
   background-color: #475569;
 }
+
+.carousel-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
