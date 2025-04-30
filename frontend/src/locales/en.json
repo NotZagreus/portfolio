@@ -22,7 +22,7 @@
     "description": "Description",
     "projects": "Projects",
     "testimonials": "Testimonials",
-    "descriptionText": "Hello ! I'm Artem as you just saw on the left.. I'm a third-year Computer Science student passionate about cybersecurity. My military service as an Infanteer in the Canadian Army shaped my discipline, teamwork, and adaptability, helping me tackle challenges with confidence. I thrive in fast-paced environments, solving problems logically and efficiently while always looking for smarter solutions. Fluent in English, French, Ukrainian, and Russian, I communicate clearly and collaborate easily across teams. Whether leading a project, troubleshooting code, or optimizing workflows, I enjoy working with others to achieve results. Beyond tech, my work as a freelance sports and automotive photographer sharpened my attention to detail and project management skills under tight deadlines. I’m always learning, adapting, and growing whether in cybersecurity, software development, or leadership with a focus on precision, teamwork, and results.",
+    "descriptionText": "Hi, I'm Artem a third-year Computer Science student with a focus on cybersecurity.<br><br>My background as an Infanteer in the Canadian Army built my discipline, adaptability, and team-first mindset  qualities I now bring to every tech challenge. I thrive in fast-paced environments, solving problems with logic and precision.<br><br>Fluent in English, French, Ukrainian, and Russian, I collaborate seamlessly across teams. Outside of tech, my work as a freelance sports and automotive photographer sharpened my eye for detail and ability to deliver under pressure.<br><br>Whether it’s coding, leading, or learning, I bring focus, resilience, and a drive for smart solutions.",
     "technologies": "Technologies"
   },
   "contact": {
@@ -35,8 +35,7 @@
     "message": "Message",
     "send": "Send",
     "emailSent": "Email sent successfully!",
-    "emailFailed": "Failed to send email.",
-    "me": "Contact Me"
+    "emailFailed": "Failed to send email."
   },
   "comments": {
     "title": "Testimonials",

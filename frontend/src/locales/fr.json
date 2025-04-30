@@ -24,7 +24,7 @@
     "description": "Description",
     "projects": "Projets",
     "testimonials": "Témoignages",
-"descriptionText": "Salut ! Je suis Artem, comme vous l’avez vu à gauche… Je suis étudiant en troisième année en informatique, passionné par la cybersécurité. Mon service militaire en tant qu’infantier dans l’Armée canadienne a forgé ma discipline, mon esprit d’équipe et mon adaptabilité, me permettant d’aborder les défis avec confiance. J’évolue dans des environnements dynamiques, résolvant les problèmes de manière logique et efficace tout en cherchant toujours des solutions plus intelligentes. Fluent en anglais, français, ukrainien et russe, je communique clairement et collabore facilement avec les équipes. Que ce soit pour diriger un projet, déboguer du code ou optimiser des processus, j’aime travailler avec les autres pour obtenir des résultats. Au-delà de la technologie, mon travail en tant que photographe sportif et automobile indépendant a affiné mon sens du détail et mes compétences en gestion de projet sous des délais serrés. J’apprends, je m’adapte et je progresse continuellement, que ce soit en cybersécurité, en développement logiciel ou en leadership, avec un engagement constant envers la précision, le travail d’équipe et l’efficacité.",
+    "descriptionText": "Salut, je suis Artem, étudiant en troisième année d’informatique avec des plans de se spécialiser en cybersécurité.<br><br>Mon expérience comme fantassin dans l’armée canadienne a forgé ma discipline, mon adaptabilité et mon esprit d’équipe — des qualités que j’applique à chaque défi technologique. Je m’épanouis dans des environnements dynamiques, en résolvant des problèmes avec logique et précision.<br><br>Parlant couramment l’anglais, le français, l’ukrainien et le russe, je collabore aisément au sein d’équipes multiculturelles. En dehors de la tech, mon travail de photographe indépendant dans le sport et l’automobile a aiguisé mon sens du détail et ma capacité à livrer dans des délais serrés.<br><br>Que ce soit pour coder, diriger ou apprendre, j’apporte concentration, résilience et recherche de solutions intelligentes.",
     "technologies": "Technologies"
   },
   "contact": {
@@ -37,8 +37,7 @@
     "message": "Message",
     "send": "Envoyer",
     "emailSent": "Email envoyé avec succès!",
-    "emailFailed": "Échec de l'envoi de l'email.",
-    "me": "Contactez-moi"
+    "emailFailed": "Échec de l'envoi de l'email."
   },
   "comments": {
     "title": "Témoignages",

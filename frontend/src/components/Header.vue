@@ -11,7 +11,7 @@
         <button @click="switchLanguage">{{ currentLanguage }}</button>
       </div>
       <button class="contact-btn" @click="toggleBurgerMenu">
-        <span>{{ t('contact.me') }}</span>
+        <span>{{ t('contact.contactMe') }}</span>
       </button>
     </div>
     <div v-if="isBurgerMenuOpen" class="burger-menu-sidebar">

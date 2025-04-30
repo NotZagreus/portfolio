@@ -28,7 +28,7 @@
     </div>
     <div class="right-side">
       <div id="description" class="section">
-        <h3>{{ t('portfolio.descriptionText') }}</h3>
+        <h3 v-html="$t('portfolio.descriptionText')"></h3>
       </div>
       <div id="projects" class="section">
         <Projects />
@@ -144,7 +144,7 @@ onMounted(() => {
         drops[i] = 0;
       }
 
-      drops[i] += 0.3;
+      drops[i] += 0.1;
     }
 
     requestAnimationFrame(draw);
