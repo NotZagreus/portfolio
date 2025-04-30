@@ -63,7 +63,7 @@
     color: #d8e9e9;
     margin-left: auto;
     margin-right: auto;
-    z-index: 3;
+    z-index: 1;
   }
   
   .info-container {
@@ -178,6 +178,7 @@
     color: #e2e8f0;
     margin-left: auto;
     margin-right: auto;
+    z-index: 1;
   }
   
   .section {
@@ -216,7 +217,7 @@
 
   /* Footer */
   .footer {
-    background-color: #262f3a7b;
+    background-color: #262f3abb;
     color: #d8e9e9;
     padding: 1rem;
     text-align: center;
@@ -224,7 +225,7 @@
     position: fixed;
     bottom: 0;
     left: 0;
-    z-index: 2;
+    z-index: 1;
     margin-top: 40%;
     font-size: 1rem;
   }
@@ -307,7 +308,7 @@
     position: fixed;
     bottom: 0;
     left: 0;
-    z-index: 10;
+    z-index: 1;
     margin-top: 40%;
     font-size: 0.75rem;
   }
