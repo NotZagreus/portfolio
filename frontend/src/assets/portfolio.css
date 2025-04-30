@@ -20,20 +20,24 @@
     background: linear-gradient(to bottom, #1f262e, #445769);
     min-height: 100vh;
     margin: 0;
+    color: #d8e9e9;
   }
   
   p, h3 {
     font-family: 'Avenir Next LT Pro Ultra Light';
+    color: #d8e9e9;
   }
   
   h1, h2, h4 {
     font-family: 'Avenir Next LT Pro Demi';
+    color: #d8e9e9;
   }
   
   ul {
     list-style-type: none;
     padding: 0;
     font-family: 'Avenir Next LT Pro Demi';
+    color: #d8e9e9;
   }
   
   html {
@@ -56,7 +60,7 @@
     top: 0;
     height: 100%;
     overflow-y: auto;
-    color: #e2e8f0;
+    color: #d8e9e9;
     margin-left: auto;
     margin-right: auto;
     z-index: 3;
@@ -84,7 +88,7 @@
   
   .navigation-container nav ul li a {
     text-decoration: none;
-    color: #e2e8f0;
+    color: #d8e9e9;
     transition: color 0.3s ease, transform 0.3s ease;
   }
   
@@ -198,7 +202,7 @@
   }
   
   button:hover {
-    background-color: #334155;
+    background-color: C1D3D3;
   }
   
   .container {
@@ -212,8 +216,8 @@
 
   /* Footer */
   .footer {
-    background-color: rgb(25, 33, 48);
-    color: #e2e8f0;
+    background-color: #262f3a;
+    color: #d8e9e9;
     padding: 1rem;
     text-align: center;
     width: 100%;
@@ -236,8 +240,8 @@
     width: 3rem;
     height: auto;
     object-fit: contain;
-    background-color: #70727a;
-    border: 0.25rem solid #24293f;
+    background-color: #d8e9e9;
+    border: 0.25rem solid #222a34;
     border-radius: 0.30rem;
     padding: 0.25rem;
     transition: transform 0.3s, box-shadow 0.3s;

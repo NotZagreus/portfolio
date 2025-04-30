@@ -189,7 +189,7 @@ const downloadCV = (path: string) => {
 
 <style scoped>
 .header {
-  background-color: rgb(25, 33, 48);
+  background-color: #21293300;
   color: #e2e8f0;
   text-align: center;
   width: 100%;
