@@ -8,7 +8,7 @@
           <h2>{{ comment.firstName }} {{ comment.lastName }}</h2>
           <p>{{ comment.comment }}</p>
           <div v-if="isAdmin" class="dropdown">
-            <button class="dropdown-button" @click="toggleDropdown(comment.id)">⋮</button>
+            <!-- <button class="dropdown-button" @click="toggleDropdown(comment.id)">⋮</button> -->
             <div v-if="dropdownOpen === comment.id" class="dropdown-menu">
               <button class="dropdown-item" @click="openDeleteModal(comment)">
                 {{ t('comments.delete') }}
@@ -55,7 +55,7 @@
     </div>
 
     <!-- Delete Comment Modal -->
-    <div v-if="showDeleteModal" class="modal">
+    <div v-if="showDeleteModal" class="delete-comments-modal">
       <div class="modal-content">
         <h3>{{ t('comments.confirmDelete') }}</h3>
         <div class="modal-buttons">
@@ -65,7 +65,7 @@
       </div>
     </div>
     <!-- View All Comments Modal -->
-    <div v-if="showViewModal" class="modal">
+    <div v-if="showViewModal" class="view-comments-modal">
       <div class="modal-content view-modal">
         <h3>{{ t('comments.manageComments') }}</h3>
 
@@ -108,6 +108,11 @@
               </button>
               <button v-else @click="toggleCarouselComment(comment.id)">
                 {{ t('comments.removeCarousel') }}
+              </button>
+
+              <!-- Add Delete Button -->
+              <button class="delete-button" @click="openDeleteModal(comment)">
+                {{ t('comments.delete') }}
               </button>
             </div>
           </li>
