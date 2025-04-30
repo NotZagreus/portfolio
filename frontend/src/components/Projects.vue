@@ -5,10 +5,14 @@
       <button class="project-title" @click="toggleProjectDropdown(project.id)">
         {{ currentLocale === 'fr' ? project.titleFr : project.titleEn }}
       </button>
-      <div v-if="dropdownOpen === project.id" class="project-card">
+      <div
+        v-if="dropdownOpen === project.id"
+        class="project-card"
+        @click="openActionModal(project)"
+      >
         <div class="card-header">
           <div v-if="isAdmin" class="dropdown">
-            <button class="dropdown-button" @click="toggleDropdown(project.id)">...</button>
+            <button class="dropdown-button" @click.stop="toggleDropdown(project.id)">...</button>
             <div v-if="dropdownOpen === project.id" class="dropdown-menu">
               <button class="dropdown-item" @click="editProject(project)">
                 {{ t('projects.edit') }}
@@ -98,6 +102,18 @@
         </div>
       </div>
     </div>
+
+    <!-- Project Actions Modal -->
+    <div v-if="showActionModal" class="modal">
+      <div class="modal-content">
+        <h3>{{ currentLocale === 'fr' ? selectedProject?.titleFr : selectedProject?.titleEn }}</h3>
+        <div class="modal-buttons">
+          <button class="modal-button" @click="triggerEdit">{{ t('projects.edit') }}</button>
+          <button class="modal-button" @click="triggerDelete">{{ t('projects.delete') }}</button>
+          <button class="modal-button" @click="closeActionModal">{{ t('projects.cancel') }}</button>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -147,10 +163,10 @@ const projectToDelete = ref<string | null>(null)
 const uploadError = ref<string | null>(null)
 const addError = ref<{ title?: string; description?: string }>({})
 const editError = ref<{ title?: string; description?: string }>({})
-
+const showActionModal = ref(false)
+const selectedProject = ref<Project | null>(null)
 const { getAccessTokenSilently, isAuthenticated, user } = useAuth0()
 const isAdmin = ref(false)
-
 
 const fetchUserInfo = async () => {
   if (isAuthenticated.value) {
@@ -189,6 +205,30 @@ const fetchProjects = async () => {
     projects.value = response.data
   } catch (error) {
     console.error('Error fetching projects:', error)
+  }
+}
+
+const openActionModal = (project: Project) => {
+  selectedProject.value = project
+  showActionModal.value = true
+}
+
+const closeActionModal = () => {
+  selectedProject.value = null
+  showActionModal.value = false
+}
+
+const triggerEdit = () => {
+  if (selectedProject.value) {
+    editProject(selectedProject.value)
+    closeActionModal()
+  }
+}
+
+const triggerDelete = () => {
+  if (selectedProject.value) {
+    confirmDelete(selectedProject.value.id)
+    closeActionModal()
   }
 }
 
