@@ -2,7 +2,10 @@
   <header v-if="showHeader" ref="header" class="header">
     <div class="auth-language-container">
       <div class="auth-buttons">
-        <button v-if="isAuthenticated" @click="logout({ logoutParams: { returnTo: windowLocation } })">
+        <button
+          v-if="isAuthenticated"
+          @click="logout({ logoutParams: { returnTo: windowLocation } })"
+        >
           {{ t('contact.logout') }}
         </button>
         <button v-else @click="loginWithRedirect()">{{ t('contact.login') }}</button>
@@ -470,13 +473,13 @@ button:hover {
 }
 
 .modal-content {
-  background-color: #1e293b;
+  background-color: #262f3a;
   padding: 20px;
   border-radius: 5px;
   width: 80%;
   max-width: 600px;
   position: relative;
-  text-align: left;
+  text-align: center;
 }
 
 .close {
@@ -510,9 +513,9 @@ textarea {
 }
 
 .cv-button {
-  background-color: #3f3f3f;
+  background-color: #2f3b4c;
+  color: white;
   border: none;
-  color: #ffffff;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -525,7 +528,8 @@ textarea {
 }
 
 .cv-button:hover {
-  transition-duration: 0.3s;
+  background-color: #64748b;
+  color: white;
 }
 
 /* Menu Button */
@@ -575,7 +579,7 @@ textarea {
 .contact-btn span::before {
   box-sizing: border-box;
   position: absolute;
-  content: "";
+  content: '';
   background: inherit;
 }
 
@@ -592,45 +596,45 @@ textarea {
 
 @keyframes chitchat {
   0% {
-    content: "#*";
+    content: '#*';
   }
   5% {
-    content: ".@";
+    content: '.@';
   }
   10% {
-    content: "^{!";
+    content: '^{!';
   }
   15% {
-    content: "-!@$";
+    content: '-!@$';
   }
   20% {
-    content: "#$_*&";
+    content: '#$_*&';
   }
   25% {
-    content: "№:0*&$@";
+    content: '№:0*&$@';
   }
   30% {
-    content: "#{+.*@$&";
+    content: '#{+.*@$&';
   }
   35% {
-    content: "@}-?@&^#*";
+    content: '@}-?@&^#*';
   }
   45% {
-    content: "=.,^!@&#)";
+    content: '=.,^!@&#)';
   }
   50% {
-    content: "?2@%&*^%@";
+    content: '?2@%&*^%@';
   }
   60% {
-    content: "?{%*@&@$:";
+    content: '?{%*@&@$:';
     right: 0;
   }
   65% {
-    content: "|{f[4&^@";
+    content: '|{f[4&^@';
     right: 0;
   }
   70% {
-    content: "{4%0%*!$";
+    content: '{4%0%*!$';
     right: 0;
   }
   75% {
@@ -638,7 +642,7 @@ textarea {
     right: 0;
   }
   80% {
-    content: "{0%$#!";
+    content: '{0%$#!';
     right: 0;
   }
   85% {
@@ -646,15 +650,15 @@ textarea {
     right: 0;
   }
   90% {
-    content: "4#@";
+    content: '4#@';
     right: 0;
   }
   95% {
-    content: "2!";
+    content: '2!';
     right: 0;
   }
   100% {
-    content: "";
+    content: '';
     right: 0;
   }
 }
