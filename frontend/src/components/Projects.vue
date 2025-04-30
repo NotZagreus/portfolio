@@ -10,19 +10,6 @@
         class="project-card"
         @click="openActionModal(project)"
       >
-        <div class="card-header">
-          <div v-if="isAdmin" class="dropdown">
-            <button class="dropdown-button" @click.stop="toggleDropdown(project.id)">...</button>
-            <div v-if="dropdownOpen === project.id" class="dropdown-menu">
-              <button class="dropdown-item" @click="editProject(project)">
-                {{ t('projects.edit') }}
-              </button>
-              <button class="dropdown-item" @click="confirmDelete(project.id)">
-                {{ t('projects.delete') }}
-              </button>
-            </div>
-          </div>
-        </div>
         <div class="project-content">
           <img
             v-if="project.image"
@@ -33,7 +20,7 @@
           <div class="project-description">
             <p>{{ currentLocale === 'fr' ? project.descriptionFr : project.descriptionEn }}</p>
             <a v-if="project.github_link" :href="project.github_link" target="_blank">
-              <img src="@/assets/Pictures/25231.png" alt="GitHub Icon" class="github-icon" />
+                <img src="https://res.cloudinary.com/dhtprehby/image/upload/v1746055237/github_icon.png" alt="GitHub Icon" class="github-icon" />
             </a>
           </div>
         </div>
