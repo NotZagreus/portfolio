@@ -1,5 +1,6 @@
 <template>
   <section class="projects">
+    <h1>{{ t('projects.title') }}</h1>
     <div class="project-dropdown" v-for="project in projects" :key="project.id">
       <button class="project-title" @click="toggleProjectDropdown(project.id)">
         {{ currentLocale === 'fr' ? project.titleFr : project.titleEn }}
