@@ -1,7 +1,8 @@
 <template>
+  <div id="enchant-rain"></div>
   <div class="container">
+    <Header />
     <div class="left-side">
-      <CV />
       <div class="info-container">
         <h1>{{ t('portfolio.name') }}</h1>
         <h3>{{ t('portfolio.title') }}</h3>
@@ -24,24 +25,10 @@
           <div class="dot" :style="dotStyle"></div>
         </nav>
       </div>
-      <div class="auth-language-container">
-        <div class="auth-buttons">
-          <button
-            v-if="isAuthenticated"
-            @click="logout({ logoutParams: { returnTo: windowLocation } })"
-          >
-            {{ t('contact.logout') }}
-          </button>
-          <button v-else @click="loginWithRedirect()">{{ t('contact.login') }}</button>
-        </div>
-        <div class="language-switcher">
-          <button @click="switchLanguage">{{ currentLanguage }}</button>
-        </div>
-      </div>
     </div>
     <div class="right-side">
       <div id="description" class="section">
-        <h3>{{ t('portfolio.descriptionText') }}</h3>
+        <h3 v-html="$t('portfolio.descriptionText')"></h3>
       </div>
       <div id="projects" class="section">
         <Projects />
@@ -49,28 +36,25 @@
       <div id="testimonials" class="section">
         <Comments />
       </div>
+      <Footer />
     </div>
-    <Footer />
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, computed } from 'vue'
-import { useAuth0 } from '@auth0/auth0-vue'
+import { onMounted, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Projects from './components/Projects.vue'
-import CV from './components/CV.vue'
 import Comments from './components/Comments.vue'
 import Footer from './components/Footer.vue'
+import Header from './components/Header.vue'
 
-const { t, locale } = useI18n()
-const { isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently } = useAuth0()
-const windowLocation = window.location.origin
-const accessToken = ref('')
+const { t } = useI18n()
 const sections = ref(['description', 'projects', 'testimonials'])
 const activeSection = ref('')
 const dotStyle = ref({ top: '0px' })
 const lineHeight = ref('100vh')
+const mouse = { x: -1000, y: -1000 }
 
 const scrollToSection = (section: string) => {
   const element = document.getElementById(section)
@@ -80,15 +64,17 @@ const scrollToSection = (section: string) => {
   }
 }
 
+window.addEventListener("mousemove", (e) => {
+  mouse.x = e.clientX
+  mouse.y = e.clientY
+})
+
 const handleScroll = () => {
   const scrollPosition = window.scrollY
   const totalHeight = document.documentElement.scrollHeight - window.innerHeight
   const scrollProgress = (scrollPosition / totalHeight) * 100
-
-  // Update the dot position
   dotStyle.value = { top: `${scrollProgress}%` }
 
-  // Update the active section based on scroll position
   sections.value.forEach((section) => {
     const element = document.getElementById(section)
     if (element) {
@@ -100,45 +86,92 @@ const handleScroll = () => {
   })
 }
 
-const currentLanguage = computed(() => (locale.value === 'en' ? 'En' : 'Fr'))
-
-const switchLanguage = () => {
-  locale.value = locale.value === 'en' ? 'fr' : 'en'
-}
-
 onMounted(() => {
-  // Set the line height to match the total scrollable height
   lineHeight.value = `${document.documentElement.scrollHeight}px`
-
-  // Add scroll event listener
   window.addEventListener('scroll', handleScroll)
-
-  // Initial call to set the dot position
   handleScroll()
+
+  const canvas = document.createElement("canvas")
+  const ctx = canvas.getContext("2d")
+  const enchantRain = document.getElementById("enchant-rain")
+
+  if (!enchantRain || !ctx) return
+
+  enchantRain.appendChild(canvas)
+  canvas.classList.add("canvas")
+
+  const minecraftRunes = [
+    "ᔑ", "ʖ", "ᓵ", "↸", "ᒷ", "⎓", "⊣", "⍑", "╎",
+    "⋮", "ꖌ", "ꖎ", "ᒲ", "リ", "𝙹", "!¡", "ᑑ", "∷",
+    "ᓭ", "ℸ", "⚍", "⍊", "∴", "̇/", "||", "⨅"
+  ]
+  let fontSize = 18
+  let columns: number
+  let drops: number[] = []
+
+  const setupCanvas = () => {
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+    columns = Math.floor(canvas.width / fontSize)
+    drops = Array(columns * 2).fill(1)
+  }
+
+  const draw = () => {
+    if (!ctx) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "rgba(232, 232, 208, 0.05)";
+    ctx.font = `${fontSize - 8}px monospace`;
+
+    for (let i = 0; i < drops.length; i++) {
+      const x = i * fontSize;
+      const y = drops[i] * fontSize;
+      const rune = minecraftRunes[Math.floor(Math.random() * minecraftRunes.length)];
+      const distance = Math.hypot(mouse.x - x, mouse.y - y);
+      let opacity = Math.min(drops[i] / (canvas.height / 4), 1);
+      let color = `rgba(232, 232, 208, ${opacity})`;
+
+      if (distance < 100) {
+        drops[i] -= 0.1;
+        color = `rgba(255, 255, 160, ${Math.min(1, opacity + 0.3)})`;
+      }
+
+      ctx.fillStyle = color;
+      ctx.fillText(rune, x, y);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+
+      drops[i] += 0.1;
+    }
+
+    requestAnimationFrame(draw);
+  };
+
+  setupCanvas();
+  draw();
+  window.addEventListener("resize", setupCanvas);
 })
 </script>
 
 <style scoped>
-.auth-language-container {
-  margin-top: 20px;
+#enchant-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  background: hsla(0, 0%, 0%, 0);
+  overflow: hidden;
 }
 
-.language-switcher {
-  display: flex;
-  gap: 10px;
-}
-
-button {
-  padding: 5px 10px;
-  border: none;
-  background-color: #1e293b;
-  color: #e2e8f0;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #334155;
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>

@@ -3,31 +3,37 @@
 }
 
 .grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1rem;
 }
 
 .project-card {
-  background-color: #1e293b;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background-color: #262f3a;
   padding: 1rem;
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  color: #e2e8f0;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #d8e9e9;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   z-index: 1;
   margin-top: 0.5rem;
 }
 
 .project-card h2 {
   font-size: 1rem;
-  color: #a8b0b9;
+  color: #d8e9e9;
   margin: 0;
 }
 
 .project-card p {
-  font-size: 0.95rem;
-  color: #9a9ead;
+  font-family: 'Avenir Next LT Pro Demi';
+  font-size: 1rem;
+  color: #d8e9e9;
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: pre-wrap;
@@ -40,14 +46,18 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+.project-description {
+  flex: 1 1 100%;
+  min-width: 200px;
+}
+
 .project-image {
-  width: 50%;
-  height: 50%;
+  width: 200px;
+  height: auto;
   border-radius: 4px;
-  margin-top: 1rem;
   border: 2px solid #232836;
-  padding: auto;
   object-fit: cover;
+  flex-shrink: 0;
 }
 
 .project-dropdown {
@@ -56,19 +66,24 @@
 }
 
 .project-title {
+  font-family: 'Avenir Next LT Pro Demi';
+  font-size: 1rem;
   width: 100%;
   padding: 1rem;
-  background-color: #1e293b;
-  color: #e2e8f0;
+  background-color: #262f3a;
+  color: #d8e9e9;
   border: none;
   text-align: left;
   cursor: pointer;
   border-radius: 4px;
   transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .project-title:hover {
-  background-color: #334155;
+  background-color: #d8e9e9;
+  color: #262f3a;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
 .card-header {
@@ -82,22 +97,26 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #94a3b8;
+  color: #1c232b;
 }
 
 .dropdown-menu {
   position: absolute;
   top: 100%;
   right: 0;
-  background-color: #334155;
-  border: 1px solid #475569;
+  background-color: #262f3a;
+  border: 1px solid #262f3a;
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 3;
+  z-index: 2;
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateY(0);
   }
   40% {
@@ -115,12 +134,12 @@
   width: 100%;
   text-align: left;
   cursor: pointer;
-  color: #e2e8f0;
+  color: #d8e9e9;
 }
 
 .dropdown-item:hover {
-  background-color: #475569;
-  color: #cbd5e1;
+  background-color: #d8e9e9;
+  color: #262f3a;
 }
 
 .github-icon {
@@ -136,25 +155,27 @@
 }
 
 .add-button {
-  background-color: #1e293b;
-  color: #e2e8f0;
+  font-size: 1rem;
+  width: 2rem;
+  height: 2rem;
+  background-color: #262f3a;
+  color: #d8e9e9;
   border: none;
-  padding: 1rem;
-  border-radius: 50%;
-  font-size: 2rem;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 3rem;
-  height: 3rem;
-  display: flex;
+  text-align: center;
   justify-content: center;
   align-items: center;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  line-height: 0;
+  border-radius: 10%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: grid;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .add-button:hover {
-  background-color: #334155;
-  color: #cbd5e1;
+  background-color: #d8e9e9;
+  color: #262f3a;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
 .modal {
@@ -167,22 +188,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 2;
 }
 
 .modal-content {
-  background-color: #1e293b;
+  background-color: #262f3a;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 500px;
-  color: #e2e8f0;
+  color: #d8e9e9;
 }
 
 .modal-content h3 {
   margin-top: 0;
-  color: #cbd5e1;
+  color: #d8e9e9;
+  text-align: center;
 }
 
 .modal-content input,
@@ -193,18 +215,18 @@
   border: 1px solid #475569;
   border-radius: 4px;
   background-color: #334155;
-  color: #e2e8f0;
+  color: #d8e9e9;
 }
 
 .modal-content input::placeholder,
 .modal-content textarea::placeholder {
-  color: #94a3b8;
+  color: #c5c9d1;
 }
 
 .modal-content input:focus,
 .modal-content textarea:focus {
   outline: none;
-  border-color: #e2e8f0;
+  border-color: #d8e9e9;
 }
 
 .modal-buttons {
@@ -215,7 +237,7 @@
 }
 
 .modal-button {
-  background-color: #475569;
+  background-color: #2f3b4c;
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -238,6 +260,12 @@
   gap: 1rem;
 }
 
-.project-description {
-  flex: 1;
+@media (min-width: 600px) {
+  .project-card {
+    flex-wrap: nowrap;
+  }
+
+  .project-description {
+    flex: 1;
+  }
 }

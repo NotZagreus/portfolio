@@ -9,8 +9,10 @@ export interface IProject extends Document {
 
 const ProjectSchema: Schema = new Schema(
   {
-    title: { type: String, required: true },
-    description: { type: String, required: true },
+    titleEn: { type: String, required: true },
+    descriptionEn: { type: String, required: true },
+    titleFr: { type: String, required: true },
+    descriptionFr: { type: String, required: true },
     image: { type: String },
     github_link: { type: String },
   },

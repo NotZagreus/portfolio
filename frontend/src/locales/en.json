@@ -4,8 +4,10 @@
     "edit": "Edit",
     "delete": "Delete",
     "addNew": "Add New Project",
-    "titlePlaceholder": "Title",
-    "descriptionPlaceholder": "Description",
+    "titlePlaceholderEn": "Title",
+    "descriptionPlaceholderEn": "Description",
+    "titlePlaceholderFr": "French Title",
+    "descriptionPlaceholderFr": "French Description",
     "githubLinkPlaceholder": "GitHub Link",
     "add": "Add",
     "cancel": "Cancel",
@@ -22,7 +24,7 @@
     "description": "Description",
     "projects": "Projects",
     "testimonials": "Testimonials",
-    "descriptionText": "Hello ! I'm Artem as you just saw on the left.. I’m a third-year Computer Science student passionate about cybersecurity, with a strong work ethic shaped by military service and experience in sports and automotive photography. As an Infanteer in the Canadian Army, I developed discipline, teamwork, and adaptability skills that help me tackle challenges with confidence. I thrive in fast-paced environments, using a logical and practical approach to solve problems efficiently. With military-level discipline and a natural curiosity, I’m always looking for better, smarter solutions. I’m a strong communicator, fluent in English, French, Ukrainian, and Russian, making it easy for me to collaborate across teams and explain complex ideas clearly. I enjoy working with others, whether leading a project, troubleshooting code, or refining workflows. Beyond tech, my work as a freelance sports and automotive photographer has sharpened my attention to detail and ability to manage projects under tight deadlines. I’m always learning, adapting, and pushing myself to grow whether in cybersecurity, software development, or leadership roles. No matter the challenge, I focus on precision, teamwork, and delivering results.",
+    "descriptionText": "Hi, I'm Artem a third-year Computer Science student with a focus on cybersecurity.<br><br>My background as an Infanteer in the Canadian Army built my discipline, adaptability, and team-first mindset  qualities I now bring to every tech challenge. I thrive in fast-paced environments, solving problems with logic and precision.<br><br>Fluent in English, French, Ukrainian, and Russian, I collaborate seamlessly across teams. Outside of tech, my work as a freelance sports and automotive photographer sharpened my eye for detail and ability to deliver under pressure.<br><br>Whether it’s coding, leading, or learning, I bring focus, resilience, and a drive for smart solutions.",
     "technologies": "Technologies"
   },
   "contact": {
@@ -53,7 +55,16 @@
     "no": "No",
     "firstNameRequired": "First name is required.",
     "lastNameRequired": "Last name is required.",
-    "commentRequired": "Comment is required."
+    "commentRequired": "Comment is required.",
+    "viewComments": "View All Comments",
+    "manageComments": "Manage Comments",
+    "close": "Close",
+    "all": "All",
+    "approved": "Approved",
+    "pending": "Pending Approval",
+    "addCarousel": "Add to Carousel",
+    "removeCarousel": "Remove from Carousel",
+    "viewAll": "View All Comments"
   },
   "cv": {
     "downloadButton": "Download CV",
