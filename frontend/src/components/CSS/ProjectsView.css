@@ -1,38 +1,41 @@
 .projects {
-  padding: 0%; /* responsive */
+  padding: 0%;
 }
 
 .grid {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem; /* responsive */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
 }
 
 .project-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   background-color: #1e293b;
-  padding: 1rem; /* responsive */
+  padding: 1rem;
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   color: #e2e8f0;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   z-index: 1;
-  margin-top: 0.5rem; /* responsive */
+  margin-top: 0.5rem;
 }
 
 .project-card h2 {
-  font-size: 1rem; /* responsive */
+  font-size: 1rem;
   color: #a8b0b9;
   margin: 0;
 }
 
 .project-card p {
-  font-size: 0.95rem; /* responsive */
+  font-size: 0.95rem;
   color: #9a9ead;
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: pre-wrap;
   text-align: justify;
-  padding: 1.5rem; /* responsive */
+  padding: 1.5rem;
 }
 
 .project-card:hover {
@@ -40,24 +43,28 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+.project-description {
+  flex: 1 1 100%;
+  min-width: 200px;
+}
+
 .project-image {
-  width: 50%; /* responsive */
-  height: 50%; /* responsive */
+  width: 200px;
+  height: auto;
   border-radius: 4px;
-  margin-top: 1rem; /* responsive */
   border: 2px solid #232836;
-  padding: auto;
   object-fit: cover;
+  flex-shrink: 0; /* Prevent image from shrinking */
 }
 
 .project-dropdown {
-  margin-bottom: 1rem; /* responsive */
-  width: 100%; /* responsive */
+  margin-bottom: 1rem;
+  width: 100%;
 }
 
 .project-title {
-  width: 100%; /* responsive */
-  padding: 1rem; /* responsive */
+  width: 100%;
+  padding: 1rem;
   background-color: #1e293b;
   color: #e2e8f0;
   border: none;
@@ -80,7 +87,7 @@
 .dropdown-button {
   background: none;
   border: none;
-  font-size: 1.5rem; /* responsive */
+  font-size: 1.5rem;
   cursor: pointer;
   color: #94a3b8;
 }
@@ -109,10 +116,10 @@
 }
 
 .dropdown-item {
-  padding: 0.5rem 1rem; /* responsive */
+  padding: 0.5rem 1rem;
   background: none;
   border: none;
-  width: 100%; /* responsive */
+  width: 100%;
   text-align: left;
   cursor: pointer;
   color: #e2e8f0;
@@ -124,28 +131,28 @@
 }
 
 .github-icon {
-  width: 24px; /* responsive */
-  height: 24px; /* responsive */
-  margin-top: 0.5rem; /* responsive */
+  width: 24px;
+  height: 24px;
+  margin-top: 0.5rem;
 }
 
 .add-project {
   display: flex;
   justify-content: center;
-  margin-top: 2rem; /* responsive */
+  margin-top: 2rem;
 }
 
 .add-button {
   background-color: #1e293b;
   color: #e2e8f0;
   border: none;
-  padding: 1rem; /* responsive */
+  padding: 1rem;
   border-radius: 50%;
-  font-size: 2rem; /* responsive */
+  font-size: 2rem;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 3rem; /* responsive */
-  height: 3rem; /* responsive */
+  width: 3rem;
+  height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -161,8 +168,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%; /* responsive */
-  height: 100%; /* responsive */
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -172,11 +179,11 @@
 
 .modal-content {
   background-color: #1e293b;
-  padding: 2rem; /* responsive */
+  padding: 2rem; 
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 90%; /* responsive */
-  max-width: 500px; /* responsive */
+  width: 90%; 
+  max-width: 500px; 
   color: #e2e8f0;
 }
 
@@ -187,9 +194,9 @@
 
 .modal-content input,
 .modal-content textarea {
-  width: 100%; /* responsive */
-  padding: 0.5rem; /* responsive */
-  margin-top: 1rem; /* responsive */
+  width: 100%; 
+  padding: 0.5rem; 
+  margin-top: 1rem; 
   border: 1px solid #475569;
   border-radius: 4px;
   background-color: #334155;
@@ -210,15 +217,15 @@
 .modal-buttons {
   display: flex;
   justify-content: center;
-  gap: 1rem; /* responsive */
-  margin-top: 1rem; /* responsive */
+  gap: 1rem; 
+  margin-top: 1rem; 
 }
 
 .modal-button {
   background-color: #475569;
   color: white;
   border: none;
-  padding: 0.5rem 1rem; /* responsive */
+  padding: 0.5rem 1rem; 
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -230,14 +237,20 @@
 
 .error-message {
   color: #f87171;
-  margin-top: 1rem; /* responsive */
+  margin-top: 1rem; 
 }
 
 .project-content {
   display: flex;
-  gap: 1rem; /* responsive */
+  gap: 1rem; 
 }
 
-.project-description {
-  flex: 1; /* responsive */
+@media (min-width: 600px) {
+  .project-card {
+    flex-wrap: nowrap;
+  }
+
+  .project-description {
+    flex: 1;
+  }
 }

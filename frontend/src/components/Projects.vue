@@ -1,13 +1,11 @@
 <template>
   <section class="projects">
-    <h1>{{ t('projects.title') }}</h1>
     <div class="project-dropdown" v-for="project in projects" :key="project.id">
       <button class="project-title" @click="toggleProjectDropdown(project.id)">
         {{ project.title }}
       </button>
       <div v-if="dropdownOpen === project.id" class="project-card">
         <div class="card-header">
-          <h2>{{ project.title }}</h2>
           <div v-if="isAdmin" class="dropdown">
             <button class="dropdown-button" @click="toggleDropdown(project.id)">...</button>
             <div v-if="dropdownOpen === project.id" class="dropdown-menu">
