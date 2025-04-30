@@ -104,14 +104,14 @@
     </div>
 
     <!-- Project Actions Modal -->
-    <div v-if="showActionModal" class="modal">
+    <div v-if="showActionModal && isAdmin" class="modal">
       <div class="modal-content">
-        <h3>{{ currentLocale === 'fr' ? selectedProject?.titleFr : selectedProject?.titleEn }}</h3>
-        <div class="modal-buttons">
-          <button class="modal-button" @click="triggerEdit">{{ t('projects.edit') }}</button>
-          <button class="modal-button" @click="triggerDelete">{{ t('projects.delete') }}</button>
-          <button class="modal-button" @click="closeActionModal">{{ t('projects.cancel') }}</button>
-        </div>
+      <h3>{{ currentLocale === 'fr' ? selectedProject?.titleFr : selectedProject?.titleEn }}</h3>
+      <div class="modal-buttons">
+        <button class="modal-button" @click="triggerEdit">{{ t('projects.edit') }}</button>
+        <button class="modal-button" @click="triggerDelete">{{ t('projects.delete') }}</button>
+        <button class="modal-button" @click="closeActionModal">{{ t('projects.cancel') }}</button>
+      </div>
       </div>
     </div>
   </section>
