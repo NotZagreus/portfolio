@@ -212,7 +212,6 @@ const downloadCV = (path: string) => {
   padding: 0 20px;
 }
 
-
 .language-switcher {
   display: flex;
   gap: 10px;
@@ -229,7 +228,7 @@ const downloadCV = (path: string) => {
   width: 100%;
   padding: 5px 10px;
   border: none;
-  background-color: rgb(83, 96, 108);
+  background-color: #53606c;
   color: #e2e8f0;
   cursor: pointer;
   border-radius: 4px;
@@ -240,7 +239,6 @@ const downloadCV = (path: string) => {
 .language-switcher button:hover {
   background-color: #334155;
 }
-
 
 .auth-language-contact-container {
   display: flex;
@@ -259,21 +257,20 @@ const downloadCV = (path: string) => {
   gap: 10px;
 }
 
-
 .auth-buttons button {
-  --btn-default-bg: #1e293b;
+  --btn-default-bg: #262f3a;
   --btn-padding: 0.65rem 1rem;
-  --btn-hover-bg: #334155;
+  --btn-hover-bg: #d8e9e9;
   --btn-transition: 0.3s;
   --btn-letter-spacing: 0.1rem;
   --btn-animation-duration: 1.2s;
-  --btn-shadow-color: rgba(0, 0, 0, 0.137);
+  --btn-shadow-color: #00000022;
   --btn-shadow: 0 2px 10px 0 var(--btn-shadow-color);
-  --hover-btn-color: #eff1f8;
-  --default-btn-color: #fff;
-  --font-size: 16px;
+  --hover-btn-color: #262f3a;
+  --default-btn-color: #d8e9e9;
+  --font-size: 14px;
   --font-weight: 600;
-  --font-family: Menlo, Roboto Mono, monospace;
+  --font-family: Avenir Next LT Pro Demi;
   box-sizing: border-box;
   padding: var(--btn-padding);
   display: flex;
@@ -302,6 +299,7 @@ const downloadCV = (path: string) => {
 .auth-buttons button:hover,
 .auth-buttons button:focus {
   background-color: var(--btn-hover-bg);
+  color: var(--hover-btn-color);
 }
 
 .auth-buttons button:hover span,
@@ -320,23 +318,24 @@ button {
 }
 
 button:hover {
-  background-color: #334155;
+  background-color: #d8e9e9;
+  color: #262f3a;
 }
 
 .language-switcher button {
-  --btn-default-bg: #1e293b;
+  --btn-default-bg: #262f3a;
   --btn-padding: 0.65rem 1rem;
-  --btn-hover-bg: #334155;
+  --btn-hover-bg: #d8e9e9;
   --btn-transition: 0.3s;
   --btn-letter-spacing: 0.1rem;
   --btn-animation-duration: 1.2s;
-  --btn-shadow-color: rgba(0, 0, 0, 0.137);
+  --btn-shadow-color: #00000022;
   --btn-shadow: 0 2px 10px 0 var(--btn-shadow-color);
-  --hover-btn-color: #eff1f8;
-  --default-btn-color: #fff;
-  --font-size: 16px;
+  --hover-btn-color: #262f3a;
+  --default-btn-color: #d8e9e9;
+  --font-size: 14px;
   --font-weight: 600;
-  --font-family: Menlo, Roboto Mono, monospace;
+  --font-family: Avenir Next LT Pro Demi;
   box-sizing: border-box;
   padding: var(--btn-padding);
   display: flex;
@@ -365,6 +364,7 @@ button:hover {
 .language-switcher button:hover,
 .language-switcher button:focus {
   background-color: var(--btn-hover-bg);
+  color: var(--hover-btn-color);
 }
 
 .card {
@@ -386,24 +386,26 @@ button:hover {
   display: flex;
   height: 1.5rem;
   flex-direction: row;
-  background-color: rgba(30, 41, 59, 0.95);
+  background-color: #262f3a;
   padding: 0.5rem;
   border-radius: 8px;
   z-index: 2;
   animation: slideInLeft 0.3s ease-out;
+  box-shadow: 0 2px 10px 0 #00000022;
 }
 
 .socialContainer {
   flex: 0 0 auto;
   min-width: 3rem;
   min-height: 1.5rem;
-  background-color: hsla(210, 20%, 20%, 1);
+  background-color: #1f2730;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 0.5rem;
   margin: 0 5px;
   transition: transform 0.3s ease;
+  box-shadow: 0 2px 10px 0 #00000011;
 }
 
 .socialContainer:hover {
@@ -411,7 +413,7 @@ button:hover {
 }
 
 .containerTwo:hover {
-  background-color: #333;
+  background-color: #333333;
   transition-duration: 0.3s;
 }
 
@@ -435,7 +437,7 @@ button:hover {
 }
 
 .socialSvg path {
-  fill: rgb(255, 255, 255);
+  fill: #ffffff;
 }
 
 .socialContainer:hover .socialSvg {
@@ -463,12 +465,12 @@ button:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #00000080;
   z-index: 2;
 }
 
 .modal-content {
-  background-color: hsl(212, 19%, 15%);
+  background-color: #1e293b;
   padding: 20px;
   border-radius: 5px;
   width: 80%;
@@ -510,7 +512,7 @@ textarea {
 .cv-button {
   background-color: #3f3f3f;
   border: none;
-  color: white;
+  color: #ffffff;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -528,19 +530,19 @@ textarea {
 
 /* Menu Button */
 .contact-btn {
-  --btn-default-bg: #1e293b;
+  --btn-default-bg: #262f3a;
   --btn-padding: 0.65rem 1rem;
-  --btn-hover-bg: #334155;
+  --btn-hover-bg: #d8e9e9;
   --btn-transition: 0.3s;
   --btn-letter-spacing: 0.1rem;
   --btn-animation-duration: 1.2s;
-  --btn-shadow-color: rgba(0, 0, 0, 0.137);
+  --btn-shadow-color: #00000022;
   --btn-shadow: 0 2px 10px 0 var(--btn-shadow-color);
-  --hover-btn-color: #eff1f8;
-  --default-btn-color: #fff;
-  --font-size: 16px;
+  --hover-btn-color: #262f3a;
+  --default-btn-color: #d8e9e9;
+  --font-size: 14px;
   --font-weight: 600;
-  --font-family: Menlo, Roboto Mono, monospace;
+  --font-family: Avenir Next LT Pro Demi;
   box-sizing: border-box;
   padding: var(--btn-padding);
   display: flex;
@@ -577,8 +579,9 @@ textarea {
   background: inherit;
 }
 
-.contact-btn:hover span,
-.contact-btn:focus span {
+.contact-btn button:hover,
+.contact-btn button:focus {
+  background-color: var(--btn-hover-bg);
   color: var(--hover-btn-color);
 }
 
@@ -669,7 +672,7 @@ textarea {
 
 @media (max-width: 768px) {
   .burger-menu-sidebar {
-    top: calc(5rem + 0px); /* Adjust based on header height */
+    top: calc(5rem + 0px);
     right: 0;
     left: 50%;
     flex-direction: column;
@@ -692,7 +695,4 @@ textarea {
     }
   }
 }
-
 </style>
-
-
