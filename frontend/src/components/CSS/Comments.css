@@ -1,34 +1,34 @@
 .comments {
   text-align: justify;
-  padding-bottom: 10%; /* responsive */
+  padding-bottom: 10%;
 }
 
 .carousel {
   position: relative;
   overflow: hidden;
-  margin: 2rem 0; /* responsive */
+  margin: 2rem 0;
   z-index: 1;
-  padding: 0%; /* responsive */
-  width: 100%; /* responsive */
+  padding: 0%;
+  width: 100%;
 }
 
 .carousel-track {
   display: flex;
   transition: transform 0.5s ease;
-  width: 100%; /* responsive */
+  width: 100%;
   z-index: 1;
 }
 
 .comment-card {
-  flex: 0 0 100%; /* responsive */
+  flex: 0 0 100%;
   background-color: #1a2433;
-  padding: 1rem; /* responsive */
-  border-radius: 8px; /* responsive */
+  padding: 1rem;
+  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   color: #e2e8f0;
   text-align: center;
   position: relative;
-  margin: 0; /* responsive */
+  margin: 0;
   box-sizing: border-box;
   transition:
     transform 0.3s ease,
@@ -37,13 +37,13 @@
 }
 
 .comment-card h2 {
-  font-size: 1rem; /* responsive */
+  font-size: 1rem;
   color: #cbd5e1;
-  margin-top: 1rem; /* responsive */
+  margin-top: 1rem;
 }
 
 .comment-card p {
-  font-size: 0.75rem; /* responsive */
+  font-size: 0.75rem;
   color: #94a3b8;
 }
 
@@ -58,27 +58,27 @@
   transform: translateY(-50%);
   background: none;
   border: none;
-  font-size: 2rem; /* responsive */
+  font-size: 2rem;
   color: #94a3b8;
   cursor: pointer;
   z-index: 1;
 }
 
 .left-arrow {
-  left: 10px; /* responsive */
+  left: 10px;
 }
 
 .right-arrow {
-  right: 10px; /* responsive */
+  right: 10px;
 }
 
 .add-comment-button {
-  margin-top: 0.5rem; /* responsive */
-  padding: 0.5rem 1rem; /* responsive */
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
   background-color: #181e29;
   color: #e2e8f0;
   border: none;
-  border-radius: 4px; /* responsive */
+  border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -91,8 +91,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%; /* responsive */
-  height: 100%; /* responsive */
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -102,11 +102,11 @@
 
 .modal-content {
   background-color: #1e293b;
-  padding: 2rem; /* responsive */
-  border-radius: 8px; /* responsive */
+  padding: 2rem;
+  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 90%; /* responsive */
-  max-width: 500px; /* responsive */
+  width: 90%;
+  max-width: 500px;
   color: #e2e8f0;
 }
 
@@ -117,11 +117,11 @@
 
 .modal-content input,
 .modal-content textarea {
-  width: 100%; /* responsive */
-  padding: 0.5rem; /* responsive */
-  margin-top: 1rem; /* responsive */
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 1rem;
   border: 1px solid #475569;
-  border-radius: 4px; /* responsive */
+  border-radius: 4px;
   background-color: #334155;
   color: #e2e8f0;
 }
@@ -140,53 +140,153 @@
 .modal-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem; /* responsive */
+  margin-top: 1rem;
 }
 
 .delete-icon {
   position: absolute;
-  top: 10px; /* responsive */
-  right: 10px; /* responsive */
+  top: 10px;
+  right: 10px;
   cursor: pointer;
   color: #94a3b8;
-  font-size: 1.2rem; /* responsive */
+  font-size: 1.2rem;
 }
 
 .dropdown {
   position: absolute;
-  top: 10px; /* responsive */
-  right: 10px; /* responsive */
+  top: 10px;
+  right: 10px;
 }
 
 .dropdown-button {
   background: none;
   border: none;
-  font-size: 1.2rem; /* responsive */
+  font-size: 1.2rem;
   cursor: pointer;
   color: #94a3b8;
 }
 
 .dropdown-menu {
   position: absolute;
-  top: 100%; /* responsive */
+  top: 100%;
   right: 0;
   background-color: #334155;
   border: 1px solid #475569;
-  border-radius: 4px; /* responsive */
+  border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
 
 .dropdown-item {
-  padding: 0.5rem 1rem; /* responsive */
+  padding: 0.5rem 1rem;
   cursor: pointer;
   color: #e2e8f0;
   background-color: #334155;
   border: none;
-  width: 100%; /* responsive */
+  width: 100%;
   text-align: left;
 }
 
 .dropdown-item:hover {
+  background-color: #475569;
+}
+
+.view-comments-button {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #1c2a3a;
+  color: #e2e8f0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.view-comments-button:hover {
+  background-color: #334155;
+}
+
+.view-modal {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.filter-controls {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  background-color: #273344;
+  border-radius: 4px;
+}
+
+.filter-controls label {
+  color: #cbd5e1;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.filter-controls input[type='radio'] {
+  margin-right: 0.25rem;
+}
+
+.comment-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.comment-list li {
+  border-bottom: 1px solid #475569;
+  padding: 1rem 0;
+}
+
+.comment-list p {
+  margin: 0.25rem 0;
+  font-size: 0.875rem;
+  color: #e2e8f0;
+}
+
+.comment-list span.approved {
+  color: #38bdf8;
+  font-weight: bold;
+}
+
+.comment-list span.pending {
+  color: #facc15;
+  font-weight: bold;
+}
+
+.modal-buttons.inline {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.modal-buttons.inline button {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-buttons.inline button:first-child {
+  background-color: #0f766e;
+  color: #e2e8f0;
+}
+
+.modal-buttons.inline button:first-child:hover {
+  background-color: #115e59;
+}
+
+.modal-buttons.inline button:last-child {
+  background-color: #334155;
+  color: #e2e8f0;
+}
+
+.modal-buttons.inline button:last-child:hover {
   background-color: #475569;
 }

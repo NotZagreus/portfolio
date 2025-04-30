@@ -53,7 +53,16 @@
     "no": "No",
     "firstNameRequired": "First name is required.",
     "lastNameRequired": "Last name is required.",
-    "commentRequired": "Comment is required."
+    "commentRequired": "Comment is required.",
+    "viewComments": "View All Comments",
+    "manageComments": "Manage Comments",
+    "close": "Close",
+    "all": "All",
+    "approved": "Approved",
+    "pending": "Pending Approval",
+    "addCarousel": "Add to Carousel",
+    "removeCarousel": "Remove from Carousel",
+    "viewAll": "View All Comments"
   },
   "cv": {
     "downloadButton": "Download CV",

@@ -50,12 +50,21 @@
     "commentPlaceholder": "Commentaire",
     "add": "Ajouter",
     "cancel": "Annuler",
-    "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce commentaire?",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce commentaire ?",
     "yes": "Oui",
     "no": "Non",
     "firstNameRequired": "Le prénom est requis.",
     "lastNameRequired": "Le nom de famille est requis.",
-    "commentRequired": "Le commentaire est requis."
+    "commentRequired": "Le commentaire est requis.",
+    "viewComments": "Voir tous les commentaires",
+    "manageComments": "Gérer les commentaires",
+    "close": "Fermer",
+    "all": "Tous",
+    "approved": "Approuvé",
+    "pending": "En attente d'approbation",
+    "addCarousel": "Ajouter au carrousel",
+    "removeCarousel": "Retirer du carrousel",
+    "viewAll": "Voir tous"
   },
   "cv": {
     "downloadButton": "Télécharger le CV",

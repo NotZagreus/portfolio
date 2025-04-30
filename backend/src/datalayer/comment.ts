@@ -5,6 +5,7 @@ export interface IComment extends Document {
   lastName: string;
   comment: string;
   approved: boolean;
+  inCarousel: boolean;
 }
 
 const CommentSchema: Schema = new Schema(
@@ -20,6 +21,7 @@ const CommentSchema: Schema = new Schema(
       },
     },
     approved: { type: Boolean, default: false },
+    inCarousel: { type: Boolean, default: false },
   },
   {
     versionKey: false,
