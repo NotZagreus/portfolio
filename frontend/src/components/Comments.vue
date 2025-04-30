@@ -126,6 +126,7 @@ import axios from 'axios'
 import { useAuth0 } from '@auth0/auth0-vue'
 import { useI18n } from 'vue-i18n'
 import './CSS/Comments.css'
+import { computed } from 'vue'
 
 const { t } = useI18n()
 
@@ -226,7 +227,7 @@ const fetchComments = async () => {
 }
 
 const visibleComments = computed(() => {
-  return isAdmin.value ? comments.value : comments.value.filter((comment) => comment.inCarousel)
+  return comments.value.filter((comment) => comment.inCarousel)
 })
 
 const nextComment = () => {
@@ -361,7 +362,7 @@ onMounted(() => {
     window.removeEventListener('keydown', handleKeydown)
   })
 })
-import { computed } from 'vue'
+
 </script>
 
 <style scoped></style>

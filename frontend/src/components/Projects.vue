@@ -39,53 +39,53 @@
     </div>
 
     <!-- Add Project Modal -->
-<div v-if="showAddModal" class="modal">
-  <div class="modal-content">
-    <h3>{{ t('projects.addNew') }}</h3>
-    <input v-model="newProject.titleEn" :placeholder="t('projects.titlePlaceholderEn')" />
-    <input v-model="newProject.titleFr" :placeholder="t('projects.titlePlaceholderFr')" />
-    <textarea
-      v-model="newProject.descriptionEn"
-      :placeholder="t('projects.descriptionPlaceholderEn')"
-    ></textarea>
-    <textarea
-      v-model="newProject.descriptionFr"
-      :placeholder="t('projects.descriptionPlaceholderFr')"
-    ></textarea>
-    <input
-      v-model="newProject.github_link"
-      :placeholder="t('projects.githubLinkPlaceholder')"
-    />
-    <input type="file" @change="handleFileUpload($event, 'newProject')" />
-    <div class="modal-buttons">
-      <button class="modal-button" @click="addProject">{{ t('projects.add') }}</button>
-      <button class="modal-button" @click="closeAddModal">{{ t('projects.cancel') }}</button>
+    <div v-if="showAddModal" class="modal">
+      <div class="modal-content">
+        <h3>{{ t('projects.addNew') }}</h3>
+        <input v-model="newProject.titleEn" :placeholder="t('projects.titlePlaceholderEn')" />
+        <input v-model="newProject.titleFr" :placeholder="t('projects.titlePlaceholderFr')" />
+        <textarea
+          v-model="newProject.descriptionEn"
+          :placeholder="t('projects.descriptionPlaceholderEn')"
+        ></textarea>
+        <textarea
+          v-model="newProject.descriptionFr"
+          :placeholder="t('projects.descriptionPlaceholderFr')"
+        ></textarea>
+        <input
+          v-model="newProject.github_link"
+          :placeholder="t('projects.githubLinkPlaceholder')"
+        />
+        <input type="file" @change="handleFileUpload($event, 'newProject')" />
+        <div class="modal-buttons">
+          <button class="modal-button" @click="addProject">{{ t('projects.add') }}</button>
+          <button class="modal-button" @click="closeAddModal">{{ t('projects.cancel') }}</button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<!-- Edit Project Modal -->
-<div v-if="showEditModal" class="modal">
-  <div class="modal-content">
-    <h3>{{ t('projects.editProject') }}</h3>
-    <input v-model="editForm.titleEn" :placeholder="t('projects.titlePlaceholderEn')" />
-    <input v-model="editForm.titleFr" :placeholder="t('projects.titlePlaceholderFr')" />
-    <textarea
-      v-model="editForm.descriptionEn"
-      :placeholder="t('projects.descriptionPlaceholderEn')"
-    ></textarea>
-    <textarea
-      v-model="editForm.descriptionFr"
-      :placeholder="t('projects.descriptionPlaceholderFr')"
-    ></textarea>
-    <input v-model="editForm.github_link" :placeholder="t('projects.githubLinkPlaceholder')" />
-    <input type="file" @change="handleFileUpload($event, 'editForm')" />
-    <div class="modal-buttons">
-      <button class="modal-button" @click="saveProject">{{ t('projects.save') }}</button>
-      <button class="modal-button" @click="closeEditModal">{{ t('projects.cancel') }}</button>
+    <!-- Edit Project Modal -->
+    <div v-if="showEditModal" class="modal">
+      <div class="modal-content">
+        <h3>{{ t('projects.editProject') }}</h3>
+        <input v-model="editForm.titleEn" :placeholder="t('projects.titlePlaceholderEn')" />
+        <input v-model="editForm.titleFr" :placeholder="t('projects.titlePlaceholderFr')" />
+        <textarea
+          v-model="editForm.descriptionEn"
+          :placeholder="t('projects.descriptionPlaceholderEn')"
+        ></textarea>
+        <textarea
+          v-model="editForm.descriptionFr"
+          :placeholder="t('projects.descriptionPlaceholderFr')"
+        ></textarea>
+        <input v-model="editForm.github_link" :placeholder="t('projects.githubLinkPlaceholder')" />
+        <input type="file" @change="handleFileUpload($event, 'editForm')" />
+        <div class="modal-buttons">
+          <button class="modal-button" @click="saveProject">{{ t('projects.save') }}</button>
+          <button class="modal-button" @click="closeEditModal">{{ t('projects.cancel') }}</button>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
     <!-- Delete Project Modal -->
     <div v-if="showDeleteModal" class="modal">
@@ -124,8 +124,24 @@ const dropdownOpen = ref<string | null>(null)
 const showEditModal = ref(false)
 const showDeleteModal = ref(false)
 const showAddModal = ref(false)
-const editForm = ref<Project>({ id: '', titleEn: '', descriptionEn: '', titleFr: '', descriptionFr: '', image: '', github_link: '' })
-const newProject = ref<Project>({ id: '', titleEn: '', descriptionEn: '', titleFr: '', descriptionFr: '', image: '', github_link: '' })
+const editForm = ref<Project>({
+  id: '',
+  titleEn: '',
+  descriptionEn: '',
+  titleFr: '',
+  descriptionFr: '',
+  image: '',
+  github_link: '',
+})
+const newProject = ref<Project>({
+  id: '',
+  titleEn: '',
+  descriptionEn: '',
+  titleFr: '',
+  descriptionFr: '',
+  image: '',
+  github_link: '',
+})
 const projectToDelete = ref<string | null>(null)
 const uploadError = ref<string | null>(null)
 const addError = ref<{ title?: string; description?: string }>({})
@@ -276,8 +292,6 @@ const deleteProject = async () => {
   }
 }
 
-
-
 const toggleDropdown = (id: string) => {
   dropdownOpen.value = dropdownOpen.value === id ? null : id
 }
@@ -318,7 +332,15 @@ const closeDeleteModal = () => {
 
 const closeAddModal = () => {
   showAddModal.value = false
-  newProject.value = { id: '', titleEn: '', descriptionEn: '', titleFr: '', descriptionFr: '', image: '', github_link: '' }
+  newProject.value = {
+    id: '',
+    titleEn: '',
+    descriptionEn: '',
+    titleFr: '',
+    descriptionFr: '',
+    image: '',
+    github_link: '',
+  }
   uploadError.value = null
   addError.value = {}
 }
@@ -341,7 +363,7 @@ const handleFileUpload = (event: Event, formType: 'newProject' | 'editForm') => 
 const resizeImage = (img: HTMLImageElement, formType: 'newProject' | 'editForm') => {
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')
-  const targetSize = 300 
+  const targetSize = 300
   canvas.width = targetSize
   canvas.height = targetSize
   ctx?.drawImage(img, 0, 0, targetSize, targetSize)
@@ -362,12 +384,9 @@ const downloadImage = (dataUrl: string) => {
   link.click()
 }
 
-
-
 const currentLocale = computed(() => {
   return locale.value
 })
-
 
 onMounted(fetchProjects)
 
@@ -375,6 +394,5 @@ function customWatch(isAuthenticated: Ref<boolean, boolean>, arg1: (newValue: an
   throw new Error('Function not implemented.')
 }
 </script>
-
 
 <style scoped></style>
