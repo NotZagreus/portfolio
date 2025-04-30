@@ -52,27 +52,29 @@
     </div>
     <div v-if="showModal" class="modal">
       <div class="modal-content">
-        <span class="close" @click="showModal = false">&times;</span>
-        <h1>{{ t('contact.contactMe') }}</h1>
-        <form @submit.prevent="sendEmail">
-          <div>
-            <label for="firstName">{{ t('contact.firstName') }}:</label>
-            <input type="text" id="firstName" v-model="firstName" required />
-          </div>
-          <div>
-            <label for="lastName">{{ t('contact.lastName') }}:</label>
-            <input type="text" id="lastName" v-model="lastName" required />
-          </div>
-          <div>
-            <label for="email">{{ t('contact.email') }}:</label>
-            <input type="email" id="email" v-model="email" required />
-          </div>
-          <div>
-            <label for="message">{{ t('contact.message') }}:</label>
-            <textarea id="message" v-model="message" required></textarea>
-          </div>
-          <button type="submit">{{ t('contact.send') }}</button>
-        </form>
+        <div class="contact-form">
+          <span class="close" @click="showModal = false">&times;</span>
+          <h1>{{ t('contact.contactMe') }}</h1>
+          <form @submit.prevent="sendEmail">
+            <div>
+              <label for="firstName">{{ t('contact.firstName') }}:</label>
+              <input type="text" id="firstName" v-model="firstName" required />
+            </div>
+            <div>
+              <label for="lastName">{{ t('contact.lastName') }}:</label>
+              <input type="text" id="lastName" v-model="lastName" required />
+            </div>
+            <div>
+              <label for="email">{{ t('contact.email') }}:</label>
+              <input type="email" id="email" v-model="email" required />
+            </div>
+            <div>
+              <label for="message">{{ t('contact.message') }}:</label>
+              <textarea id="message" v-model="message" required></textarea>
+            </div>
+            <button type="submit">{{ t('contact.send') }}</button>
+          </form>
+        </div>
       </div>
     </div>
     <div v-if="showCvModal" class="modal">
@@ -698,5 +700,9 @@ textarea {
       opacity: 1;
     }
   }
+}
+
+.contact-form label{
+  text-align: left;
 }
 </style>
