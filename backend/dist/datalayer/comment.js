@@ -46,6 +46,7 @@ const CommentSchema = new mongoose_1.Schema({
         },
     },
     approved: { type: Boolean, default: false },
+    inCarousel: { type: Boolean, default: false },
 }, {
     versionKey: false,
     toJSON: {
