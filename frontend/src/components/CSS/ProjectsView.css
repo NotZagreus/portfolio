@@ -20,7 +20,7 @@
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
-  z-index: 1;
+  z-index: 2;
   margin-top: 0.5rem;
 }
 
@@ -199,6 +199,7 @@
   width: 90%;
   max-width: 500px;
   color: #d8e9e9;
+  z-index: 2;
 }
 
 .modal-content h3 {
