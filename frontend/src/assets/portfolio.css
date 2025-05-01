@@ -203,6 +203,30 @@
   button:hover {
     background-color: C1D3D3;
   }
+
+  .edit-button {
+    background-color: #ffffff00;
+    position: absolute;
+    top: 37vh;
+    resize: both;
+    overflow: auto;
+    z-index: 0;
+    /* opacity: 0; */
+    transition: opacity 0.3s ease;
+  }
+
+  /* .edit-button:hover {
+    opacity: 1;
+  } */
+
+  .edit-button img {
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: contain;
+    padding: 0.25rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    z-index: 0;
+  }
   
   .container {
     display: flex;

@@ -6,11 +6,9 @@
       <div class="info-container">
         <h1>{{ t('portfolio.name') }}</h1>
         <h3>{{ currentLocale === 'fr' ? portfolio.titleFr : portfolio.titleEn }}</h3>
-        <h4>{{ currentLocale === 'fr' ? portfolio.specializationFr : portfolio.specializationEn }}</h4>
-
-        <div v-if="isAdmin" class="edit-portfolio">
-          <button class="edit-button" @click="showEditModal = true">{{ t('portfolio.edit') }}</button>
-        </div>
+        <h4>
+          {{ currentLocale === 'fr' ? portfolio.specializationFr : portfolio.specializationEn }}
+        </h4>
       </div>
 
       <div class="navigation-container">
@@ -33,9 +31,16 @@
     </div>
 
     <div class="right-side">
-      <p>isAdmin: {{ isAdmin }}</p>
       <div id="description" class="section">
         <h3>{{ currentLocale === 'fr' ? portfolio.descriptionFr : portfolio.descriptionEn }}</h3>
+      </div><div v-if="isAdmin" class="edit-portfolio">
+        <button 
+          class="edit-button" 
+          @click="showEditModal = true" 
+          @mouseover="playHoverSound"
+        >
+          <img src="https://res.cloudinary.com/dhtprehby/image/upload/v1746108013/box.png" alt="Edit" />
+        </button>
       </div>
       <div id="projects" class="section">
         <Projects />
@@ -53,10 +58,22 @@
       <h3>{{ t('portfolio.editPortfolio') }}</h3>
       <input v-model="editForm.titleEn" :placeholder="t('portfolio.titlePlaceholderEn')" />
       <input v-model="editForm.titleFr" :placeholder="t('portfolio.titlePlaceholderFr')" />
-      <input v-model="editForm.specializationEn" :placeholder="t('portfolio.specializationPlaceholderEn')" />
-      <input v-model="editForm.specializationFr" :placeholder="t('portfolio.specializationPlaceholderFr')" />
-      <textarea v-model="editForm.descriptionEn" :placeholder="t('portfolio.descriptionPlaceholderEn')"></textarea>
-      <textarea v-model="editForm.descriptionFr" :placeholder="t('portfolio.descriptionPlaceholderFr')"></textarea>
+      <input
+        v-model="editForm.specializationEn"
+        :placeholder="t('portfolio.specializationPlaceholderEn')"
+      />
+      <input
+        v-model="editForm.specializationFr"
+        :placeholder="t('portfolio.specializationPlaceholderFr')"
+      />
+      <textarea
+        v-model="editForm.descriptionEn"
+        :placeholder="t('portfolio.descriptionPlaceholderEn')"
+      ></textarea>
+      <textarea
+        v-model="editForm.descriptionFr"
+        :placeholder="t('portfolio.descriptionPlaceholderFr')"
+      ></textarea>
 
       <div class="modal-buttons">
         <button class="modal-button" @click="savePortfolio">{{ t('portfolio.save') }}</button>
@@ -158,6 +175,11 @@ const closeEditModal = () => {
   showEditModal.value = false
 }
 
+const playHoverSound = () => {
+  const audio = new Audio('path/to/hover-sound.mp3')
+  audio.play()
+}
+
 window.addEventListener('mousemove', (e) => {
   mouse.x = e.clientX
   mouse.y = e.clientY
@@ -174,29 +196,55 @@ onMounted(async () => {
           headers: { Authorization: `Bearer ${token}` },
         })
         isAdmin.value = response.data.sub === import.meta.env.VITE_ADMIN_USER_ID
-        console.log("isAdmin:", isAdmin.value)
+        console.log('isAdmin:', isAdmin.value)
       } catch (err) {
         console.error('Error checking admin status:', err)
       }
     }
   })
 
-
   lineHeight.value = `${window.innerHeight * 0.3}px`
   window.addEventListener('scroll', handleScroll)
   handleScroll()
 
   // Rune Canvas Logic
-  const canvas = document.createElement("canvas")
-  const ctx = canvas.getContext("2d")
-  const enchantRain = document.getElementById("enchant-rain")
+  const canvas = document.createElement('canvas')
+  const ctx = canvas.getContext('2d')
+  const enchantRain = document.getElementById('enchant-rain')
 
   if (!enchantRain || !ctx) return
 
   enchantRain.appendChild(canvas)
-  canvas.classList.add("canvas")
+  canvas.classList.add('canvas')
 
-  const runes = ["ᔑ", "ʖ", "ᓵ", "↸", "ᒷ", "⎓", "⊣", "⍑", "╎", "⋮", "ꖌ", "ꖎ", "ᒲ", "リ", "𝙹", "!¡", "ᑑ", "∷", "ᓭ", "ℸ", "⚍", "⍊", "∴", "̇/", "||", "⨅"]
+  const runes = [
+    'ᔑ',
+    'ʖ',
+    'ᓵ',
+    '↸',
+    'ᒷ',
+    '⎓',
+    '⊣',
+    '⍑',
+    '╎',
+    '⋮',
+    'ꖌ',
+    'ꖎ',
+    'ᒲ',
+    'リ',
+    '𝙹',
+    '!¡',
+    'ᑑ',
+    '∷',
+    'ᓭ',
+    'ℸ',
+    '⚍',
+    '⍊',
+    '∴',
+    '̇/',
+    '||',
+    '⨅',
+  ]
   let fontSize = 18
   let columns: number
   let drops: number[] = []
@@ -211,7 +259,7 @@ onMounted(async () => {
   const draw = () => {
     if (!ctx) return
 
-    ctx.fillStyle = "rgba(232,232,208,0.05)"
+    ctx.fillStyle = 'rgba(232,232,208,0.05)'
     ctx.font = `${fontSize - 8}px monospace`
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
@@ -243,7 +291,7 @@ onMounted(async () => {
 
   setupCanvas()
   draw()
-  window.addEventListener("resize", setupCanvas)
+  window.addEventListener('resize', setupCanvas)
 })
 </script>
 

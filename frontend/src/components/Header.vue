@@ -202,7 +202,7 @@ const downloadCV = (path: string) => {
   height: 5rem;
   top: 0;
   left: 0;
-  z-index: 10;
+  z-index: 1;
 }
 
 .auth-language-container {
