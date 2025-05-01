@@ -207,24 +207,26 @@
   .edit-button {
     background-color: #ffffff00;
     position: absolute;
-    top: 37vh;
+    top: 40%;
+    right: 23%;
+    transform: translate(-50%, -50%);
     resize: both;
     overflow: auto;
     z-index: 0;
-    /* opacity: 0; */
-    transition: opacity 0.3s ease;
+    opacity: 0;
+    transition: opacity 10s ease;
   }
 
-  /* .edit-button:hover {
+  .edit-button:hover {
     opacity: 1;
-  } */
+  }
 
   .edit-button img {
     width: 1.5rem;
     height: 1.5rem;
     object-fit: contain;
     padding: 0.25rem;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 5s, box-shadow 5s;
     z-index: 0;
   }
   

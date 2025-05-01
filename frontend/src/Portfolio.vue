@@ -37,9 +37,10 @@
         <button 
           class="edit-button" 
           @click="showEditModal = true" 
-          @mouseover="playHoverSound"
+          @mouseover="playHoverSound" 
+          @mouseleave="stopHoverSound"
         >
-          <img src="https://res.cloudinary.com/dhtprehby/image/upload/v1746108013/box.png" alt="Edit" />
+          <img src="https://res.cloudinary.com/dhtprehby/image/upload/v1746110042/metal_gear.png" alt="Edit" />
         </button>
       </div>
       <div id="projects" class="section">
@@ -175,9 +176,20 @@ const closeEditModal = () => {
   showEditModal.value = false
 }
 
+const audio = new Audio('https://res.cloudinary.com/dhtprehby/video/upload/v1746110446/lnac20vfgv07soxcmo3n.mp3')
+const hovering = ref(false)
+
 const playHoverSound = () => {
-  const audio = new Audio('path/to/hover-sound.mp3')
-  audio.play()
+  if (!hovering.value) {
+    hovering.value = true
+    audio.play()
+  }
+}
+
+const stopHoverSound = () => {
+  hovering.value = false
+  audio.pause()
+  audio.currentTime = 0
 }
 
 window.addEventListener('mousemove', (e) => {
