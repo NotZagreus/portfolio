@@ -5,10 +5,8 @@
     <div class="left-side">
       <div class="info-container">
         <h1>{{ t('portfolio.name') }}</h1>
-        <h3>{{ currentLocale === 'fr' ? portfolio.titleFr : portfolio.titleEn }}</h3>
-        <h4>
-          {{ currentLocale === 'fr' ? portfolio.specializationFr : portfolio.specializationEn }}
-        </h4>
+        <h3 v-html="currentLocale === 'fr' ? portfolio.titleFr : portfolio.titleEn"> </h3>
+        <h4 v-html="currentLocale === 'fr' ? portfolio.specializationFr : portfolio.specializationEn"></h4>
       </div>
 
       <div class="navigation-container">
@@ -32,7 +30,7 @@
 
     <div class="right-side">
       <div id="description" class="section">
-        <h3>{{ currentLocale === 'fr' ? portfolio.descriptionFr : portfolio.descriptionEn }}</h3>
+        <h3 v-html="currentLocale === 'fr' ? portfolio.descriptionFr : portfolio.descriptionEn"></h3>
       </div><div v-if="isAdmin" class="edit-portfolio">
         <button 
           class="edit-button" 
