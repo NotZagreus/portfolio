@@ -27,7 +27,17 @@
     "projects": "Projets",
     "testimonials": "Témoignages",
     "descriptionText": "Salut, je suis Artem, étudiant en troisième année d’informatique avec des plans de se spécialiser en cybersécurité.<br><br>Mon expérience comme fantassin dans l’armée canadienne a forgé ma discipline, mon adaptabilité et mon esprit d’équipe — des qualités que j’applique à chaque défi technologique. Je m’épanouis dans des environnements dynamiques, en résolvant des problèmes avec logique et précision.<br><br>Parlant couramment l’anglais, le français, l’ukrainien et le russe, je collabore aisément au sein d’équipes multiculturelles. En dehors de la tech, mon travail de photographe indépendant dans le sport et l’automobile a aiguisé mon sens du détail et ma capacité à livrer dans des délais serrés.<br><br>Que ce soit pour coder, diriger ou apprendre, j’apporte concentration, résilience et recherche de solutions intelligentes.",
-    "technologies": "Technologies"
+    "technologies": "Technologies",
+    "edit": "Modifier",
+    "editPortfolio": "Modifier le portfolio",
+    "titlePlaceholderEn": "Entrez le titre en anglais",
+    "titlePlaceholderFr": "Entrez le titre",
+    "specializationPlaceholderEn": "Entrez la spécialisation en anglais",
+    "specializationPlaceholderFr": "Entrez la spécialisation",
+    "descriptionPlaceholderEn": "Entrez la description en anglais",
+    "descriptionPlaceholderFr": "Entrez la description",
+    "save": "Enregistrer",
+    "cancel": "Annuler"
   },
   "contact": {
     "logout": "Déconnection",

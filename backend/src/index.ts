@@ -4,8 +4,10 @@ import cors from "cors";
 import connectDB from "./config/db";
 import projectRoutes from "./presentationlayer/projectRoutes";
 import commentRoutes from "./presentationlayer/commentRoutes";
+import portfolioRoutes from "./presentationlayer/portfolioRoutes";
 import bodyParser from "body-parser";
-import nodemailer, { SentMessageInfo } from "nodemailer"; // Import SentMessageInfo type
+import nodemailer, { SentMessageInfo } from "nodemailer";
+
 
 dotenv.config();// we see
 
@@ -62,6 +64,7 @@ app.get("/health", (req: Request, res: Response) => {
 // Routes
 app.use("/api/projects", projectRoutes);
 app.use("/api/comments", commentRoutes);
+app.use("/api/portfolio", portfolioRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to my Portfolio");

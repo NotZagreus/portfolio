@@ -34,13 +34,13 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
-const ProjectSchema = new mongoose_1.Schema({
+const PortfolioSchema = new mongoose_1.Schema({
     titleEn: { type: String, required: true },
-    descriptionEn: { type: String, required: true },
     titleFr: { type: String, required: true },
+    specializationEn: { type: String, required: true },
+    specializationFr: { type: String, required: true },
+    descriptionEn: { type: String, required: true },
     descriptionFr: { type: String, required: true },
-    image: { type: String },
-    github_link: { type: String },
 }, {
     versionKey: false,
     toJSON: {
@@ -51,4 +51,4 @@ const ProjectSchema = new mongoose_1.Schema({
         },
     },
 });
-exports.default = mongoose_1.default.model("Project", ProjectSchema);
+exports.default = mongoose_1.default.model("Portfolio", PortfolioSchema);

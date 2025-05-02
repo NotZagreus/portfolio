@@ -25,7 +25,17 @@
     "projects": "Projects",
     "testimonials": "Testimonials",
     "descriptionText": "Hi, I'm Artem a third-year Computer Science student with a focus on cybersecurity.<br><br>My background as an Infanteer in the Canadian Army built my discipline, adaptability, and team-first mindset  qualities I now bring to every tech challenge. I thrive in fast-paced environments, solving problems with logic and precision.<br><br>Fluent in English, French, Ukrainian, and Russian, I collaborate seamlessly across teams. Outside of tech, my work as a freelance sports and automotive photographer sharpened my eye for detail and ability to deliver under pressure.<br><br>Whether it’s coding, leading, or learning, I bring focus, resilience, and a drive for smart solutions.",
-    "technologies": "Technologies"
+    "technologies": "Technologies",
+    "edit": "Edit",
+    "editPortfolio": "Edit Portfolio",
+    "titlePlaceholderEn": "Enter title",
+    "titlePlaceholderFr": "Enter title in French",
+    "specializationPlaceholderEn": "Enter specialization",
+    "specializationPlaceholderFr": "Enter specialization in French",
+    "descriptionPlaceholderEn": "Enter description",
+    "descriptionPlaceholderFr": "Enter description in French",
+    "save": "Save",
+    "cancel": "Cancel"
   },
   "contact": {
     "logout": "Logout",

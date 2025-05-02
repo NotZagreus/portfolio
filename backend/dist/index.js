@@ -9,8 +9,9 @@ const cors_1 = __importDefault(require("cors"));
 const db_1 = __importDefault(require("./config/db"));
 const projectRoutes_1 = __importDefault(require("./presentationlayer/projectRoutes"));
 const commentRoutes_1 = __importDefault(require("./presentationlayer/commentRoutes"));
+const portfolioRoutes_1 = __importDefault(require("./presentationlayer/portfolioRoutes"));
 const body_parser_1 = __importDefault(require("body-parser"));
-const nodemailer_1 = __importDefault(require("nodemailer")); // Import SentMessageInfo type
+const nodemailer_1 = __importDefault(require("nodemailer"));
 dotenv_1.default.config(); // we see
 const app = (0, express_1.default)();
 const BACKEND_PORT = process.env.BACKEND_PORT;
@@ -57,6 +58,7 @@ app.get("/health", (req, res) => {
 // Routes
 app.use("/api/projects", projectRoutes_1.default);
 app.use("/api/comments", commentRoutes_1.default);
+app.use("/api/portfolio", portfolioRoutes_1.default);
 app.get("/", (req, res) => {
     res.send("Welcome to my Portfolio");
 });
