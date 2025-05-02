@@ -10,6 +10,7 @@ const db_1 = __importDefault(require("./config/db"));
 const projectRoutes_1 = __importDefault(require("./presentationlayer/projectRoutes"));
 const commentRoutes_1 = __importDefault(require("./presentationlayer/commentRoutes"));
 const portfolioRoutes_1 = __importDefault(require("./presentationlayer/portfolioRoutes"));
+const technologyRoutes_1 = __importDefault(require("./presentationlayer/technologyRoutes"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const nodemailer_1 = __importDefault(require("nodemailer"));
 dotenv_1.default.config(); // we see
@@ -59,6 +60,7 @@ app.get("/health", (req, res) => {
 app.use("/api/projects", projectRoutes_1.default);
 app.use("/api/comments", commentRoutes_1.default);
 app.use("/api/portfolio", portfolioRoutes_1.default);
+app.use("/api/technologies", technologyRoutes_1.default);
 app.get("/", (req, res) => {
     res.send("Welcome to my Portfolio");
 });

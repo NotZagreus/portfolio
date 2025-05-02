@@ -12,47 +12,47 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const portfolioRepository_1 = __importDefault(require("../datalayer/portfolioRepository"));
-class PortfolioService {
-    static getPortfolios() {
+const technologyRepository_1 = __importDefault(require("../datalayer/technologyRepository"));
+class TechnologyService {
+    static getTechnologies() {
         return __awaiter(this, void 0, void 0, function* () {
-            return portfolioRepository_1.default.getAllPortfolios();
+            return technologyRepository_1.default.getAllTechnologies();
         });
     }
-    static getPortfolioById(id) {
+    static getTechnologyById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const portfolio = yield portfolioRepository_1.default.getPortfolioById(id);
-            if (!portfolio) {
-                throw new Error("Portfolio not found");
+            const technology = yield technologyRepository_1.default.getTechnologyById(id);
+            if (!technology) {
+                throw new Error("Technology not found");
             }
-            return portfolio;
+            return technology;
         });
     }
-    static createPortfolio(data) {
+    static createTechnology(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (!data.titleEn || !data.titleFr) {
-                throw new Error("Title in English and French are required");
+            if (!data.name || !data.image) {
+                throw new Error("Title and description are required");
             }
-            return portfolioRepository_1.default.addPortfolio(data);
+            return technologyRepository_1.default.addTechnology(data);
         });
     }
-    static updatePortfolio(id, data) {
+    static updateTechnology(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
-            const portfolio = yield portfolioRepository_1.default.updatePortfolio(id, data);
-            if (!portfolio) {
-                throw new Error("Portfolio not found");
+            const technology = yield technologyRepository_1.default.updateTechnology(id, data);
+            if (!technology) {
+                throw new Error("Technology not found");
             }
-            return portfolio;
+            return technology;
         });
     }
-    static deletePortfolio(id) {
+    static deleteTechnology(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const portfolio = yield portfolioRepository_1.default.deletePortfolio(id);
-            if (!portfolio) {
-                throw new Error("Portfolio not found");
+            const technology = yield technologyRepository_1.default.deleteTechnology(id);
+            if (!technology) {
+                throw new Error("Technology not found");
             }
-            return portfolio;
+            return technology;
         });
     }
 }
-exports.default = PortfolioService;
+exports.default = TechnologyService;
