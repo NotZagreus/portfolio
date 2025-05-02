@@ -5,8 +5,12 @@
     <div class="left-side">
       <div class="info-container">
         <h1>{{ t('portfolio.name') }}</h1>
-        <h3 v-html="currentLocale === 'fr' ? portfolio.titleFr : portfolio.titleEn"> </h3>
-        <h4 v-html="currentLocale === 'fr' ? portfolio.specializationFr : portfolio.specializationEn"></h4>
+        <h3 @click="openModal('title')">
+          {{ currentLocale === 'fr' ? portfolio.titleFr : portfolio.titleEn }}
+        </h3>
+        <h4 @click="openModal('specialization')">
+          {{ currentLocale === 'fr' ? portfolio.specializationFr : portfolio.specializationEn }}
+        </h4>
       </div>
 
       <div class="navigation-container">
@@ -30,16 +34,10 @@
 
     <div class="right-side">
       <div id="description" class="section">
-        <h3 v-html="currentLocale === 'fr' ? portfolio.descriptionFr : portfolio.descriptionEn"></h3>
-      </div><div v-if="isAdmin" class="edit-portfolio">
-        <button 
-          class="edit-button" 
-          @click="showEditModal = true" 
-          @mouseover="playHoverSound" 
-          @mouseleave="stopHoverSound"
-        >
-          <img src="https://res.cloudinary.com/dhtprehby/image/upload/v1746110042/metal_gear.png" alt="Edit" />
-        </button>
+        <h3
+          @click="openModal('description')"
+          v-html="currentLocale === 'fr' ? portfolio.descriptionFr : portfolio.descriptionEn"
+        ></h3>
       </div>
       <div id="projects" class="section">
         <Projects />
@@ -52,31 +50,45 @@
   </div>
 
   <!-- Edit Modal -->
-  <div v-if="showEditModal" class="modal">
+  <div v-if="showModal" class="modal">
     <div class="modal-content">
-      <h3>{{ t('portfolio.editPortfolio') }}</h3>
-      <input v-model="editForm.titleEn" :placeholder="t('portfolio.titlePlaceholderEn')" />
-      <input v-model="editForm.titleFr" :placeholder="t('portfolio.titlePlaceholderFr')" />
+      <h3>{{ modalTitle }}</h3>
+      <input
+        v-model="editForm.titleEn"
+        v-if="editingField === 'title'"
+        placeholder="Enter title in English"
+      />
+      <input
+        v-model="editForm.titleFr"
+        v-if="editingField === 'title'"
+        placeholder="Enter title in French"
+      />
+
       <input
         v-model="editForm.specializationEn"
-        :placeholder="t('portfolio.specializationPlaceholderEn')"
+        v-if="editingField === 'specialization'"
+        placeholder="Enter specialization in English"
       />
       <input
         v-model="editForm.specializationFr"
-        :placeholder="t('portfolio.specializationPlaceholderFr')"
+        v-if="editingField === 'specialization'"
+        placeholder="Enter specialization in French"
       />
+
       <textarea
         v-model="editForm.descriptionEn"
-        :placeholder="t('portfolio.descriptionPlaceholderEn')"
+        v-if="editingField === 'description'"
+        placeholder="Enter description in English"
       ></textarea>
       <textarea
         v-model="editForm.descriptionFr"
-        :placeholder="t('portfolio.descriptionPlaceholderFr')"
+        v-if="editingField === 'description'"
+        placeholder="Enter description in French"
       ></textarea>
 
       <div class="modal-buttons">
-        <button class="modal-button" @click="savePortfolio">{{ t('portfolio.save') }}</button>
-        <button class="modal-button" @click="closeEditModal">{{ t('portfolio.cancel') }}</button>
+        <button class="modal-button" @click="saveField">{{ t('portfolio.save') }}</button>
+        <button class="modal-button" @click="closeModal">{{ t('portfolio.cancel') }}</button>
       </div>
     </div>
   </div>
@@ -97,7 +109,9 @@ const { t, locale } = useI18n()
 const { isAuthenticated, getAccessTokenSilently } = useAuth0()
 
 const isAdmin = ref(false)
-const showEditModal = ref(false)
+const showModal = ref(false)
+const editingField = ref<string | null>(null)
+const modalTitle = ref('')
 
 const portfolio = ref({
   id: '',
@@ -153,7 +167,24 @@ const fetchPortfolio = async () => {
   }
 }
 
-const savePortfolio = async () => {
+const openModal = (field: string) => {
+  if (!isAdmin.value) return
+  editingField.value = field
+  modalTitle.value =
+    field === 'title'
+      ? 'Edit Title'
+      : field === 'specialization'
+        ? 'Edit Specialization'
+        : 'Edit Description'
+  showModal.value = true
+}
+
+const closeModal = () => {
+  showModal.value = false
+  editingField.value = null
+}
+
+const saveField = async () => {
   try {
     const token = await getAccessTokenSilently()
     await axios.put(
@@ -164,17 +195,15 @@ const savePortfolio = async () => {
       },
     )
     portfolio.value = { ...editForm.value }
-    closeEditModal()
+    closeModal()
   } catch (err) {
     console.error('Failed to save:', err)
   }
 }
 
-const closeEditModal = () => {
-  showEditModal.value = false
-}
-
-const audio = new Audio('https://res.cloudinary.com/dhtprehby/video/upload/v1746110446/lnac20vfgv07soxcmo3n.mp3')
+const audio = new Audio(
+  'https://res.cloudinary.com/dhtprehby/video/upload/v1746110446/lnac20vfgv07soxcmo3n.mp3',
+)
 const hovering = ref(false)
 
 const playHoverSound = () => {
@@ -323,4 +352,48 @@ onMounted(async () => {
   top: 0;
   left: 0;
 }
+
+/* .modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.modal-content {
+  background-color: #262f3a;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 500px;
+  color: #d8e9e9;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.modal-button {
+  background-color: #2f3b4c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-button:hover {
+  background-color: #64748b;
+} */
 </style>
