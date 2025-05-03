@@ -35,7 +35,14 @@
     "descriptionPlaceholderEn": "Enter description",
     "descriptionPlaceholderFr": "Enter description in French",
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "addTechnology": "Add Technology",
+    "technologyNamePlaceholder": "Enter Technology name",
+    "imageUrlPlaceholder": "Enter Image URL",
+    "confirmDeleteTechnology": "Delete Technology",
+    "confirmDeleteText": "Are you sure you want to delete \"{name}\"?",
+    "yes": "Yes",
+    "no": "No"
   },
   "contact": {
     "logout": "Logout",

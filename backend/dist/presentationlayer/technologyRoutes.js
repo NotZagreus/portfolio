@@ -13,13 +13,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const portfolioService_1 = __importDefault(require("../businesslayer/portfolioService"));
+const multer_1 = __importDefault(require("multer"));
+const technologyService_1 = __importDefault(require("../businesslayer/technologyService"));
 const auth_1 = require("../middleware/auth");
 const router = express_1.default.Router();
-router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const upload = (0, multer_1.default)({
+    storage: multer_1.default.memoryStorage(),
+    limits: { fileSize: 10 * 1024 * 1024, fieldSize: 25 * 1024 * 1024 },
+});
+router.get("/", (_, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const portfolios = yield portfolioService_1.default.getPortfolios();
-        res.json(portfolios);
+        const technologies = yield technologyService_1.default.getTechnologies();
+        res.json(technologies);
     }
     catch (error) {
         res.status(500).json({ message: error.message });
@@ -27,26 +32,34 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 router.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const portfolio = yield portfolioService_1.default.getPortfolioById(req.params.id);
-        res.json(portfolio);
+        const technology = yield technologyService_1.default.getTechnologyById(req.params.id);
+        res.json(technology);
     }
     catch (error) {
         res.status(404).json({ message: error.message });
     }
 }));
-router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post("/", auth_1.checkJwt, (0, auth_1.checkPermissions)(), upload.single("image"), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const portfolio = yield portfolioService_1.default.createPortfolio(req.body);
-        res.status(201).json(portfolio);
+        const technologyData = req.body;
+        if (req.file) {
+            technologyData.image = req.file.buffer.toString("base64");
+        }
+        const technology = yield technologyService_1.default.createTechnology(technologyData);
+        res.status(201).json(technology);
     }
     catch (error) {
         res.status(400).json({ message: error.message });
     }
 }));
-router.put("/:id", auth_1.checkJwt, (0, auth_1.checkPermissions)(), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.put("/:id", auth_1.checkJwt, (0, auth_1.checkPermissions)(), upload.single("image"), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const portfolio = yield portfolioService_1.default.updatePortfolio(req.params.id, req.body);
-        res.json(portfolio);
+        const technologyData = req.body;
+        if (req.file) {
+            technologyData.image = req.file.buffer.toString("base64");
+        }
+        const technology = yield technologyService_1.default.updateTechnology(req.params.id, technologyData);
+        res.json(technology);
     }
     catch (error) {
         res.status(404).json({ message: error.message });
@@ -54,8 +67,8 @@ router.put("/:id", auth_1.checkJwt, (0, auth_1.checkPermissions)(), (req, res) =
 }));
 router.delete("/:id", auth_1.checkJwt, (0, auth_1.checkPermissions)(), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const portfolio = yield portfolioService_1.default.deletePortfolio(req.params.id);
-        res.json(portfolio);
+        const technology = yield technologyService_1.default.deleteTechnology(req.params.id);
+        res.json(technology);
     }
     catch (error) {
         res.status(404).json({ message: error.message });

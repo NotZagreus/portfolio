@@ -37,13 +37,13 @@
 }
 
 .comment-card h2 {
-  font-size: 1rem;
+  font-size: 1.25rem;
   color: #cbd5e1;
   margin-top: 1rem;
 }
 
 .comment-card p {
-  font-size: 0.75rem;
+  font-size: 1rem;
   color: #94a3b8;
 }
 
