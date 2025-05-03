@@ -8,6 +8,7 @@
         class="technology"
         @mouseover="hoveredTech = tech.name"
         @mouseleave="hoveredTech = null"
+        @click="isAdmin ? openDeleteModal(tech) : null"
       >
         <img :src="tech.image" :alt="tech.name" />
         <span v-if="hoveredTech === tech.name" class="tooltip">{{ tech.name }}</span>
@@ -32,6 +33,17 @@
         </div>
       </div>
     </div>
+    <!-- Delete Technology Modal -->
+    <div v-if="showDeleteModal" class="modal">
+      <div class="modal-content">
+        <h3>{{ t('portfolio.confirmDeleteTechnology') }}</h3>
+        <p>{{ t('portfolio.confirmDeleteText', { name: technologyToDelete?.name }) }}</p>
+        <div class="modal-buttons">
+          <button class="modal-button" @click="deleteTechnology">{{ t('portfolio.yes') }}</button>
+          <button class="modal-button" @click="closeDeleteModal">{{ t('portfolio.no') }}</button>
+        </div>
+      </div>
+    </div>
   </footer>
 </template>
 
@@ -44,7 +56,7 @@ import axios from 'axios'
 const { t } = useI18n()
 const { getAccessTokenSilently, isAuthenticated } = useAuth0()
 
-const technologies = ref<{ name: string; image: string }[]>([])
+const technologies = ref<{ id: string; name: string; image: string }[]>([])
 const showFooter = ref(false)
 const footerHeight = ref(0)
 const footer = ref<HTMLElement | null>(null)
@@ -110,6 +122,39 @@ const closeAddModal = () => {
   newTechnology.value = { name: '', image: '' }
 }
 
+const showDeleteModal = ref(false)
+const technologyToDelete = ref<{ id: string; name: string; image: string } | null>(null)
+
+
+const openDeleteModal = (tech: { id: string; name: string; image: string }) => {
+  technologyToDelete.value = tech
+  showDeleteModal.value = true
+}
+
+const closeDeleteModal = () => {
+  showDeleteModal.value = false
+  technologyToDelete.value = null
+}
+
+const deleteTechnology = async () => {
+  if (!technologyToDelete.value) return
+
+  try {
+    const token = await getAccessTokenSilently()
+    await axios.delete(`${import.meta.env.VITE_API_URL}/api/technologies/${technologyToDelete.value.id}`, {
+  headers: { Authorization: `Bearer ${token}` },
+})
+
+
+    technologies.value = technologies.value.filter(
+      (tech) => tech.name !== technologyToDelete.value?.name,
+    )
+    closeDeleteModal()
+  } catch (error) {
+    console.error('Error deleting technology:', error)
+  }
+}
+
 const handleScroll = () => {
   const scrollPosition = window.scrollY
   const totalHeight = Math.ceil(document.documentElement.scrollHeight)
@@ -127,7 +172,6 @@ onMounted(async () => {
   footerHeight.value = footer.value?.offsetHeight || 0
   handleScroll()
 })
-
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
