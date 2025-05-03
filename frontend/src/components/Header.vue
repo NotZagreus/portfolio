@@ -93,9 +93,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, nextTick, computed } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick, computed, watch } from 'vue'
 import { useAuth0 } from '@auth0/auth0-vue'
 import { useI18n } from 'vue-i18n'
+import Cookies from 'js-cookie' //if the deployment is cooked its this
 import cvEn from '@/assets/Resume EN - Artem Kozlov.pdf'
 import cvFr from '@/assets/Resume FR - Artem Kozlov.pdf'
 
@@ -123,6 +124,7 @@ const currentLanguage = computed(() => (locale.value === 'en' ? 'En' : 'Fr'))
 
 const switchLanguage = () => {
   locale.value = locale.value === 'en' ? 'fr' : 'en'
+  Cookies.set('language', locale.value) // Save language to cookies
 }
 
 const accessToken = ref('')
@@ -139,9 +141,21 @@ const email = ref('')
 const message = ref('')
 
 onMounted(async () => {
-  if (isAuthenticated.value) {
-    accessToken.value = await getAccessTokenSilently()
+  // Retrieve language from cookies
+  const savedLanguage = Cookies.get('language')
+  if (savedLanguage) {
+    locale.value = savedLanguage
   }
+
+  // Retrieve authentication token from cookies
+  const savedAccessToken = Cookies.get('accessToken')
+  if (savedAccessToken) {
+    accessToken.value = savedAccessToken
+  } else if (isAuthenticated.value) {
+    accessToken.value = await getAccessTokenSilently()
+    Cookies.set('accessToken', accessToken.value) // Save token to cookies
+  }
+
   window.addEventListener('scroll', handleScroll)
   await nextTick()
   headerHeight.value = header.value?.offsetHeight || 0
@@ -191,6 +205,7 @@ const downloadCV = (path: string) => {
   window.open(path, '_blank')
 }
 </script>
+
 
 <style scoped>
 .header {
