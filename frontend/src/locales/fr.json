@@ -37,7 +37,10 @@
     "descriptionPlaceholderEn": "Entrez la description en anglais",
     "descriptionPlaceholderFr": "Entrez la description",
     "save": "Enregistrer",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "addTechnology": "Ajouter une technologie",
+    "technologyNamePlaceholder": "Entrez le nom de la technologie",
+    "imageUrlPlaceholder": "Entrez l'URL de l'image"
   },
   "contact": {
     "logout": "Déconnection",
