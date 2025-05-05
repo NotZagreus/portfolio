@@ -52,12 +52,12 @@
 }
 
 .project-image {
-  width: 200px;
+  width: 15vw;
   height: auto;
-  border-radius: 4px;
-  border: 2px solid #232836;
-  object-fit: cover;
+  border-radius: 5px;
+  object-fit: scale-down;
   flex-shrink: 0;
+  margin-left: 1rem;
 }
 
 .project-dropdown {
