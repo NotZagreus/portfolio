@@ -26,7 +26,7 @@
               </a>
             </li>
           </ul>
-          <div class="line" :style="{ height: lineHeight }"></div>
+          <div class="line"></div>
           <div class="dot" :style="dotStyle"></div>
         </nav>
       </div>
@@ -129,7 +129,6 @@ const currentLocale = computed(() => locale.value)
 const sections = ref(['description', 'projects', 'testimonials'])
 const activeSection = ref('')
 const dotStyle = ref({ top: '0px' })
-const lineHeight = ref('100vh')
 const mouse = { x: -1000, y: -1000 }
 
 const scrollToSection = (section: string) => {
@@ -242,11 +241,9 @@ onMounted(async () => {
     }
   })
 
-  lineHeight.value = `${window.innerHeight * 0.3}px`
   window.addEventListener('scroll', handleScroll)
   handleScroll()
 
-  // Rune Canvas Logic
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')
   const enchantRain = document.getElementById('enchant-rain')
@@ -284,6 +281,7 @@ onMounted(async () => {
     '||',
     '⨅',
   ]
+
   let fontSize = 18
   let columns: number
   let drops: number[] = []
