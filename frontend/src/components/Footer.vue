@@ -8,7 +8,7 @@
         class="technology"
         @mouseover="hoveredTech = tech.name"
         @mouseleave="hoveredTech = null"
-        @click="isAdmin ? openDeleteModal(tech) : null"
+        @click="isAdmin ? openActionModal(tech) : null"
       >
         <img :src="tech.image" :alt="tech.name" />
         <span v-if="hoveredTech === tech.name" class="tooltip">{{ tech.name }}</span>
@@ -33,14 +33,39 @@
         </div>
       </div>
     </div>
-    <!-- Delete Technology Modal -->
-    <div v-if="showDeleteModal" class="modal">
+
+    <!-- Action Modal -->
+    <div v-if="showActionModal" class="modal">
       <div class="modal-content">
-        <h3>{{ t('portfolio.confirmDeleteTechnology') }}</h3>
-        <p>{{ t('portfolio.confirmDeleteText', { name: technologyToDelete?.name }) }}</p>
+        <h3>{{ selectedTechnology?.name }}</h3>
         <div class="modal-buttons">
-          <button class="modal-button" @click="deleteTechnology">{{ t('portfolio.yes') }}</button>
-          <button class="modal-button" @click="closeDeleteModal">{{ t('portfolio.no') }}</button>
+          <button class="modal-button" @click="triggerEdit">{{ t('portfolio.edit') }}</button>
+          <button class="modal-button" @click="triggerDelete">{{ t('portfolio.delete') }}</button>
+          <button class="modal-button" @click="closeActionModal">{{ t('portfolio.cancel') }}</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Technology Modal -->
+    <div v-if="showEditModal" class="modal">
+      <div class="modal-content">
+        <h3>{{ t('portfolio.editTechnology') }}</h3>
+        <input v-model="editForm.name" :placeholder="t('portfolio.technologyNamePlaceholder')" />
+        <input v-model="editForm.image" :placeholder="t('portfolio.imageUrlPlaceholder')" />
+        <div class="modal-buttons">
+          <button class="modal-button" @click="updateTechnology">{{ t('portfolio.save') }}</button>
+          <button class="modal-button" @click="closeEditModal">{{ t('portfolio.cancel') }}</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div v-if="showDeleteConfirmModal" class="modal">
+      <div class="modal-content">
+        <h3>{{ t('portfolio.confirmDeleteText', { name: selectedTechnology?.name }) }}</h3>
+        <div class="modal-buttons">
+          <button class="modal-button" @click="confirmDelete">{{ t('portfolio.yes') }}</button>
+          <button class="modal-button" @click="closeDeleteConfirmModal">{{ t('portfolio.no') }}</button>
         </div>
       </div>
     </div>
@@ -48,7 +73,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue'
+import { onMounted, onUnmounted, nextTick, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useAuth0 } from '@auth0/auth0-vue'
 import axios from 'axios'
@@ -62,21 +87,12 @@ const footerHeight = ref(0)
 const footer = ref<HTMLElement | null>(null)
 const hoveredTech = ref<string | null>(null)
 const showAddModal = ref(false)
+const showEditModal = ref(false)
+const showActionModal = ref(false)
 const newTechnology = ref<{ name: string; image: string }>({ name: '', image: '' })
+const editForm = ref<{ id: string; name: string; image: string }>({ id: '', name: '', image: '' })
+const selectedTechnology = ref<{ id: string; name: string; image: string } | null>(null)
 const isAdmin = ref(false)
-
-watch(isAuthenticated, () => {
-  fetchUserInfo()
-})
-
-const fetchTechnologies = async () => {
-  try {
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/technologies`)
-    technologies.value = response.data
-  } catch (error) {
-    console.error('Failed to fetch technologies:', error)
-  }
-}
 
 const fetchUserInfo = async () => {
   if (isAuthenticated.value) {
@@ -89,6 +105,20 @@ const fetchUserInfo = async () => {
     } catch (error) {
       console.error('Error fetching user info:', error)
     }
+  }
+}
+
+watch(isAuthenticated, () => {
+  fetchUserInfo()
+})
+
+
+const fetchTechnologies = async () => {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/technologies`)
+    technologies.value = response.data
+  } catch (error) {
+    console.error('Failed to fetch technologies:', error)
   }
 }
 
@@ -117,43 +147,98 @@ const addTechnology = async () => {
   }
 }
 
+const updateTechnology = async () => {
+  if (!editForm.value.name || !editForm.value.image) {
+    alert(t('portfolio.fillAllFields'))
+    return
+  }
+
+  try {
+    const token = await getAccessTokenSilently()
+    const response = await axios.put(
+      `${import.meta.env.VITE_API_URL}/api/technologies/${editForm.value.id}`,
+      editForm.value,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    )
+
+    const index = technologies.value.findIndex((tech) => tech.id === editForm.value.id)
+    if (index !== -1) {
+      technologies.value[index] = response.data
+    }
+    closeEditModal()
+  } catch (error) {
+    console.error('Failed to update technology:', error)
+  }
+}
+
+const deleteTechnology = async () => {
+  if (!selectedTechnology.value) return
+
+  try {
+    const token = await getAccessTokenSilently()
+    await axios.delete(`${import.meta.env.VITE_API_URL}/api/technologies/${selectedTechnology.value.id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+
+    technologies.value = technologies.value.filter(
+      (tech) => tech.id !== selectedTechnology.value?.id,
+    )
+    closeActionModal()
+  } catch (error) {
+    console.error('Error deleting technology:', error)
+  }
+}
+
+const showDeleteConfirmModal = ref(false)
+
+const triggerDelete = () => {
+  if (selectedTechnology.value) {
+    showDeleteConfirmModal.value = true
+  }
+}
+
+const confirmDelete = async () => {
+  if (selectedTechnology.value) {
+    await deleteTechnology()
+    closeDeleteConfirmModal()
+  }
+}
+
+const closeDeleteConfirmModal = () => {
+  showDeleteConfirmModal.value = false
+}
+
+const openActionModal = (tech: { id: string; name: string; image: string }) => {
+  selectedTechnology.value = tech
+  showActionModal.value = true
+}
+
+const closeActionModal = () => {
+  selectedTechnology.value = null
+  showActionModal.value = false
+}
+
+const triggerEdit = () => {
+  if (selectedTechnology.value) {
+    editForm.value = { ...selectedTechnology.value }
+    showEditModal.value = true
+    closeActionModal()
+  }
+}
+
 const closeAddModal = () => {
   showAddModal.value = false
   newTechnology.value = { name: '', image: '' }
 }
 
-const showDeleteModal = ref(false)
-const technologyToDelete = ref<{ id: string; name: string; image: string } | null>(null)
-
-
-const openDeleteModal = (tech: { id: string; name: string; image: string }) => {
-  technologyToDelete.value = tech
-  showDeleteModal.value = true
+const closeEditModal = () => {
+  showEditModal.value = false
 }
 
-const closeDeleteModal = () => {
-  showDeleteModal.value = false
-  technologyToDelete.value = null
-}
-
-const deleteTechnology = async () => {
-  if (!technologyToDelete.value) return
-
-  try {
-    const token = await getAccessTokenSilently()
-    await axios.delete(`${import.meta.env.VITE_API_URL}/api/technologies/${technologyToDelete.value.id}`, {
-  headers: { Authorization: `Bearer ${token}` },
-})
-
-
-    technologies.value = technologies.value.filter(
-      (tech) => tech.name !== technologyToDelete.value?.name,
-    )
-    closeDeleteModal()
-  } catch (error) {
-    console.error('Error deleting technology:', error)
-  }
-}
 
 const handleScroll = () => {
   const scrollPosition = window.scrollY
@@ -176,6 +261,5 @@ onMounted(async () => {
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
 })
-</script>
 
-<style scoped></style>
+</script>

@@ -96,7 +96,7 @@
 import { ref, onMounted, onUnmounted, nextTick, computed, watch } from 'vue'
 import { useAuth0 } from '@auth0/auth0-vue'
 import { useI18n } from 'vue-i18n'
-import Cookies from 'js-cookie' //if the deployment is cooked its this
+import Cookies from 'js-cookie'
 import cvEn from '@/assets/Resume EN - Artem Kozlov.pdf'
 import cvFr from '@/assets/Resume FR - Artem Kozlov.pdf'
 
