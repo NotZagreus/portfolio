@@ -142,24 +142,8 @@ const accessToken = ref('')
 const showModal = ref(false)
 const showCvModal = ref(false)
 const selectedLanguage = ref<keyof typeof cvFiles | ''>('')
-  const cvFiles = ref<{ en: string; fr: string } | null>(null)
+const cvFiles = ref<{ en: string; fr: string } | null>(null)
 
-// const fetchCVs = async () => {
-//   try {
-//     const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/cv`);
-//     if (response.data.length > 0) {
-//       const cvData = response.data[0];
-//       cvFiles.value = {
-//         en: `${import.meta.env.VITE_API_URL}/api/cv/681accc37a007e66b2579b68`,
-//         fr: `${import.meta.env.VITE_API_URL}/api/cv/`,  
-//       };
-//     } else {
-//       console.warn('No CV data found.');
-//     }
-//   } catch (error) {
-//     console.error('Failed to fetch CVs:', error);
-//   }
-// }
 const fetchCVs = async () => {
   try {
     const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/cv`)
@@ -175,17 +159,6 @@ const fetchCVs = async () => {
   }
 }
 
-// const downloadSelectedCV = () => {
-//   if (selectedLanguage.value && cvFiles.value) {
-//     const path = cvFiles.value && selectedLanguage.value ? cvFiles.value[selectedLanguage.value as keyof typeof cvFiles.value] : null
-//     if (path) {
-//       window.open(path, '_blank')
-//       showCvModal.value = false
-//     } else {
-//       alert(t('cv.selectValidLanguage'))
-//     }
-//   }
-// }
 const downloadSelectedCV = async () => {
   if (selectedLanguage.value && cvFiles.value) {
     const path = cvFiles.value ? cvFiles.value[selectedLanguage.value as keyof typeof cvFiles.value] : null
