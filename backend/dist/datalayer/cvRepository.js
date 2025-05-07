@@ -19,6 +19,11 @@ class CVRepository {
             return cv_1.default.find();
         });
     }
+    static getCVById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return cv_1.default.findById(id);
+        });
+    }
     static updateCV(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
             return cv_1.default.findByIdAndUpdate(id, data, { new: true });

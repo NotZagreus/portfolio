@@ -35,7 +35,8 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
 const cvSchema = new mongoose_1.Schema({
-    pdfFile: { type: Buffer, required: true },
+    pdfFileEn: { type: Buffer, required: true },
+    pdfFileFr: { type: Buffer, required: true },
     createdAt: { type: Date, default: Date.now },
 });
 exports.default = mongoose_1.default.model("CV", cvSchema);

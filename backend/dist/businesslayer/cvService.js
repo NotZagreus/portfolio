@@ -19,6 +19,11 @@ class CVService {
             return cvRepository_1.default.getAllCVs();
         });
     }
+    static getCVById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return cvRepository_1.default.getCVById(id);
+        });
+    }
     static updateCV(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
             const CV = yield cvRepository_1.default.updateCV(id, data);

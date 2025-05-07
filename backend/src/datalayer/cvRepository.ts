@@ -5,7 +5,11 @@ export default class CVRepository {
     return CV.find();
   }
 
+  static async getCVById(id: string): Promise<ICV | null> {
+    return CV.findById(id);
+  }
+
   static async updateCV(id: string, data: Partial<ICV>): Promise<ICV | null> {
     return CV.findByIdAndUpdate(id, data, { new: true });
   }
-}
+} 

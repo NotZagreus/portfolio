@@ -6,6 +6,10 @@ export default class CVService {
     return CVRepository.getAllCVs();
   }
 
+  static async getCVById(id: string): Promise<ICV | null> {
+    return CVRepository.getCVById(id);
+  }
+
   static async updateCV(id: string, data: Partial<ICV>): Promise<ICV | null> {
     const CV = await CVRepository.updateCV(id, data);
     if (!CV) {

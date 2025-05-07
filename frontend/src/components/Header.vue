@@ -77,7 +77,7 @@
         </div>
       </div>
     </div>
-    <div v-if="showCvModal" class="modal">
+    <!-- <div v-if="showCvModal" class="modal">
       <div class="modal-content">
         <span class="close" @click="showCvModal = false">&times;</span>
         <h2>{{ t('cv.selectLanguage') }}</h2>
@@ -88,17 +88,28 @@
         </select>
         <button class="cv-button" @click="downloadSelectedCV">{{ t('cv.downloadButton') }}</button>
       </div>
+    </div> -->
+    <div v-if="showCvModal" class="modal">
+    <div class="modal-content">
+      <span class="close" @click="showCvModal = false">&times;</span>
+      <h2>{{ t('cv.selectLanguage') }}</h2>
+      <select v-model="selectedLanguage" class="cv-select">
+        <option value="" disabled>{{ t('cv.selectLanguagePlaceholder') }}</option>
+        <option value="en">{{ t('cv.english') }}</option>
+        <option value="fr">{{ t('cv.french') }}</option>
+      </select>
+      <button class="cv-button" @click="downloadSelectedCV">{{ t('cv.downloadButton') }}</button>
     </div>
-  </header>
+  </div>
+  </header> 
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, nextTick, computed, watch } from 'vue'
 import { useAuth0 } from '@auth0/auth0-vue'
 import { useI18n } from 'vue-i18n'
-import Cookies from 'js-cookie'
-import cvEn from '@/assets/Resume EN - Artem Kozlov.pdf'
-import cvFr from '@/assets/Resume FR - Artem Kozlov.pdf'
+import axios from 'axios'
+import Cookies from 'js-cookie' 
 
 const { t, locale } = useI18n()
 const { isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently } = useAuth0()
@@ -131,10 +142,87 @@ const accessToken = ref('')
 const showModal = ref(false)
 const showCvModal = ref(false)
 const selectedLanguage = ref<keyof typeof cvFiles | ''>('')
-const cvFiles = {
-  en: cvEn,
-  fr: cvFr,
+  const cvFiles = ref<{ en: string; fr: string } | null>(null)
+
+// const fetchCVs = async () => {
+//   try {
+//     const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/cv`);
+//     if (response.data.length > 0) {
+//       const cvData = response.data[0];
+//       cvFiles.value = {
+//         en: `${import.meta.env.VITE_API_URL}/api/cv/681accc37a007e66b2579b68`,
+//         fr: `${import.meta.env.VITE_API_URL}/api/cv/`,  
+//       };
+//     } else {
+//       console.warn('No CV data found.');
+//     }
+//   } catch (error) {
+//     console.error('Failed to fetch CVs:', error);
+//   }
+// }
+const fetchCVs = async () => {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/cv`)
+    if (response.data.length > 0) {
+      const cvData = response.data[0]
+      cvFiles.value = {
+        en: `${import.meta.env.VITE_API_URL}/api/cv/${cvData._id}/en`,
+        fr: `${import.meta.env.VITE_API_URL}/api/cv/${cvData._id}/fr`,
+      }
+    }
+  } catch (error) {
+    console.error('Failed to fetch CVs:', error)
+  }
 }
+
+// const downloadSelectedCV = () => {
+//   if (selectedLanguage.value && cvFiles.value) {
+//     const path = cvFiles.value && selectedLanguage.value ? cvFiles.value[selectedLanguage.value as keyof typeof cvFiles.value] : null
+//     if (path) {
+//       window.open(path, '_blank')
+//       showCvModal.value = false
+//     } else {
+//       alert(t('cv.selectValidLanguage'))
+//     }
+//   }
+// }
+const downloadSelectedCV = async () => {
+  if (selectedLanguage.value && cvFiles.value) {
+    const path = cvFiles.value ? cvFiles.value[selectedLanguage.value as keyof typeof cvFiles.value] : null
+    try {
+      if (!path) {
+        throw new Error('Invalid path: Path is null or undefined');
+      }
+      const response = await fetch(path, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken.value}`,
+        },
+      })
+
+      if (!response.ok) throw new Error('Failed to download file')
+
+      const blob = await response.blob()
+      const url = window.URL.createObjectURL(blob)
+
+      const link = document.createElement('a')
+      link.href = url
+      link.download = `Artem Kozlov-CV-${String(selectedLanguage.value)}.pdf`
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+      window.URL.revokeObjectURL(url)
+
+      showCvModal.value = false
+    } catch (error) {
+      console.error('Download error:', error)
+      alert(t('cv.downloadFailed'))
+    }
+  } else {
+    alert(t('cv.selectValidLanguage'))
+  }
+}
+
 const firstName = ref('')
 const lastName = ref('')
 const email = ref('')
@@ -156,6 +244,7 @@ onMounted(async () => {
     Cookies.set('accessToken', accessToken.value) // Save token to cookies
   }
 
+  await fetchCVs()
   window.addEventListener('scroll', handleScroll)
   await nextTick()
   headerHeight.value = header.value?.offsetHeight || 0
@@ -191,15 +280,6 @@ const sendEmail = async () => {
   }
 }
 
-const downloadSelectedCV = () => {
-  if (selectedLanguage.value && cvFiles[selectedLanguage.value]) {
-    downloadCV(cvFiles[selectedLanguage.value])
-    showCvModal.value = false
-  } else {
-    alert(t('cv.selectValidLanguage'))
-  }
-}
-
 const downloadCV = (path: string) => {
   if (!path) return
   window.open(path, '_blank')
@@ -215,7 +295,7 @@ const downloadCV = (path: string) => {
   width: 100%;
   position: fixed;
   height: 5rem;
-  top: 0;
+  top: 0; 
   left: 0;
   z-index: 1;
 }
