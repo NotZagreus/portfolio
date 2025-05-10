@@ -77,7 +77,7 @@
         </div>
       </div>
     </div>
-    <!-- <div v-if="showCvModal" class="modal">
+    <div v-if="showCvModal" class="modal">
       <div class="modal-content">
         <span class="close" @click="showCvModal = false">&times;</span>
         <h2>{{ t('cv.selectLanguage') }}</h2>
@@ -88,20 +88,8 @@
         </select>
         <button class="cv-button" @click="downloadSelectedCV">{{ t('cv.downloadButton') }}</button>
       </div>
-    </div> -->
-    <div v-if="showCvModal" class="modal">
-    <div class="modal-content">
-      <span class="close" @click="showCvModal = false">&times;</span>
-      <h2>{{ t('cv.selectLanguage') }}</h2>
-      <select v-model="selectedLanguage" class="cv-select">
-        <option value="" disabled>{{ t('cv.selectLanguagePlaceholder') }}</option>
-        <option value="en">{{ t('cv.english') }}</option>
-        <option value="fr">{{ t('cv.french') }}</option>
-      </select>
-      <button class="cv-button" @click="downloadSelectedCV">{{ t('cv.downloadButton') }}</button>
     </div>
-  </div>
-  </header> 
+  </header>
 </template>
 
 <script setup lang="ts">
@@ -109,7 +97,7 @@ import { ref, onMounted, onUnmounted, nextTick, computed, watch } from 'vue'
 import { useAuth0 } from '@auth0/auth0-vue'
 import { useI18n } from 'vue-i18n'
 import axios from 'axios'
-import Cookies from 'js-cookie' 
+import Cookies from 'js-cookie'
 
 const { t, locale } = useI18n()
 const { isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently } = useAuth0()
@@ -135,7 +123,7 @@ const currentLanguage = computed(() => (locale.value === 'en' ? 'En' : 'Fr'))
 
 const switchLanguage = () => {
   locale.value = locale.value === 'en' ? 'fr' : 'en'
-  Cookies.set('language', locale.value) // Save language to cookies
+  Cookies.set('language', locale.value)
 }
 
 const accessToken = ref('')
@@ -161,10 +149,12 @@ const fetchCVs = async () => {
 
 const downloadSelectedCV = async () => {
   if (selectedLanguage.value && cvFiles.value) {
-    const path = cvFiles.value ? cvFiles.value[selectedLanguage.value as keyof typeof cvFiles.value] : null
+    const path = cvFiles.value
+      ? cvFiles.value[selectedLanguage.value as keyof typeof cvFiles.value]
+      : null
     try {
       if (!path) {
-        throw new Error('Invalid path: Path is null or undefined');
+        throw new Error('Invalid path: Path is null or undefined')
       }
       const response = await fetch(path, {
         method: 'GET',
@@ -202,19 +192,17 @@ const email = ref('')
 const message = ref('')
 
 onMounted(async () => {
-  // Retrieve language from cookies
   const savedLanguage = Cookies.get('language')
   if (savedLanguage) {
     locale.value = savedLanguage
   }
 
-  // Retrieve authentication token from cookies
   const savedAccessToken = Cookies.get('accessToken')
   if (savedAccessToken) {
     accessToken.value = savedAccessToken
   } else if (isAuthenticated.value) {
     accessToken.value = await getAccessTokenSilently()
-    Cookies.set('accessToken', accessToken.value) // Save token to cookies
+    Cookies.set('accessToken', accessToken.value)
   }
 
   await fetchCVs()
@@ -252,13 +240,7 @@ const sendEmail = async () => {
     alert(t('contact.emailFailed'))
   }
 }
-
-const downloadCV = (path: string) => {
-  if (!path) return
-  window.open(path, '_blank')
-}
 </script>
-
 
 <style scoped>
 .header {
@@ -268,7 +250,7 @@ const downloadCV = (path: string) => {
   width: 100%;
   position: fixed;
   height: 5rem;
-  top: 0; 
+  top: 0;
   left: 0;
   z-index: 1;
 }
@@ -770,7 +752,7 @@ textarea {
   }
 }
 
-.contact-form label{
+.contact-form label {
   text-align: left;
 }
 </style>
