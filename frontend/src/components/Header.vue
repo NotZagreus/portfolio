@@ -89,8 +89,10 @@
         <button class="cv-button" @click="downloadSelectedCV">{{ t('cv.downloadButton') }}</button>
 
         <!-- Add Update Button for Admins -->
-        <!-- <button v-if="isAdmin" class="cv-button" @click="openUpdateModal">{{ t('cv.updateButton') }}</button> -->
-        <button class="cv-button" @click="openUpdateModal">{{ t('cv.updateButton') }}</button>
+        <button v-if="isAdmin" class="cv-button" @click="openUpdateModal">
+          {{ t('cv.updateButton') }}
+        </button>
+        <!-- <button class="cv-button" @click="openUpdateModal">{{ t('cv.updateButton') }}</button> -->
       </div>
       <div v-if="showUpdateModal" class="modal">
         <div class="modal-content">
@@ -130,15 +132,36 @@ import { useI18n } from 'vue-i18n'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
+const { t, locale } = useI18n()
+
+const { isAuthenticated, user, loginWithRedirect, logout, getAccessTokenSilently } = useAuth0()
 const isAdmin = ref(false)
 
-const { t, locale } = useI18n()
-const { isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently } = useAuth0()
 const windowLocation = window.location.origin
 
 const showHeader = ref(false)
 const headerHeight = ref(0)
 const header = ref<HTMLElement | null>(null)
+
+const fetchUserInfo = async () => {
+  if (isAuthenticated.value) {
+    try {
+      const token = await getAccessTokenSilently()
+      const response = await axios.get('https://dev-k4fhctws467co87d.us.auth0.com/userinfo', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      isAdmin.value = response.data.sub === import.meta.env.VITE_ADMIN_USER_ID
+    } catch (error) {
+      console.error('Error fetching user info:', error)
+    }
+  }
+}
+
+watch(isAuthenticated, (newValue) => {
+  if (newValue) {
+    fetchUserInfo()
+  }
+})
 
 const handleScroll = () => {
   const scrollPosition = window.scrollY
@@ -222,8 +245,7 @@ const downloadSelectedCV = async () => {
 
 const showUpdateModal = ref(false)
 
-const pdfFiles = ref<{ en: File | null; fr: File | null }>({ en: null, fr: null });
-
+const pdfFiles = ref<{ en: File | null; fr: File | null }>({ en: null, fr: null })
 
 const openUpdateModal = () => {
   showUpdateModal.value = true
@@ -235,26 +257,26 @@ const closeUpdateModal = () => {
 }
 
 const handleFileUpload = (event: Event, language: 'en' | 'fr') => {
-  const file = (event.target as HTMLInputElement).files?.[0];
+  const file = (event.target as HTMLInputElement).files?.[0]
   if (file && file.type === 'application/pdf') {
-    pdfFiles.value[language] = file;
+    pdfFiles.value[language] = file
   } else {
-    alert('Please upload a valid PDF file.');
+    alert('Please upload a valid PDF file.')
   }
-};
+}
 
 const updateCV = async () => {
   if (!pdfFiles.value.en || !pdfFiles.value.fr) {
-    alert(t('cv.uploadBothFiles'));
-    return;
+    alert(t('cv.uploadBothFiles'))
+    return
   }
 
   try {
-    const token = await getAccessTokenSilently();
+    const token = await getAccessTokenSilently()
 
-    const formData = new FormData();
-    formData.append('pdfFileEn', pdfFiles.value.en);
-    formData.append('pdfFileFr', pdfFiles.value.fr);
+    const formData = new FormData()
+    formData.append('pdfFileEn', pdfFiles.value.en)
+    formData.append('pdfFileFr', pdfFiles.value.fr)
 
     const response = await axios.put(
       `${import.meta.env.VITE_API_URL}/api/cv/${cvFiles.value?._id}`,
@@ -264,18 +286,17 @@ const updateCV = async () => {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
         },
-      }
-    );
+      },
+    )
 
-    alert(t('cv.updateSuccess'));
-    closeUpdateModal();
-    await fetchCVs();
+    alert(t('cv.updateSuccess'))
+    closeUpdateModal()
+    await fetchCVs()
   } catch (error) {
-    console.error('Failed to update CV:', error);
-    alert(t('cv.updateFailed'));
+    console.error('Failed to update CV:', error)
+    alert(t('cv.updateFailed'))
   }
-};
-
+}
 
 const firstName = ref('')
 const lastName = ref('')
@@ -296,6 +317,7 @@ onMounted(async () => {
     Cookies.set('accessToken', accessToken.value)
   }
 
+  await fetchUserInfo()
   await fetchCVs()
   window.addEventListener('scroll', handleScroll)
   await nextTick()
