@@ -92,7 +92,6 @@
         <button v-if="isAdmin" class="cv-button" @click="openUpdateModal">
           {{ t('cv.updateButton') }}
         </button>
-        <!-- <button class="cv-button" @click="openUpdateModal">{{ t('cv.updateButton') }}</button> -->
       </div>
       <div v-if="showUpdateModal" class="modal">
         <div class="modal-content">
