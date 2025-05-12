@@ -66,6 +66,7 @@
     <!-- View All Comments Modal -->
     <div v-if="showViewModal" class="view-comments-modal">
       <div class="modal-content view-modal">
+        <span class="close" @click="showViewModal = false">&times;</span>
         <h3>{{ t('comments.manageComments') }}</h3>
 
         <!-- Filter -->

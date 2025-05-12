@@ -646,6 +646,11 @@ button:hover {
   text-align: center;
 }
 
+.modal-content label {
+  padding-top: 3%;
+  text-align: start;
+}
+
 .close {
   position: absolute;
   top: 10px;

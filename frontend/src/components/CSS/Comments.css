@@ -1,6 +1,7 @@
 .comments {
   text-align: justify;
   padding-bottom: 10%;
+  margin-bottom: 5rem;
 }
 
 .carousel {
@@ -10,6 +11,14 @@
   z-index: 1;
   padding: 0%;
   width: 100%;
+}
+
+.close {
+  position: end;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
 }
 
 .carousel-track {
