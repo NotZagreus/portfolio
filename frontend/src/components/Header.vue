@@ -87,6 +87,37 @@
           <option value="fr">{{ t('cv.french') }}</option>
         </select>
         <button class="cv-button" @click="downloadSelectedCV">{{ t('cv.downloadButton') }}</button>
+
+        <!-- Add Update Button for Admins -->
+        <!-- <button v-if="isAdmin" class="cv-button" @click="openUpdateModal">{{ t('cv.updateButton') }}</button> -->
+        <button class="cv-button" @click="openUpdateModal">{{ t('cv.updateButton') }}</button>
+      </div>
+      <div v-if="showUpdateModal" class="modal">
+        <div class="modal-content">
+          <span class="close" @click="closeUpdateModal">&times;</span>
+          <h2>{{ t('cv.updateCv') }}</h2>
+          <form @submit.prevent="updateCV">
+            <div>
+              <label for="pdfFileEn">{{ t('cv.uploadEnglish') }}</label>
+              <input
+                type="file"
+                id="pdfFileEn"
+                @change="handleFileUpload($event, 'en')"
+                accept="application/pdf"
+              />
+            </div>
+            <div>
+              <label for="pdfFileFr">{{ t('cv.uploadFrench') }}</label>
+              <input
+                type="file"
+                id="pdfFileFr"
+                @change="handleFileUpload($event, 'fr')"
+                accept="application/pdf"
+              />
+            </div>
+            <button type="submit" class="cv-button">{{ t('cv.save') }}</button>
+          </form>
+        </div>
       </div>
     </div>
   </header>
@@ -98,6 +129,8 @@ import { useAuth0 } from '@auth0/auth0-vue'
 import { useI18n } from 'vue-i18n'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+
+const isAdmin = ref(false)
 
 const { t, locale } = useI18n()
 const { isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently } = useAuth0()
@@ -130,7 +163,7 @@ const accessToken = ref('')
 const showModal = ref(false)
 const showCvModal = ref(false)
 const selectedLanguage = ref<keyof typeof cvFiles | ''>('')
-const cvFiles = ref<{ en: string; fr: string } | null>(null)
+const cvFiles = ref<{ _id: string; en: string; fr: string } | null>(null)
 
 const fetchCVs = async () => {
   try {
@@ -138,6 +171,7 @@ const fetchCVs = async () => {
     if (response.data.length > 0) {
       const cvData = response.data[0]
       cvFiles.value = {
+        _id: cvData._id,
         en: `${import.meta.env.VITE_API_URL}/api/cv/${cvData._id}/en`,
         fr: `${import.meta.env.VITE_API_URL}/api/cv/${cvData._id}/fr`,
       }
@@ -185,6 +219,63 @@ const downloadSelectedCV = async () => {
     alert(t('cv.selectValidLanguage'))
   }
 }
+
+const showUpdateModal = ref(false)
+
+const pdfFiles = ref<{ en: File | null; fr: File | null }>({ en: null, fr: null });
+
+
+const openUpdateModal = () => {
+  showUpdateModal.value = true
+}
+
+const closeUpdateModal = () => {
+  showUpdateModal.value = false
+  pdfFiles.value = { en: null, fr: null }
+}
+
+const handleFileUpload = (event: Event, language: 'en' | 'fr') => {
+  const file = (event.target as HTMLInputElement).files?.[0];
+  if (file && file.type === 'application/pdf') {
+    pdfFiles.value[language] = file;
+  } else {
+    alert('Please upload a valid PDF file.');
+  }
+};
+
+const updateCV = async () => {
+  if (!pdfFiles.value.en || !pdfFiles.value.fr) {
+    alert(t('cv.uploadBothFiles'));
+    return;
+  }
+
+  try {
+    const token = await getAccessTokenSilently();
+
+    const formData = new FormData();
+    formData.append('pdfFileEn', pdfFiles.value.en);
+    formData.append('pdfFileFr', pdfFiles.value.fr);
+
+    const response = await axios.put(
+      `${import.meta.env.VITE_API_URL}/api/cv/${cvFiles.value?._id}`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+
+    alert(t('cv.updateSuccess'));
+    closeUpdateModal();
+    await fetchCVs();
+  } catch (error) {
+    console.error('Failed to update CV:', error);
+    alert(t('cv.updateFailed'));
+  }
+};
+
 
 const firstName = ref('')
 const lastName = ref('')

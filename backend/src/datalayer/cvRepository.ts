@@ -12,4 +12,4 @@ export default class CVRepository {
   static async updateCV(id: string, data: Partial<ICV>): Promise<ICV | null> {
     return CV.findByIdAndUpdate(id, data, { new: true });
   }
-} 
+}
