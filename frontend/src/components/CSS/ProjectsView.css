@@ -52,12 +52,12 @@
 }
 
 .project-image {
-  width: 200px;
+  width: 15vw;
   height: auto;
-  border-radius: 4px;
-  border: 2px solid #232836;
-  object-fit: cover;
+  border-radius: 5px;
+  object-fit: scale-down;
   flex-shrink: 0;
+  margin-left: 1rem;
 }
 
 .project-dropdown {
@@ -269,4 +269,73 @@
   .project-description {
     flex: 1;
   }
+}
+
+@media (max-width: 768px) {
+p {
+    font-family: 'Avenir Next LT Pro Ultra Light';
+    font-size: 0.75rem;
+  }
+
+  h3 {
+    font-family: 'Avenir Next LT Pro Ultra Light';
+    font-size: 0.85rem;
+  }
+
+  h1 {
+    font-family: 'Avenir Next LT Pro Demi';
+    font-size: 1rem;
+  }
+
+  h2 {
+    font-family: 'Avenir Next LT Pro Demi';
+  }
+
+  h4 {
+    font-family: 'Avenir Next LT Pro Demi';
+    font-size: 0.75rem;
+  }
+
+  a {
+    font-family: 'Avenir Next LT Pro Demi';
+    font-size: 0.85rem;
+  }
+
+  button {
+    font-family: 'Avenir Next LT Pro Demi';
+    font-size: 0.85rem;
+  }
+
+  .project-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background-color: #262f3a;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #d8e9e9;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  z-index: 2;
+  margin-top: 0.5rem;
+}
+
+.project-card h2 {
+  font-size: 0.75rem;
+  color: #d8e9e9;
+  margin: 0;
+}
+
+.project-card p {
+  font-family: 'Avenir Next LT Pro Demi';
+  font-size: 0.85rem;
+  color: #d8e9e9;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  text-align: justify;
+  padding: 1.5rem;
+}
 }

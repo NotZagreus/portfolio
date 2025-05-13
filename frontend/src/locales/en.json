@@ -90,6 +90,12 @@
     "selectLanguagePlaceholder": "Select Language",
     "english": "English",
     "french": "French",
-    "selectValidLanguage": "Please select a valid language"
+    "selectValidLanguage": "Please select a valid language",
+    "updateButton": "Update CV",
+    "updateCv": "Update CV",
+    "uploadEnglish": "Upload English CV",
+    "uploadFrench": "Upload French CV",
+    "save": "Save",
+    "updateSuccess": "CV updated successfully!"
   }
 }

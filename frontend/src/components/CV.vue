@@ -155,16 +155,16 @@ const switchLanguage = () => {
   justify-content: center;
   padding: 25px;
   position: relative;
-  width: 100%; /* responsive */
-  height: auto; /* responsive */
-  gap: 5%; /* responsive */
+  width: 100%; 
+  height: auto; 
+  gap: 5%; 
   flex-wrap: nowrap;
 }
 
 /* for all social containers*/
 .socialContainer {
-  width: 52px; /* responsive */
-  height: 52px; /* responsive */
+  width: 52px; 
+  height: 52px; 
   background-color: hsla(210, 20%, 20%, 1);
   display: flex;
   align-items: center;
@@ -200,7 +200,7 @@ const switchLanguage = () => {
 }
 
 .socialSvg {
-  width: 17px; /* responsive */
+  width: 17px; 
 }
 
 .socialSvg path {
@@ -230,8 +230,8 @@ const switchLanguage = () => {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%; /* responsive */
-  height: 100%; /* responsive */
+  width: 100%; 
+  height: 100%; 
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 2;
 }
@@ -240,8 +240,8 @@ const switchLanguage = () => {
   background-color: hsl(212, 19%, 15%);
   padding: 20px;
   border-radius: 5px;
-  width: 80%; /* responsive */
-  max-width: 600px; /* responsive */
+  width: 80%; 
+  max-width: 600px; 
   position: relative;
   text-align: left;
 }
@@ -265,7 +265,7 @@ label {
 
 input,
 textarea {
-  width: 100%; /* responsive */
+  width: 100%; 
   padding: 8px;
   box-sizing: border-box;
 }
@@ -273,18 +273,18 @@ textarea {
 .cv-select {
   padding: 10px;
   margin: 10px;
-  font-size: 16px; /* responsive */
+  font-size: 16px; 
 }
 
 .cv-button {
   background-color: #3f3f3f;
   border: none;
   color: white;
-  padding: 15px 32px; /* responsive */
+  padding: 15px 32px; 
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px; /* responsive */
+  font-size: 16px; 
   margin: 10px 2px;
   cursor: pointer;
   border-radius: 4px;
@@ -299,31 +299,31 @@ textarea {
 @media (max-width: 768px) {
   .card {
     flex-direction: column;
-    gap: 20px; /* responsive */
+    gap: 20px; 
   }
 
   .socialContainer {
-    width: 40px; /* responsive */
-    height: 40px; /* responsive */
+    width: 40px; 
+    height: 40px; 
   }
 
   .socialSvg {
-    width: 14px; /* responsive */
+    width: 14px; 
   }
 }
 
 @media (max-width: 480px) {
   .card {
-    padding: 15px; /* responsive */
+    padding: 15px; 
   }
 
   .socialContainer {
-    width: 35px; /* responsive */
-    height: 35px; /* responsive */
+    width: 35px; 
+    height: 35px; 
   }
 
   .socialSvg {
-    width: 12px; /* responsive */
+    width: 12px; 
   }
 }
 </style>

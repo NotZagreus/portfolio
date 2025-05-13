@@ -87,6 +87,38 @@
           <option value="fr">{{ t('cv.french') }}</option>
         </select>
         <button class="cv-button" @click="downloadSelectedCV">{{ t('cv.downloadButton') }}</button>
+
+        <!-- Add Update Button for Admins -->
+        <button v-if="isAdmin" class="cv-button" @click="openUpdateModal">
+          {{ t('cv.updateButton') }}
+        </button>
+      </div>
+      <div v-if="showUpdateModal" class="modal">
+        <div class="modal-content">
+          <span class="close" @click="closeUpdateModal">&times;</span>
+          <h2>{{ t('cv.updateCv') }}</h2>
+          <form @submit.prevent="updateCV">
+            <div>
+              <label for="pdfFileEn">{{ t('cv.uploadEnglish') }}</label>
+              <input
+                type="file"
+                id="pdfFileEn"
+                @change="handleFileUpload($event, 'en')"
+                accept="application/pdf"
+              />
+            </div>
+            <div>
+              <label for="pdfFileFr">{{ t('cv.uploadFrench') }}</label>
+              <input
+                type="file"
+                id="pdfFileFr"
+                @change="handleFileUpload($event, 'fr')"
+                accept="application/pdf"
+              />
+            </div>
+            <button type="submit" class="cv-button">{{ t('cv.save') }}</button>
+          </form>
+        </div>
       </div>
     </div>
   </header>
@@ -96,17 +128,39 @@
 import { ref, onMounted, onUnmounted, nextTick, computed, watch } from 'vue'
 import { useAuth0 } from '@auth0/auth0-vue'
 import { useI18n } from 'vue-i18n'
+import axios from 'axios'
 import Cookies from 'js-cookie'
-import cvEn from '@/assets/Resume EN - Artem Kozlov.pdf'
-import cvFr from '@/assets/Resume FR - Artem Kozlov.pdf'
 
 const { t, locale } = useI18n()
-const { isAuthenticated, loginWithRedirect, logout, getAccessTokenSilently } = useAuth0()
+
+const { isAuthenticated, user, loginWithRedirect, logout, getAccessTokenSilently } = useAuth0()
+const isAdmin = ref(false)
+
 const windowLocation = window.location.origin
 
 const showHeader = ref(false)
 const headerHeight = ref(0)
 const header = ref<HTMLElement | null>(null)
+
+const fetchUserInfo = async () => {
+  if (isAuthenticated.value) {
+    try {
+      const token = await getAccessTokenSilently()
+      const response = await axios.get('https://dev-k4fhctws467co87d.us.auth0.com/userinfo', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      isAdmin.value = response.data.sub === import.meta.env.VITE_ADMIN_USER_ID
+    } catch (error) {
+      console.error('Error fetching user info:', error)
+    }
+  }
+}
+
+watch(isAuthenticated, (newValue) => {
+  if (newValue) {
+    fetchUserInfo()
+  }
+})
 
 const handleScroll = () => {
   const scrollPosition = window.scrollY
@@ -124,38 +178,146 @@ const currentLanguage = computed(() => (locale.value === 'en' ? 'En' : 'Fr'))
 
 const switchLanguage = () => {
   locale.value = locale.value === 'en' ? 'fr' : 'en'
-  Cookies.set('language', locale.value) // Save language to cookies
+  Cookies.set('language', locale.value)
 }
 
 const accessToken = ref('')
 const showModal = ref(false)
 const showCvModal = ref(false)
 const selectedLanguage = ref<keyof typeof cvFiles | ''>('')
-const cvFiles = {
-  en: cvEn,
-  fr: cvFr,
+const cvFiles = ref<{ _id: string; en: string; fr: string } | null>(null)
+
+const fetchCVs = async () => {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/cv`)
+    if (response.data.length > 0) {
+      const cvData = response.data[0]
+      cvFiles.value = {
+        _id: cvData._id,
+        en: `${import.meta.env.VITE_API_URL}/api/cv/${cvData._id}/en`,
+        fr: `${import.meta.env.VITE_API_URL}/api/cv/${cvData._id}/fr`,
+      }
+    }
+  } catch (error) {
+    console.error('Failed to fetch CVs:', error)
+  }
 }
+
+const downloadSelectedCV = async () => {
+  if (selectedLanguage.value && cvFiles.value) {
+    const path = cvFiles.value
+      ? cvFiles.value[selectedLanguage.value as keyof typeof cvFiles.value]
+      : null
+    try {
+      if (!path) {
+        throw new Error('Invalid path: Path is null or undefined')
+      }
+      const response = await fetch(path, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken.value}`,
+        },
+      })
+
+      if (!response.ok) throw new Error('Failed to download file')
+
+      const blob = await response.blob()
+      const url = window.URL.createObjectURL(blob)
+
+      const link = document.createElement('a')
+      link.href = url
+      link.download = `Artem Kozlov-CV-${String(selectedLanguage.value)}.pdf`
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+      window.URL.revokeObjectURL(url)
+
+      showCvModal.value = false
+    } catch (error) {
+      console.error('Download error:', error)
+      alert(t('cv.downloadFailed'))
+    }
+  } else {
+    alert(t('cv.selectValidLanguage'))
+  }
+}
+
+const showUpdateModal = ref(false)
+
+const pdfFiles = ref<{ en: File | null; fr: File | null }>({ en: null, fr: null })
+
+const openUpdateModal = () => {
+  showUpdateModal.value = true
+}
+
+const closeUpdateModal = () => {
+  showUpdateModal.value = false
+  pdfFiles.value = { en: null, fr: null }
+}
+
+const handleFileUpload = (event: Event, language: 'en' | 'fr') => {
+  const file = (event.target as HTMLInputElement).files?.[0]
+  if (file && file.type === 'application/pdf') {
+    pdfFiles.value[language] = file
+  } else {
+    alert('Please upload a valid PDF file.')
+  }
+}
+
+const updateCV = async () => {
+  if (!pdfFiles.value.en || !pdfFiles.value.fr) {
+    alert(t('cv.uploadBothFiles'))
+    return
+  }
+
+  try {
+    const token = await getAccessTokenSilently()
+
+    const formData = new FormData()
+    formData.append('pdfFileEn', pdfFiles.value.en)
+    formData.append('pdfFileFr', pdfFiles.value.fr)
+
+    const response = await axios.put(
+      `${import.meta.env.VITE_API_URL}/api/cv/${cvFiles.value?._id}`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      },
+    )
+
+    alert(t('cv.updateSuccess'))
+    closeUpdateModal()
+    await fetchCVs()
+  } catch (error) {
+    console.error('Failed to update CV:', error)
+    alert(t('cv.updateFailed'))
+  }
+}
+
 const firstName = ref('')
 const lastName = ref('')
 const email = ref('')
 const message = ref('')
 
 onMounted(async () => {
-  // Retrieve language from cookies
   const savedLanguage = Cookies.get('language')
   if (savedLanguage) {
     locale.value = savedLanguage
   }
 
-  // Retrieve authentication token from cookies
   const savedAccessToken = Cookies.get('accessToken')
   if (savedAccessToken) {
     accessToken.value = savedAccessToken
   } else if (isAuthenticated.value) {
     accessToken.value = await getAccessTokenSilently()
-    Cookies.set('accessToken', accessToken.value) // Save token to cookies
+    Cookies.set('accessToken', accessToken.value)
   }
 
+  await fetchUserInfo()
+  await fetchCVs()
   window.addEventListener('scroll', handleScroll)
   await nextTick()
   headerHeight.value = header.value?.offsetHeight || 0
@@ -190,22 +352,7 @@ const sendEmail = async () => {
     alert(t('contact.emailFailed'))
   }
 }
-
-const downloadSelectedCV = () => {
-  if (selectedLanguage.value && cvFiles[selectedLanguage.value]) {
-    downloadCV(cvFiles[selectedLanguage.value])
-    showCvModal.value = false
-  } else {
-    alert(t('cv.selectValidLanguage'))
-  }
-}
-
-const downloadCV = (path: string) => {
-  if (!path) return
-  window.open(path, '_blank')
-}
 </script>
-
 
 <style scoped>
 .header {
@@ -499,6 +646,11 @@ button:hover {
   text-align: center;
 }
 
+.modal-content label {
+  padding-top: 3%;
+  text-align: start;
+}
+
 .close {
   position: absolute;
   top: 10px;
@@ -717,7 +869,7 @@ textarea {
   }
 }
 
-.contact-form label{
+.contact-form label {
   text-align: left;
 }
 </style>

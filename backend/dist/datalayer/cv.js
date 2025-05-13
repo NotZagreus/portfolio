@@ -34,17 +34,9 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
-const TechnologySchema = new mongoose_1.Schema({
-    name: { type: String, required: true },
-    image: { type: String, required: true },
-}, {
-    versionKey: false,
-    toJSON: {
-        virtuals: true,
-        transform: (doc, ret) => {
-            delete ret._id;
-            return ret;
-        },
-    },
+const cvSchema = new mongoose_1.Schema({
+    pdfFileEn: { type: Buffer, required: true },
+    pdfFileFr: { type: Buffer, required: true },
+    createdAt: { type: Date, default: Date.now },
 });
-exports.default = mongoose_1.default.model("Technology", TechnologySchema);
+exports.default = mongoose_1.default.model("CV", cvSchema);

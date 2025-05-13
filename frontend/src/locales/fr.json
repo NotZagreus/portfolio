@@ -92,6 +92,12 @@
     "selectLanguagePlaceholder": "Choisir la langue",
     "english": "Anglais",
     "french": "Français",
-    "selectValidLanguage": "Veuillez sélectionner une langue valide"
+    "selectValidLanguage": "Veuillez sélectionner une langue valide",
+    "updateButton": "Actualiser le CV",
+    "updateCv": "Actualiser le CV",
+    "uploadEnglish": "Ajouter le CV en anglais",
+    "uploadFrench": "Ajouter le CV en français",
+    "save": "Enregistrer",
+    "updateSuccess": "CV mis à jour avec succès!"
   }
 }

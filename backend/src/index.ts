@@ -6,6 +6,7 @@ import projectRoutes from "./presentationlayer/projectRoutes";
 import commentRoutes from "./presentationlayer/commentRoutes";
 import portfolioRoutes from "./presentationlayer/portfolioRoutes";
 import technologiesRoutes from "./presentationlayer/technologyRoutes";
+import cvRoutes from "./presentationlayer/cvRoutes";
 import bodyParser from "body-parser";
 import nodemailer, { SentMessageInfo } from "nodemailer";
 
@@ -67,6 +68,7 @@ app.use("/api/projects", projectRoutes);
 app.use("/api/comments", commentRoutes);
 app.use("/api/portfolio", portfolioRoutes);
 app.use("/api/technologies", technologiesRoutes);
+app.use("/api/cv", cvRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to my Portfolio");
