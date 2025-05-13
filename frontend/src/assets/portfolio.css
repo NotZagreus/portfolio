@@ -968,15 +968,33 @@
     color: #d8e9e9;
   }
 
-  p,
-  h3 {
+  p {
     font-family: 'Avenir Next LT Pro Ultra Light';
+    font-size: 0.75rem;
   }
 
-  h1,
-  h2,
+  h3 {
+    font-family: 'Avenir Next LT Pro Ultra Light';
+    font-size: 0.85rem;
+  }
+
+  h1 {
+    font-family: 'Avenir Next LT Pro Demi';
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-family: 'Avenir Next LT Pro Demi';
+  }
+
   h4 {
     font-family: 'Avenir Next LT Pro Demi';
+    font-size: 0.75rem;
+  }
+
+  a {
+    font-family: 'Avenir Next LT Pro Demi';
+    font-size: 0.85rem;
   }
 
   ul {
@@ -1006,7 +1024,6 @@
 
   .info-container {
     text-align: justify;
-    margin-bottom: 2rem;
     padding: 1rem;
     border-radius: 0.5rem;
     width: 90%;
@@ -1104,7 +1121,7 @@
     bottom: 0;
     left: 0;
     z-index: 1;
-    margin-top: 40%;
+    margin-top: 10%;
     font-size: 0.75rem;
   }
 
