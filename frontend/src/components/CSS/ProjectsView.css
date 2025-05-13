@@ -271,8 +271,72 @@
   }
 }
 
+@media (max-width: 1050px) {
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #262f3a;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #d8e9e9;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    z-index: 2;
+    margin-top: 0.5rem;
+  }
+
+  .project-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .project-image {
+    width: 85%;
+    height: auto;
+    align-self: center;
+    border-radius: 5px;
+    object-fit: cover;
+    margin-left: 0;
+  }
+}
+
 @media (max-width: 768px) {
-p {
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #262f3a;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #d8e9e9;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    z-index: 2;
+    margin-top: 0.5rem;
+  }
+
+  .project-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .project-image {
+    width: 85%;
+    height: auto;
+    align-self: center;
+    border-radius: 5px;
+    object-fit: cover;
+    margin-left: 0;
+  }
+
+  p {
     font-family: 'Avenir Next LT Pro Ultra Light';
     font-size: 0.75rem;
   }
@@ -307,35 +371,35 @@ p {
   }
 
   .project-card {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  background-color: #262f3a;
-  padding: 1rem;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  color: #d8e9e9;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-  z-index: 2;
-  margin-top: 0.5rem;
-}
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    background-color: #262f3a;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #d8e9e9;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    z-index: 2;
+    margin-top: 0.5rem;
+  }
 
-.project-card h2 {
-  font-size: 0.75rem;
-  color: #d8e9e9;
-  margin: 0;
-}
+  .project-card h2 {
+    font-size: 0.75rem;
+    color: #d8e9e9;
+    margin: 0;
+  }
 
-.project-card p {
-  font-family: 'Avenir Next LT Pro Demi';
-  font-size: 0.85rem;
-  color: #d8e9e9;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  white-space: pre-wrap;
-  text-align: justify;
-  padding: 1.5rem;
-}
+  .project-card p {
+    font-family: 'Avenir Next LT Pro Demi';
+    font-size: 0.85rem;
+    color: #d8e9e9;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    text-align: justify;
+    padding: 1.5rem;
+  }
 }
