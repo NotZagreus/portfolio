@@ -193,13 +193,15 @@
 
 .modal-content {
   background-color: #262f3a;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 90%;
-  max-width: 500px;
-  color: #d8e9e9;
-  z-index: 2;
+  padding: 20px;
+  border-radius: 5px;
+  width: 80%;
+  font-family: 'Avenir Next LT Pro Demi', sans-serif;
+  max-width: 600px;
+  position: relative;
+  text-align: justify;
+  overflow: hidden;
+  max-height: 90vh;
 }
 
 .modal-content h3 {
@@ -210,10 +212,11 @@
 
 .modal-content input,
 .modal-content textarea {
-  width: 100%;
+  width: 90%;
   padding: 0.5rem;
   margin-top: 1rem;
   border: 1px solid #475569;
+  font-family: 'Avenir Next LT Pro Ultra Light', sans-serif;
   border-radius: 4px;
   background-color: #334155;
   color: #d8e9e9;

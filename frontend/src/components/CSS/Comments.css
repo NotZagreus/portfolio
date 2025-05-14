@@ -53,9 +53,10 @@
 
 .comment-card p {
   font-size: 1rem;
-  color: #94a3b8;
+  color: #c4d2d2;
   word-wrap: break-word;
   white-space: normal;
+  font-family: 'Avenir Next LT Pro Demi', sans-serif;
 }
 
 .comment-card:hover {
@@ -427,7 +428,7 @@
 
   .comment-card p {
     font-size: 1rem;
-    color: #94a3b8;
+    color: #bdcbcb;
   }
 
   .comment-card:hover {
@@ -828,7 +829,7 @@
 
   .comment-card p {
     font-size: 0.7rem;
-    color: #94a3b8;
+    color: #bdcbcb;
     word-wrap: break-word;
     white-space: normal;
   }
@@ -844,7 +845,7 @@
     transform: translateY(-50%);
     background: none;
     border: none;
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: #d8e9e9;
     cursor: pointer;
     z-index: 1;

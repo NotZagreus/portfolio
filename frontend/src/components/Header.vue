@@ -18,7 +18,7 @@
       </button>
     </div>
     <div v-if="isBurgerMenuOpen" class="burger-menu-sidebar">
-      <div class="socialContainer containerOne" @click="showCvModal = true">
+      <div class="socialContainer containerOne" @click="showCvModal = true" @click.self="closeModal">
         <svg class="socialSvg cvSvg" viewBox="0 0 24 24">
           <path
             d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-4H8V8h5v2zm1-5.5V9h5.5L14 2.5z"
@@ -50,7 +50,7 @@
         </svg>
       </div>
     </div>
-    <div v-if="showModal" class="modal">
+    <div v-if="showModal" class="modal" @click.self="closeModal">
       <div class="modal-content">
         <div class="contact-form">
           <span class="close" @click="showModal = false">&times;</span>
@@ -77,7 +77,7 @@
         </div>
       </div>
     </div>
-    <div v-if="showCvModal" class="modal">
+    <div v-if="showCvModal" class="modal" @click.self="closeModal">
       <div class="modal-content">
         <span class="close" @click="showCvModal = false">&times;</span>
         <h2>{{ t('cv.selectLanguage') }}</h2>
@@ -93,7 +93,7 @@
           {{ t('cv.updateButton') }}
         </button>
       </div>
-      <div v-if="showUpdateModal" class="modal">
+      <div v-if="showUpdateModal" class="modal" @click.self="closeModal">
         <div class="modal-content">
           <span class="close" @click="closeUpdateModal">&times;</span>
           <h2>{{ t('cv.updateCv') }}</h2>
@@ -142,6 +142,8 @@ const showHeader = ref(false)
 const headerHeight = ref(0)
 const header = ref<HTMLElement | null>(null)
 
+
+
 const fetchUserInfo = async () => {
   if (isAuthenticated.value) {
     try {
@@ -164,7 +166,11 @@ watch(isAuthenticated, (newValue) => {
 
 const handleScroll = () => {
   const scrollPosition = window.scrollY
-  showHeader.value = scrollPosition <= headerHeight.value
+  if (showModal.value || showCvModal.value || showUpdateModal.value) {
+    showHeader.value = true;
+  } else {
+    showHeader.value = scrollPosition <= headerHeight.value;
+  }
   document.body.style.paddingTop = showHeader.value ? `${headerHeight.value}rem` : '0'
 }
 
@@ -186,6 +192,11 @@ const showModal = ref(false)
 const showCvModal = ref(false)
 const selectedLanguage = ref<keyof typeof cvFiles | ''>('')
 const cvFiles = ref<{ _id: string; en: string; fr: string } | null>(null)
+const closeModal = () => {
+  showModal.value = false;
+  showCvModal.value = false;
+  showUpdateModal.value = false;
+};
 
 const fetchCVs = async () => {
   try {
@@ -634,6 +645,7 @@ button:hover {
   height: 100%;
   background-color: #00000080;
   z-index: 2;
+  overflow: hidden;
 }
 
 .modal-content {
@@ -641,10 +653,14 @@ button:hover {
   padding: 20px;
   border-radius: 5px;
   width: 80%;
+  font-family: 'Avenir Next LT Pro Demi', sans-serif;
   max-width: 600px;
   position: relative;
   text-align: center;
+  overflow: auto;
+  max-height: 90vh;
 }
+
 
 .modal-content label {
   padding-top: 3%;
@@ -843,18 +859,20 @@ textarea {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 660px) {
   .burger-menu-sidebar {
     top: calc(5rem + 0px);
     right: 0;
-    left: 50%;
     flex-direction: column;
-    width: 35%;
+    width: 20vw;
+    right: 1.75rem;
     height: auto;
     border-radius: 0;
     animation: slideInDown 0.3s ease-out;
     gap: 0.25rem;
     padding: 1rem;
+    width: 94.1167px;
+    border-radius: 4px;
   }
 
   @keyframes slideInDown {

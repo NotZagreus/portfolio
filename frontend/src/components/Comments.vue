@@ -34,7 +34,7 @@
       </button>
     </div>
     <!-- Add Comment Modal -->
-    <div v-if="showAddModal" class="modal">
+    <div v-if="showAddModal" class="modal" @click.self="closeModal">
       <div class="modal-content">
         <h3>{{ t('comments.addNewComment') }}</h3>
         <input v-model="newComment.firstName" :placeholder="t('comments.firstNamePlaceholder')" />
@@ -54,7 +54,7 @@
     </div>
 
     <!-- Delete Comment Modal -->
-    <div v-if="showDeleteModal" class="delete-comments-modal">
+    <div v-if="showDeleteModal" class="delete-comments-modal" @click.self="closeModal">
       <div class="modal-content">
         <h3>{{ t('comments.confirmDelete') }}</h3>
         <div class="modal-buttons">
@@ -64,9 +64,9 @@
       </div>
     </div>
     <!-- View All Comments Modal -->
-    <div v-if="showViewModal" class="view-comments-modal">
+    <div v-if="showViewModal" class="view-comments-modal" @click.self="closeModal">
       <div class="modal-content view-modal">
-        <span class="close" @click="showViewModal = false">&times;</span>
+        
         <h3>{{ t('comments.manageComments') }}</h3>
 
         <!-- Filter -->
@@ -149,6 +149,8 @@ const comments = ref<Comment[]>([])
 const currentIndex = ref(0)
 const delay = 7777
 const showAddModal = ref(false)
+
+
 const newComment = ref<Comment>({
   id: '',
   firstName: '',
@@ -162,8 +164,13 @@ const showDeleteModal = ref(false)
 const commentToDelete = ref<Comment | null>(null)
 const dropdownOpen = ref<string | null>(null)
 const isAdmin = ref(false)
-
 const showViewModal = ref(false)
+const closeModal = () => {
+  showViewModal.value = false;
+  showDeleteModal.value = false;
+  showAddModal.value = false;
+};
+
 const filterStatus = ref<'all' | 'approved' | 'pending'>('all')
 const selectedCarouselIds = ref<Set<string>>(new Set())
 
