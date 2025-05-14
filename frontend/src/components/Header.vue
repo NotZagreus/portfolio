@@ -18,7 +18,7 @@
       </button>
     </div>
     <div v-if="isBurgerMenuOpen" class="burger-menu-sidebar">
-      <div class="socialContainer containerOne" @click="showCvModal = true" @click.self="closeModal">
+      <div class="socialContainer containerOne" @click="showCvModal = true">
         <svg class="socialSvg cvSvg" viewBox="0 0 24 24">
           <path
             d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-4H8V8h5v2zm1-5.5V9h5.5L14 2.5z"
@@ -386,7 +386,7 @@ const sendEmail = async () => {
   margin-bottom: 0px;
   position: absolute;
   bottom: 20px;
-  left: 0;
+  left: 1px;
   padding: 0 20px;
 }
 
