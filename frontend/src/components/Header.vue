@@ -843,13 +843,13 @@ textarea {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 660px) {
   .burger-menu-sidebar {
     top: calc(5rem + 0px);
     right: 0;
-    left: 50%;
     flex-direction: column;
-    width: 35%;
+    width: 20vw;
+    right: 1.75rem;
     height: auto;
     border-radius: 0;
     animation: slideInDown 0.3s ease-out;
