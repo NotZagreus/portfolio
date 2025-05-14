@@ -31,7 +31,7 @@
     </div>
 
     <!-- Add Project Modal -->
-    <div v-if="showAddModal" class="modal">
+    <div v-if="showAddModal" class="modal" @click.self="closeModal">
       <div class="modal-content">
         <h3>{{ t('projects.addNew') }}</h3>
         <input v-model="newProject.titleEn" :placeholder="t('projects.titlePlaceholderEn')" />
@@ -57,7 +57,7 @@
     </div>
 
     <!-- Edit Project Modal -->
-    <div v-if="showEditModal" class="modal">
+    <div v-if="showEditModal" class="modal" @click.self="closeModal">
       <div class="modal-content">
         <h3>{{ t('projects.editProject') }}</h3>
         <input v-model="editForm.titleEn" :placeholder="t('projects.titlePlaceholderEn')" />
@@ -80,7 +80,7 @@
     </div>
 
     <!-- Delete Project Modal -->
-    <div v-if="showDeleteModal" class="modal">
+    <div v-if="showDeleteModal" class="modal" @click.self="closeModal">
       <div class="modal-content">
         <h3>{{ t('projects.confirmDelete') }}</h3>
         <div class="modal-buttons">
@@ -91,7 +91,7 @@
     </div>
 
     <!-- Project Actions Modal -->
-    <div v-if="showActionModal && isAdmin" class="modal">
+    <div v-if="showActionModal && isAdmin" class="modal" @click.self="closeModal">
       <div class="modal-content">
       <h3>{{ currentLocale === 'fr' ? selectedProject?.titleFr : selectedProject?.titleEn }}</h3>
       <div class="modal-buttons">
@@ -128,6 +128,12 @@ const dropdownOpen = ref<string | null>(null)
 const showEditModal = ref(false)
 const showDeleteModal = ref(false)
 const showAddModal = ref(false)
+const closeModal = () => {
+  showEditModal.value = false;
+  showDeleteModal.value = false;
+  showAddModal.value = false;
+  showActionModal.value = false;
+};
 const editForm = ref<Project>({
   id: '',
   titleEn: '',
