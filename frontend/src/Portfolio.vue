@@ -154,6 +154,15 @@ const handleScroll = () => {
       }
     }
   })
+
+  const navigationContainer = document.querySelector('.navigation-container') as HTMLElement
+  if (navigationContainer) {
+    if (window.innerHeight + scrollY >= document.documentElement.scrollHeight) {
+      navigationContainer.style.display = 'none'
+    } else {
+      navigationContainer.style.display = 'block'
+    }
+  }
 }
 
 const fetchPortfolio = async () => {
