@@ -19,7 +19,7 @@
     </div>
 
     <!-- Add Technology Modal -->
-    <div v-if="showAddModal" class="modal">
+    <div v-if="showAddModal" class="modal" @click.self="closeModal">
       <div class="modal-content">
         <h3>{{ t('portfolio.addTechnology') }}</h3>
         <input
@@ -35,7 +35,7 @@
     </div>
 
     <!-- Action Modal -->
-    <div v-if="showActionModal" class="modal">
+    <div v-if="showActionModal" class="modal" @click.self="closeModal">
       <div class="modal-content">
         <h3>{{ selectedTechnology?.name }}</h3>
         <div class="modal-buttons">
@@ -47,7 +47,7 @@
     </div>
 
     <!-- Edit Technology Modal -->
-    <div v-if="showEditModal" class="modal">
+    <div v-if="showEditModal" class="modal" @click.self="closeModal">
       <div class="modal-content">
         <h3>{{ t('portfolio.editTechnology') }}</h3>
         <input v-model="editForm.name" :placeholder="t('portfolio.technologyNamePlaceholder')" />
@@ -60,7 +60,7 @@
     </div>
 
     <!-- Delete Confirmation Modal -->
-    <div v-if="showDeleteConfirmModal" class="modal">
+    <div v-if="showDeleteConfirmModal" class="modal" @click.self="closeModal">
       <div class="modal-content">
         <h3>{{ t('portfolio.confirmDeleteText', { name: selectedTechnology?.name }) }}</h3>
         <div class="modal-buttons">
@@ -93,6 +93,13 @@ const newTechnology = ref<{ name: string; image: string }>({ name: '', image: ''
 const editForm = ref<{ id: string; name: string; image: string }>({ id: '', name: '', image: '' })
 const selectedTechnology = ref<{ id: string; name: string; image: string } | null>(null)
 const isAdmin = ref(false)
+
+const closeModal = () => {
+  showAddModal.value = false;
+  showActionModal.value = false;
+  showEditModal.value = false;
+  showDeleteConfirmModal.value = false;
+};
 
 const fetchUserInfo = async () => {
   if (isAuthenticated.value) {
