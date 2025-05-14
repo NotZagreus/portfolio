@@ -386,7 +386,7 @@ const sendEmail = async () => {
   margin-bottom: 0px;
   position: absolute;
   bottom: 20px;
-  left: 0;
+  left: 1px;
   padding: 0 20px;
 }
 
