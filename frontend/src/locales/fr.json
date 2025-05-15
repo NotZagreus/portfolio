@@ -11,6 +11,7 @@
     "titlePlaceholderFr": "Titre",
     "descriptionPlaceholderFr": "Description",
     "githubLinkPlaceholder": "Lien GitHub",
+    "projectLinkPlaceholder": "Lien vers le site du projet",
     "add": "Ajouter",
     "cancel": "Annuler",
     "editProject": "Modifier le projet",

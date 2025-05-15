@@ -1,10 +1,13 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 export interface IProject extends Document {
-  title: string;
-  description: string;
+  titleEn: string;
+  descriptionEn: string;
+  titleFr: string;
+  descriptionFr: string;
   image: string;
   github_link?: string;
+  project_link?: string;
 }
 
 const ProjectSchema: Schema = new Schema(
@@ -15,6 +18,7 @@ const ProjectSchema: Schema = new Schema(
     descriptionFr: { type: String, required: true },
     image: { type: String },
     github_link: { type: String },
+    project_link: { type: String },
   },
   {
     versionKey: false,

@@ -15,8 +15,13 @@ export default class ProjectService {
   }
 
   static async createProject(data: Partial<IProject>): Promise<IProject> {
-    if (!data.title || !data.description) {
-      throw new Error("Title and description are required");
+    if (
+      !data.titleEn ||
+      !data.descriptionEn ||
+      !data.titleFr ||
+      !data.descriptionFr
+    ) {
+      throw new Error("All titles and descriptions are required");
     }
     return ProjectRepository.addProject(data);
   }

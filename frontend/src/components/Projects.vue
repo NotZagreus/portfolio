@@ -11,16 +11,18 @@
         @click="openActionModal(project)"
       >
         <div class="project-content">
-          <img
-            v-if="project.image"
-            :src="project.image"
-            alt="Project Image"
-            class="project-image"
-          />
+           <img
+              :src="project.image"
+              alt="Project Image"
+              class="project-image"
+            />
           <div class="project-description">
             <p>{{ currentLocale === 'fr' ? project.descriptionFr : project.descriptionEn }}</p>
             <a v-if="project.github_link" :href="project.github_link" target="_blank">
-                <img src="https://res.cloudinary.com/dhtprehby/image/upload/v1746055237/github_icon.png" alt="GitHub Icon" class="github-icon" />
+              <img src="https://res.cloudinary.com/dhtprehby/image/upload/v1746055237/github_icon.png" alt="GitHub Icon" class="link-button" />
+            </a>
+            <a v-if="project.project_link" :href="project.project_link" target="_blank">
+              <img src="https://res.cloudinary.com/dhtprehby/image/upload/v1747339967/aobdemqq43qoikbb2ola.png" alt="External Link Icon" class="link-button" />
             </a>
           </div>
         </div>
@@ -48,6 +50,10 @@
           v-model="newProject.github_link"
           :placeholder="t('projects.githubLinkPlaceholder')"
         />
+        <input
+          v-model="newProject.project_link"
+          :placeholder="t('projects.projectLinkPlaceholder')"
+        />
         <input type="file" @change="handleFileUpload($event, 'newProject')" />
         <div class="modal-buttons">
           <button class="modal-button" @click="addProject">{{ t('projects.add') }}</button>
@@ -71,6 +77,7 @@
           :placeholder="t('projects.descriptionPlaceholderFr')"
         ></textarea>
         <input v-model="editForm.github_link" :placeholder="t('projects.githubLinkPlaceholder')" />
+        <input v-model="editForm.project_link" :placeholder="t('projects.projectLinkPlaceholder')" />
         <input type="file" @change="handleFileUpload($event, 'editForm')" />
         <div class="modal-buttons">
           <button class="modal-button" @click="saveProject">{{ t('projects.save') }}</button>
@@ -121,6 +128,7 @@ interface Project {
   descriptionFr: string
   image: string
   github_link?: string
+  project_link?: string
 }
 
 const projects = ref<Project[]>([])
@@ -142,6 +150,7 @@ const editForm = ref<Project>({
   descriptionFr: '',
   image: '',
   github_link: '',
+  project_link: '',
 })
 const newProject = ref<Project>({
   id: '',
@@ -151,6 +160,7 @@ const newProject = ref<Project>({
   descriptionFr: '',
   image: '',
   github_link: '',
+  project_link: '',
 })
 const projectToDelete = ref<string | null>(null)
 const uploadError = ref<string | null>(null)
@@ -250,6 +260,9 @@ const addProject = async () => {
     if (newProject.value.github_link) {
       formData.append('github_link', newProject.value.github_link)
     }
+    if (newProject.value.project_link) {
+      formData.append('project_link', newProject.value.project_link)
+    }
     if (newProject.value.image) {
       formData.append('image', newProject.value.image)
     }
@@ -290,6 +303,9 @@ const saveProject = async () => {
     formData.append('descriptionFr', editForm.value.descriptionFr)
     if (editForm.value.github_link) {
       formData.append('github_link', editForm.value.github_link)
+    }
+    if (editForm.value.project_link) {
+      formData.append('project_link', editForm.value.project_link)
     }
     if (editForm.value.image) {
       formData.append('image', editForm.value.image)
@@ -375,6 +391,7 @@ const closeAddModal = () => {
     descriptionFr: '',
     image: '',
     github_link: '',
+    project_link: '',
   }
   uploadError.value = null
   addError.value = {}
@@ -429,5 +446,3 @@ function customWatch(isAuthenticated: Ref<boolean, boolean>, arg1: (newValue: an
   throw new Error('Function not implemented.')
 }
 </script>
-
-<style scoped></style>
